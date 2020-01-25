@@ -51,10 +51,10 @@ tag_page: '/blog/tags/'
 category_page: '/blog/categories/'
 
 hero:
-  image: https://Yngie-C.github.io/public/img/pic.JPG
-  caption: Original Artwork &copy; Pablo Picasso. Girl before a Mirror. Boisgeloup, March 1932. Oil on canvas
+  image: https://Yngie-C.github.io/public/img/pic.jpg
+  caption: A Sunday on La Grande Jatte, Georges Seurat, 1884
 
-# Puglins
+# Pulgins
 mathjax: true # whether support mathjax
 #google_analytics_token: 'UA-93172815-1' # leave blank if you don't want google analytics
 #disqus_short_name: 'ratsgo-github-io' # leave blank if you don't want disqus
