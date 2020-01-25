@@ -1,9 +1,10 @@
-# ratsgo's blog
+# Blog by Yngie
 
-안녕하세요, 이기창이라고 합니다.
-현재는 NAVER Chatbot Model 팀에서 일하고 있습니다.
-제 컨택포인트는 아래와 같습니다.
+NLP에 관심이 많은 데린이입니다.
 
-E-mail : ratsgo@naver.com
+E-mail : efrks@naver.com
 
-blog : https://ratsgo.github.io
+blog : https://yngie-c.github.io
+
+Instagram : https://www.instagram.com/yngie_daily
+

@@ -1,8 +1,8 @@
 # Site Info
-title: ratsgo's blog
-tagline: 'for textmining'
+title: Data science
+tagline: 'by Yngie'
 description: 'blog for textmining'
-url: http://ratsgo.github.io
+url: https://yngie-c.github.io
 logo: '/public/logo.png'
 encoding: utf-8
 
@@ -23,16 +23,17 @@ version: 1.0.0
 
 # About/contact
 author:
-  name: ratsgo
-  description: <strong>보물찾기</strong> 그리운 마을, 그 먼 바다에 이르기까지
-  gravatar: 0a638fc7996869b1b67fb90ccf77dcfe # md5 hash of your email address
+  name: Yngie
+  description: <strong>Increscunt animi virescit volnere virtus</strong> by Friedrich Nietzsche
+  gravatar: 8dc8eb5fb70460f5da8e678a7cb47b3f # md5 hash of your email address
   contact:
-    linkedin:  https://www.linkedin.com/in/gichanglee/
-    github:    https://github.com/ratsgo
-    facebook:  https://www.facebook.com/gichanglee.84
+    #linkedin:  https://www.linkedin.com/in/gichanglee/
+    github:    https://github.com/Yngie-C
+    #facebook:  https://www.facebook.com/gichanglee.84
     #twitter:  <hide>
     #weibo:    <hide>
-    email:     mailto:gichang_lee@korea.ac.kr
+    instagram :   https://instagram.com/yngie_daily
+    #email:    
 
 # Navigation (2nd level links supported)
 nav:
@@ -50,11 +51,11 @@ tag_page: '/blog/tags/'
 category_page: '/blog/categories/'
 
 hero:
-  image: https://ratsgo.github.io/public/img/picture.JPG
+  image: https://Yngie-C.github.io/public/img/pic.JPG
   caption: Original Artwork &copy; Pablo Picasso. Girl before a Mirror. Boisgeloup, March 1932. Oil on canvas
 
 # Puglins
 mathjax: true # whether support mathjax
-google_analytics_token: 'UA-93172815-1' # leave blank if you don't want google analytics
-disqus_short_name: 'ratsgo-github-io' # leave blank if you don't want disqus
+#google_analytics_token: 'UA-93172815-1' # leave blank if you don't want google analytics
+#disqus_short_name: 'ratsgo-github-io' # leave blank if you don't want disqus
 
