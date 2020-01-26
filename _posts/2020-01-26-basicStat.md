@@ -9,16 +9,16 @@ tag: Statistics, Terminology
 
 본 포스트의 내용은 [권재명](https://dataninja.me/) 선생님의 [『따라하며 배우는 데이터 과학』](http://www.yes24.com/Product/Goods/44184320) 을  기반으로 작성하였습니다.
 
-### 1. t-value
+## 1. t-value
 
-__t-value__를 알아보기 전에 __Z-value__를 먼저 알아보자. 
+먼저 __Z-value__ 란, 
 $$
 Z=\frac{\overline{X}-\mu_0}{\sqrt{\sigma^2/n}} \sim N(0,1) \qquad When \quad H_0 : \mu = \mu_0
 $$
 
-__Z-value__의 문제점 : 모분산 (${\sigma^2}$ )을 알 수 없다는 것
+__Z-value __의 문제점 : 모분산 (${\sigma^2}$ )을 알 수 없다는 것
 
-__t-value__는 모분산 (${\sigma^2}$ )을 표본분산($s^2$)으로 추정한 통계량.
+__t-value__ 는 모분산 (${\sigma^2}$ )을 표본분산($s^2$)으로 추정한 통계량.
 $$
 t=\frac{\overline{X}-\mu_0}{\sqrt{s^2/n}} \sim t_v \qquad When \quad H_0 : \mu = \mu_0
 $$
@@ -27,7 +27,7 @@ $v = n-1$ (자유도, Degree of Freedom, DoE)가 클 수록 $N(0,1)$에 가까�
 
  
 
-### 2. P-value
+## 2. P-value
 
 P-value의 정의는 다음과 같다.
 
@@ -46,7 +46,7 @@ P-value의 정의는 다음과 같다.
 
 
 
-### 3.  신뢰구간(Confidence Interval, CI)
+## 3. 신뢰구간(Confidence Interval, CI)
 
 신뢰구간의 정의도 살펴보자. 95% 신뢰구간의 정의는 다음과 같다.
 
@@ -56,7 +56,7 @@ P-value의 정의는 다음과 같다.
 
 
 
-### 4. 이외의 다른 용어들
+## 4. 이외의 다른 용어들
 
 - __모집단(population)__ : 데이터가 표본화되었다고 가정하는 분포/집단
 - __모수(population parameter)__ : 모집단을 정의하는 미지의 상수
