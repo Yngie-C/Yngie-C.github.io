@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Start :)
-category: Daily
-tag: Daily
+title: Analytics Techniques
+category: R-language
+tag: R
 ---
 
  
