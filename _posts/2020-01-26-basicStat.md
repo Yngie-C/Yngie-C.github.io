@@ -2,7 +2,7 @@
 layout: post
 title: 기초 통계(Basic statistics)
 category: Statistics
-tag: Statistics, Terminology
+tag: Statistics	tag:Terminology
 ---
 
 
@@ -18,7 +18,7 @@ $$
 
 __Z-value __의 문제점 : 모분산 (${\sigma^2}$ )을 알 수 없다는 것
 
-__t-value__ 는 모분산 (${\sigma^2}$ )을 표본분산($s^2$)으로 추정한 통계량.
+__t-value__ : 모분산 (${\sigma^2}$ )을 표본분산($s^2$)으로 추정한 통계량.
 $$
 t=\frac{\overline{X}-\mu_0}{\sqrt{s^2/n}} \sim t_v \qquad When \quad H_0 : \mu = \mu_0
 $$
