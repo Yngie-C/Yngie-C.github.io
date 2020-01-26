@@ -1,9 +1,9 @@
 # Site Info
-title: Data science
+title: Data Science
 tagline: 'by Yngie'
 description: 'text is everything'
 url: https://yngie-c.github.io
-logo: '/public/Homelogo.PNG'
+logo: '/public/Homelogo.png'
 encoding: utf-8
 
 # Site configurations
