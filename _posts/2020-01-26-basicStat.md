@@ -2,7 +2,7 @@
 layout: post
 title: 기초 통계(Basic statistics)
 category: Statistics
-tag: Statistics
+tag: Statistics, Terminology
 ---
 
 
@@ -11,19 +11,25 @@ tag: Statistics
 
 ### 1. t-value
 
-__t-value__를 알아보기 전에 __Z-value__를 먼저 알아보자.
+__t-value__를 알아보기 전에 __Z-value__를 먼저 알아보자. 
 $$
-Z=\frac{\overline{X}-\mu_0}{\sqrt{\sigma^2/n}}
-$$
-
-$$
-t
+Z=\frac{\overline{X}-\mu_0}{\sqrt{\sigma^2/n}} \sim N(0,1) \qquad When \quad H_0 : \mu = \mu_0
 $$
 
+__Z-value__의 문제점 : 모분산 (${\sigma^2}$ )을 알 수 없다는 것
+
+__t-value__는 모분산 (${\sigma^2}$ )을 표본분산($s^2$)으로 추정한 통계량.
+$$
+t=\frac{\overline{X}-\mu_0}{\sqrt{s^2/n}} \sim t_v \qquad When \quad H_0 : \mu = \mu_0
+$$
+
+$v = n-1$ (자유도, Degree of Freedom, DoE)가 클 수록 $N(0,1)$에 가까워진다.
+
+ 
 
 ### 2. P-value
 
-학부생 때 들었던 통계학에서도 P-value가 특정 숫자 이상인지 아닌지 따졌을 뿐, 그 값의 의미 자체에 집중하지는 않았던 것 같다. P-value의 정의는 다음과 같다.
+P-value의 정의는 다음과 같다.
 
 > 귀무가설 하에서 관찰된 통계량만큼의 극단적인 값이 관찰될 확률(The p-value is defined as the probability, under the assumption of the null hypothesis, of obtaining a result equal to or more extreme than what was actually observed)
 
@@ -45,3 +51,29 @@ $$
 신뢰구간의 정의도 살펴보자. 95% 신뢰구간의 정의는 다음과 같다.
 
 > 같은 모형에서 반복해서 표본을 얻고, 신뢰구간을 얻을 때 신뢰구간이 참 모수값을 포함할 확률이 95%가 되도록 만들어진 구간(Were this procedure to be repeated on multiple samples, the calculated confidence interval would encompass the true population parameter 95% of the time)
+
+쉽게 설명하자면, 95% 신뢰구간을 이용하여 100편의 논문을 사용했다면 그 중 5개 논문의 결론은 잘못되었다고 할 수 있다.
+
+
+
+### 4. 이외의 다른 용어들
+
+- __모집단(population)__ : 데이터가 표본화되었다고 가정하는 분포/집단
+- __모수(population parameter)__ : 모집단을 정의하는 미지의 상수
+- __표본(sample)__ : 모집단으로부터 랜덤하게 추출된 일부 관측치
+- __통계량(statistics)__ : 모수를 추정하기 위해 데이터로부터 계산된 값
+- __귀무가설(null hypothesis)__ : 모수에 대한 기존(status quo)의 사실 혹은 디폴트 값
+- __대립가설(alternative hypothesis)__ : 모수에 대해 귀무가설과 대립하여 증명하고 싶은 사실
+- __가설검정(hypothesis testing)__ : 통계량을 사용해 귀무가설을 기각하는 절차
+- __타입 1 오류(Type 1 error)__ : 가설검정 절차가 참인 귀무가설을 기각하는 사건
+- __타입 2 오류(Type 2 error)__ : 가설검정 절차가 거짓인 귀무가설을 기각하지 않는 사건
+- __유의수준(significance level)__ : 타입 1 오류를 범할 확률의 허용치
+- __P-값__ : 만약 귀무가설이 참일 때 데이터가 보여준 정도로 특이한 값이 관측될 확률
+- __중심극한정리__ : 표본 평균이 항상 대략적으로 종모양(정규분포)을 따르는 것. 이 때문에 비교적 적은 수의 모형을 가지고 있다고 하더라도 분석을 위해 사용할 수 있다. 
+
+$$
+정규분포식 :\quad f(x) = \frac{1}{\sqrt{2\sigma^2\pi}}exp(-\frac{(x-\mu)^2}{2\sigma^2})
+$$
+
+
+
