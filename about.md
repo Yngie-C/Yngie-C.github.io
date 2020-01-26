@@ -3,8 +3,8 @@ layout: page
 title: About
 ---
 
-<div style="font-size: 0.9rem; font-weight:300; line-height: 1.6rem;">
-### Text를 좋아하는 데린이입니다.
+### Text에 관심이 많은 데린이입니다.
+
 
 20대의 끝자락에서, 데이터 사이언스의 길로 전향하게 되었습니다.
 
