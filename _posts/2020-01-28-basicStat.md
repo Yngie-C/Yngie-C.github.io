@@ -29,7 +29,7 @@ $v = n-1$ (자유도, Degree of Freedom, DoE)가 클 수록 $N(0,1)$에 가까�
 
 
 
- 
+<br/>
 
 ## 2. P-value
 
@@ -50,7 +50,7 @@ P-value의 정의는 다음과 같다.
 
 
 
-
+<br/>
 
 ## 3. 신뢰구간(Confidence Interval, CI)
 
@@ -62,7 +62,7 @@ P-value의 정의는 다음과 같다.
 
 
 
-
+<br/>
 
 ## 4. 이외의 다른 용어들
 
