@@ -83,7 +83,7 @@ df.value_counts()	# column 내부에 어떤 value가 몇 개 있는지를 출력
 
   ```python
   df.loc[1,'col2']	#df['index_value', 'colname']
-  df2.loc['a', 'col3']	#df2의 index가 'a','b','c' ... 라면,
+  df2.loc['a', 'col3']	#df2의 index가 'a','b','c' ... 일 때
   ```
 
   - 불린 인덱싱
@@ -100,7 +100,7 @@ df.value_counts()	# column 내부에 어떤 value가 몇 개 있는지를 출력
   - .sort_values()
 
   ```python
-  df.sort_values(by=['col1'])		#디폴트 값은 ascending = True.
+  df.sort_values(by=['col1'])	#디폴트 값은 ascending = True.
   df.sort_values(by=['col1', 'col2'], ascending=False)
   ```
 
@@ -108,13 +108,14 @@ df.value_counts()	# column 내부에 어떤 value가 몇 개 있는지를 출력
 
   ```python
   df.isna()	#NaN 값을 True, 아닌 값을 False로 불린 인덱싱
-  df.isna().sum()		#각 column에 있는 True의 개수(NaN값의 개수) 반환
+  df.isna().sum()	#각 column에 있는 True의 개수(NaN값의 개수) 반환
   ```
 
   - .fillna()
 
   ```python
-  df['col4'] = titanic_df['col4'].fillna('val1')	#col4에 있는 NaN 값을 val로 대체
+  df['col4'] = titanic_df['col4'].fillna('val1')
+  #col4에 있는 NaN 값을 val로 대체
   #이후 df['col4'].isna().sum() 실행시 0이 나오게 된다. 
   ```
 
