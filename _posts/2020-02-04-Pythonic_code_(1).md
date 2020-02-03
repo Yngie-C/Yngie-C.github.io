@@ -9,7 +9,7 @@ tag: Python
 
 아래 내용은 [파이썬 코딩의 기술](http://www.yes24.com/Product/Goods/25138160) (브렛 슬라킨, 길벗, 2016)를 참조하여 작성하였습니다.
 
-
+<br/>
 
 ## 0) 시작에 앞서서
 
@@ -38,7 +38,7 @@ If the implementation is easy to explain, it may be a good idea.
 Namespaces are one honking great idea -- let's do more of those!
 ```
 
-
+<br/>
 
 ## Better way 1) 사용중인 파이썬의 버전을 알자
 
@@ -132,6 +132,8 @@ with open('/tmp/random.bin', 'wb') as f:
 
 
 
+<br/>
+
 ## 5) 시퀀스를 슬라이스 하는 방법을 알자
 
 파이썬은 시퀀스를 **슬라이스** (Slice)해서 조각으로 만드는 문법을 제공한다. 슬라이싱 문법의 기본 형태는 `someList[start:end]` 이며, 여기서 `start` 인덱스는 포함되고, `end` 인덱스는 제외된다. 리스트의 처음부터 슬라이스 할 때는 start의 0을 생략하며, 끝까지 슬라이스 할 때도 end의 마지막 인덱스를 생략한다.
@@ -172,7 +174,7 @@ print(a)
 
 시작과 끝 인덱스를 모두 생략하고 슬라이스 하면 원본 리스트의 복사본을 얻는다. 슬라이스에 시작과 끝 인덱스를 지정하지 않고 할당하면 슬라이스의 전체 내용을 참조 대상의 복사본으로 대체한다.
 
-
+<br/>
 
 ## 6) 한 슬라이스에 start, end, stride를 함께 쓰지 말자.
 
@@ -246,3 +248,7 @@ c = b[1:-1]	# ['c', 'e']
 <br/>
 
 ## 13) try/except/else/finally 에서 각 블록의 장점을 이용하자
+
+
+
+<br/>
