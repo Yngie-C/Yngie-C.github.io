@@ -40,7 +40,7 @@ Namespaces are one honking great idea -- let's do more of those!
 
 <br/>
 
-## Better way 1) 사용중인 파이썬의 버전을 알자
+## 1) 사용중인 파이썬의 버전을 알자
 
 파이썬 3의 버전은 다음과 같은 코드로 확인한다. (2020년부터 python 2.x버전은 더 이상 업데이트되지 않는다.)
 
@@ -55,7 +55,7 @@ print(sys.version)
 
 <br/>
 
-## Better way 2) PEP 8 스타일 가이드를 따르자
+## 2) PEP 8 스타일 가이드를 따르자
 
 문법만 잘 지킨다면 코드를 마음대로 작성해도 괜찮지만, 일관성 있는 스타일을 사용하면 유지보수가 훨씬 쉬워지고 가독성도 높아진다. **PEP 8** (Python Enhencement Proposal #8)은 파이썬 코드를 어떻게 구성할지 알려주는 스타일 가이드다. 전체적인 내용은 [공식 가이드](https://www.python.org/dev/peps/pep-0008/) 를 참조하는 것이 좋으며 아래는 그 중 중요한 몇 가지를 나열하였다.
 
