@@ -16,7 +16,7 @@ tag: Python
 ```python
 import this
 >>> The Zen of Python, by Tim Peters
-
+"""
 Beautiful is better than ugly.
 Explicit is better than implicit.
 Simple is better than complex.
@@ -36,6 +36,7 @@ Although never is often better than *right* now.
 If the implementation is hard to explain, it's a bad idea.
 If the implementation is easy to explain, it may be a good idea.
 Namespaces are one honking great idea -- let's do more of those!
+"""
 ```
 
 <br/>
@@ -347,11 +348,38 @@ print(next(roots))
 
 ## 10) range 보다는 enumerate를 사용하자
 
+내장 함수인 `range`는 정수 집합을 순회(iterate)하는 루프를 실행할 때 유용하다. 종종 리스트를 순회하거나 리스트에서 현재 아이템의 인덱스를 알고 싶은 경우가 있다. 다음의 코드는 좋아하는 아이스크림의 순위를 출력하는 코드다.
 
+```python
+for i in range(len(flavor_list)):
+    flavor = flavor_list[i]
+    print('%d : %s' % (i + 1, flavor))
+```
+
+위 코드는 리스트의 길이를 알아내야 하고, 배열을 인덱스로 접근하며, 읽기 불편하다는 단점이 있다. 파이썬은 이런 상황을 위한 내장 함수 `enumerate` 를 제공한다. `enumerate` 는 지연 제너레이터(Lazy generator)로 이터레이터를 감싼다. 이 제너레이터는 이터레이터에서 루프 인덱스와 다음 값을 한 쌍으로 가져온다. 위의 코드를 `enumerate` 를 활용해 작성한 코드는 다음과 같다.
+
+```python
+for i, flavor in enumerate(flavor_list):
+    print('%d : %s' % (i + 1, flavor))
+```
+
+`enumerate` 로 세기 시작할 숫자를 지정하면 코드를 더욱 짧게 만들 수 있다. 
+
+```python
+for i, flavor in enumerate(flavor_list, 1):
+    print('%d : %s' % (i + 1, flavor))
+```
 
 <br/>
 
 ## 11) 이터레이터를 병렬로 처리하려면 zip을 사용하자 
+
+리스트 컴프리헨션을 사용하면 소스 리스트(Source list)에 표현식을 적용하여 파생 리스트(Derived list)를 쉽게 얻을 수 있다. 다음의 코드 같은 경우가 그것이다.
+
+```python
+names = ['Cecilia', 'Lise', 'Marie']
+letters = [len(a) for n in names]
+```
 
 
 
