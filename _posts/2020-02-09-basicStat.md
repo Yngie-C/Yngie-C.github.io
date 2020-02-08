@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 기초 통계(Basic statistics)
-category: Statistics
+category: R-language
 tag: Statistics
 ---
 
@@ -15,14 +15,14 @@ tag: Statistics
 
 먼저 __Z-value__ 란, 
 $$
-Z=\frac{\overline{X}-\mu_0}{\sqrt{\sigma^2/n}} \sim N(0,1) \qquad When \quad H_0 : \mu = \mu_0
+Z=\frac{\overline{X}-\mu_0}{\sqrt{\sigma^2/n}} \sim N(0,1) \qquad \text{When} \quad H_0 : \mu = \mu_0
 $$
 
 *Z-value* 의 문제점은 모분산 ${\sigma^2}$ 을 알 수 없다는 것이다.
 
 __t-value__ : 모분산 (${\sigma^2}$ )을 표본분산($s^2$)으로 추정한 통계량.
 $$
-t=\frac{\overline{X}-\mu_0}{\sqrt{s^2/n}} \sim t_v \qquad When \quad H_0 : \mu = \mu_0
+t=\frac{\overline{X}-\mu_0}{\sqrt{s^2/n}} \sim t_v \qquad \text{When} \quad H_0 : \mu = \mu_0
 $$
 
 $v = n-1$ (자유도, Degree of Freedom, DoE)가 클 수록 $N(0,1)$에 가까워진다.
@@ -37,9 +37,11 @@ P-value의 정의는 다음과 같다.
 
 > 귀무가설 하에서 관찰된 통계량만큼의 극단적인 값이 관찰될 확률(The p-value is defined as the probability, under the assumption of the null hypothesis, of obtaining a result equal to or more extreme than what was actually observed)
 
-예를 들어, P = 0.5라는 것은 귀무가설 하에서도 주어진 데이터만큼 크거나 작은 것이 충분히 관측될 만하다. 즉, 귀무가설에 대한 반박증거가 부족하다는 것이다. 반대로 P = 0.000001이라는 것은 귀무가설 하에서는 주어진 데이터만큼 크거나 작은 것이 관측될 확률이 거의 없다는 것이다.<br/>즉, P-value은 숫자일 뿐 모든 것을 결정해주지 않는다.
+예를 들어, P = 0.5라는 것은 귀무가설 하에서도 주어진 데이터만큼 크거나 작은 것이 충분히 관측될 만하다. 즉, 귀무가설에 대한 반박증거가 부족하다는 것이다. 반대로 P = 0.000001이라는 것은 귀무가설 하에서는 주어진 데이터만큼 크거나 작은 것이 관측될 확률이 거의 없다는 것이다.
 
-##### 미국통계학회의 P-value에 대한 설명서
+즉, P-value은 숫자일 뿐 모든 것을 결정해주지 않는다.
+
+**미국통계학회의 P-value에 대한 설명서**
 
 1. P-value는 가정된 모형이 데이터와 별로 맞지 않음을 나타낼 수 있다.
 2. P-value는 주어진 가설이 참일 확률이나, 데이터가 랜덤하게 생성된 확률이 아니다.
