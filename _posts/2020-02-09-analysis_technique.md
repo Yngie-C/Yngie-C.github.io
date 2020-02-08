@@ -68,7 +68,7 @@ mean of x
 
 *P-value* 해석하기 : *P-value* = 0.083 이다. 실제 고속도로 연비의 모평균이 22.9라면 우리가 관측한 것만큼 큰 표본평균값과 t 통계량(1.3877)이 관측될 확률은 8.3%라는 것이다. 따라서 유의수준 $\alpha$ 가 10%라면 고속도로 연비가 22.9보다 크다고 결론지을 수 있지만, 유의수준이 5%라면 고속도로 연비가 22.9보다 크다고 결론지을 만한 증거가 충분하지 않다고 할 수 있다.
 
-*신뢰구간* 표기 : 위 결과에서 95% 신뢰구간은 약 [22.8 , $\infin$ ) 이며, 같은 데이터로 양측( *two_sided* ) 검정을 했을 때의 신뢰구간은 약 [22.7, 24.2] 임을 알 수 있다.
+*신뢰구간* 표기 : 위 결과에서 95% 신뢰구간은 약 [22.8 , ∞ ) 이며, 같은 데이터로 양측( *two_sided* ) 검정을 했을 때의 신뢰구간은 약 [22.7, 24.2] 임을 알 수 있다.
 
 `alternative = "two-sided"` 로 설정하면 양측 검정을 할 수 있으며,  95% 가 아닌 다른 신뢰도에서 t-검정을 하고 싶다면 `conf.level=` 옵션을 사용하여 조정할 수 있다. 
 
@@ -126,7 +126,6 @@ $\text{concordant}$ 는 ( $x_i > x_j$ 이고 $y_i > y_j$) 또는 ( $x_i < x_j$ �
 스피어만의 상관계수는 순위상관계수(rank correlation coefficient)라고 불린다. 각 $x_i$ 와 $y_i$ 를 순위값(1, 2, 3, ... , n)으로 바꿔준 후, 피어슨 상관계수를 계산해준 값이다. 원래의 $x_i$ 와 $y_i$ 의 값이 극단적이라도 1~n 사이의 값으로 제한되어 이상치의 영향을 덜 받게 된다. 아래는 피어슨 상관계수와 스피어만 상관계수를 비교한 그래프이다.
 
 <p align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Spearman_fig1.svg/1024px-Spearman_fig1.svg.png" alt="스피어만1" style="zoom:33%;" /><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Spearman_fig3.svg/1024px-Spearman_fig3.svg.png" alt="스피어만2" style="zoom:33%;" /></p>
-
 - **선형회귀** 모형 적합 : 여러 독립변수를 사용하여 수량형 종속변수 $Y$ 를 예측하기 위한 유용한 방법은 선형회귀 모델이다. 
 
 $$
@@ -202,7 +201,7 @@ summary(data1_lm2)
 - 일반화 선형 모형, 로짓/로지스틱 함수 : 0-1 형태의 범주형 독립변수와 수량형(혹은 범주형) 독립변수를 가진 데이터는 전통적인 선형모형으로 다룰 수 없다. 대신 일반화 선형모형(Generalized Linear Model, GLM), 특히 이항분포 패밀리(binomial family)를 사용하여야 한다. 독립변수는 0과 1의 값을 가지는 베르누이 확률변수이다. $Y$ 가 1일 확률은 0과 1사이의 값으로, 독립변수 $x$ 의 함수 형태인 $\mu(x)$ 로 나타낸다.
 
 $$
-Y \sim \text{Bernoulli(p)} \quad \rarr \quad \text{Pr}(Y=1\vert x) = \mu(x)
+Y \sim \text{Bernoulli(p)} \quad → \quad \text{Pr}(Y=1\vert x) = \mu(x)
 $$
 
 확률값 $\mu(x)$ 는 선형예측 함수인 $x\beta$ 와 로짓(Logit)함수로 연결되어 있다.
@@ -224,7 +223,6 @@ $$
 아래는 각각 로짓함수(왼쪽)와 그 역함수인 로지스틱함수(오른쪽) 그래프이다.
 
 <p align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Logit.svg/525px-Logit.svg.png" alt="로짓" style="zoom:50%;" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/1280px-Logistic-curve.svg.png" alt="로지스틱" style="zoom:25%;" /></p>
-
 로지스틱 회귀 모델을 적용하기 위한 R 코드는 다음과 같다.
 
 ```R
