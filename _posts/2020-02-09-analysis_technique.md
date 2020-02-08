@@ -111,7 +111,7 @@ $$
 
 피어슨 상관계수는 두 변량의 '선형(linear)' 관계의 강도를 -1에서 1사이의 숫자로 나타낸다. 0은 상관관계가 없음을 나타낸다. 피어슨 상관관계는 선형 강도의 관계만 나타내 줄 뿐, 관계의 기울기를 이야기해 주지는 않는다. 따라서 상관관계를 구하기 이전에 산점도를 통해 관계의 기울기, 혹은 데이터의 군집성 등을 파악해주는 과정이 필요하다.
 
-![상관계수](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Correlation_examples2.svg/600px-Correlation_examples2.svg.png)
+<p align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Correlation_examples2.svg/600px-Correlation_examples2.svg.png" alt="상관계수" style="zoom:100%;" /></p>
 
 또한, 상관계수는 이상치의 영향을 많이 받기 때문에 로버스트한 방법인 스피어만(Spearman) 상관계수나 켄달(Kendall)의 $\tau$ (타우)를 사용하여 통계량을 계산하기도 한다.
 
@@ -125,7 +125,8 @@ $\text{concordant}$ 는 ( $x_i > x_j$ 이고 $y_i > y_j$) 또는 ( $x_i < x_j$ �
 
 스피어만의 상관계수는 순위상관계수(rank correlation coefficient)라고 불린다. 각 $x_i$ 와 $y_i$ 를 순위값(1, 2, 3, ... , n)으로 바꿔준 후, 피어슨 상관계수를 계산해준 값이다. 원래의 $x_i$ 와 $y_i$ 의 값이 극단적이라도 1~n 사이의 값으로 제한되어 이상치의 영향을 덜 받게 된다. 아래는 피어슨 상관계수와 스피어만 상관계수를 비교한 그래프이다.
 
-<p align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Spearman_fig1.svg/1024px-Spearman_fig1.svg.png" alt="스피어만1" style="zoom:33%;" /><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Spearman_fig3.svg/1024px-Spearman_fig3.svg.png" alt="스피어만2" style="zoom:33%;" /></p>
+<p align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Spearman_fig3.svg/1024px-Spearman_fig3.svg.png" alt="스피어만2" style="zoom:33%;" /></p>
+
 - **선형회귀** 모형 적합 : 여러 독립변수를 사용하여 수량형 종속변수 $Y$ 를 예측하기 위한 유용한 방법은 선형회귀 모델이다. 
 
 $$
@@ -212,6 +213,8 @@ $$
 \text{logit}(\mu) = \log{(\frac{\mu}{1-\mu})} = \eta(x) = x\beta
 $$
 
+<p align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Logit.svg/525px-Logit.svg.png" alt="로짓" style="zoom:50%;" /></p>
+
 모수벡터 $\beta$  의 추정값 $\hat{\beta}$ 는 최대우도법(Maximum Likelihood Estimation, MLE)으로 계산한다. 최대우도법은 해를 구하는 공식이 존재하지 않으므로 Newton-Rhapson법을 사용하여 반복적으로 찾아나간다. 이를 통해 $\hat{\beta}$ 를 얻게되면, 종속변수의 기대값을 추정할 수 있다. 선형추정 값인 $x\hat{\beta}$ 가 무한한 값을 가지므로 이를 (0,1) 범위의 확률값으로 변환하기 위해 로지스틱(Logistic) 함수를 사용한다.
 
 - **로지스틱 함수**
@@ -220,9 +223,10 @@ $$
 \hat{\mu}(x) = \text{logit}^{-1}(\hat{\eta}) = \text{logistic}(\hat{\eta}) = \frac{1}{1 + \exp{(-\hat{\eta}})} = \frac{\exp({\hat{\eta}})}{\exp({\hat{\eta}}) +1}
 $$
 
-아래는 각각 로짓함수(왼쪽)와 그 역함수인 로지스틱함수(오른쪽) 그래프이다.
 
-<p align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Logit.svg/525px-Logit.svg.png" alt="로짓" style="zoom:50%;" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/1280px-Logistic-curve.svg.png" alt="로지스틱" style="zoom:25%;" /></p>
+
+<p align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/1280px-Logistic-curve.svg.png" alt="로지스틱" style="zoom:25%;" /></p>
+
 로지스틱 회귀 모델을 적용하기 위한 R 코드는 다음과 같다.
 
 ```R
