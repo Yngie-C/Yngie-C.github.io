@@ -13,21 +13,21 @@ tag: Statistics
 
 ## 1. t-value
 
-먼저 __Z-value__ 란, 
+- **Z-value**  
+
 $$
 Z=\frac{\overline{X}-\mu_0}{\sqrt{\sigma^2/n}} \sim N(0,1) \qquad \text{When} \quad H_0 : \mu = \mu_0
 $$
 
 *Z-value* 의 문제점은 모분산 ${\sigma^2}$ 을 알 수 없다는 것이다.
 
-__t-value__ : 모분산 (${\sigma^2}$ )을 표본분산($s^2$)으로 추정한 통계량.
+- **t-value** : 모분산 (${\sigma^2}$ )을 표본분산($s^2$)으로 추정한 통계량.
+
 $$
 t=\frac{\overline{X}-\mu_0}{\sqrt{s^2/n}} \sim t_v \qquad \text{When} \quad H_0 : \mu = \mu_0
 $$
 
-$v = n-1$ (자유도, Degree of Freedom, DoE)가 클 수록 $N(0,1)$에 가까워진다.
-
-
+$v = n-1$ (자유도, Degree of Freedom, DoE)가 클수록 $N(0,1)$에 가까워진다.
 
 <br/>
 
