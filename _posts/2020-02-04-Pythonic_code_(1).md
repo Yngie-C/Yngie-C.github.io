@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Effective Python (1)
+title: 파이썬 코딩의 기술 (1)
 category: Python
 tag: Python
 ---
@@ -378,14 +378,65 @@ for i, flavor in enumerate(flavor_list, 1):
 
 ```python
 names = ['Cecilia', 'Lise', 'Marie']
-letters = [len(a) for n in names]
+letters = [len(n) for n in names]
 ```
 
+파생 리스트의 아이템과 소스 리스트의 아이템은 서로의 인덱스로 연관되어 있음. 따라서 두 리스트를 병렬로 순회하려면 소스 리스트인 names의 길이만큼 순회하면 된다. 아래의 코드를 보자
 
+```python
+longest_name = None
+max_letters = 0
+
+for i in range(len(names)):
+    count = letters[i]
+    if count > max_letters:
+        longest_name = names[i]
+        max_letters = count
+
+print(longest_name)
+>>> 'Cecilia'
+```
+
+코드는 잘 돌아가지만, 전체 루프문의 가독성이 좋지는 않다. names와 letters를 인덱스로 접근하면 코드를 읽기 어려워진다. 10) 에 있는 `enumerate` 를 사용하여 코드를 나타내면 조금 더 개선되긴 하지만 그것도 만족스럽지는 못하다.
+
+```python
+for i, name enumerate(names):
+    count = letters[i]
+    if count > max_letters:
+        longest_name = names[i]
+        max_letters = count
+```
+
+파이썬은 위와 같은 상황에서 쓸 수 있는  `zip` 이라는 내장 함수를 지원한다. 파이썬 3에서 `zip` 은 지연 제너레이터로 두 개 이상의 이터레이터를 감싼다. `zip`  제너레이터는 각 이터레이터로부터 다음 값을 담은 튜플을 얻어온다. `zip` 제너레이터를 사용한 코드는 다중 리스트에서 인덱스로 접근하는 코드보다 명료하다.
+
+```python
+for name, count in zip(names, letters):
+    if count > max_letters:
+        longest_name = name
+        max_letters = count
+```
+
+`zip` 을 사용할 때의 문제점은 입력 이터레이터들의 길이가 다르면 zip이 이상하게 동작한다는 점이다. 이외에도 많은 경우에 `zip` 의 잘라내기 동작은 이상하고 나쁘다. `zip` 으로 실행할 리스트의 길이가 같다고 확신할 수 없다면 대신 내장 모듈 *itertools* 의 `zip_longest` 를 사용하는 방안을 고려해보자.
 
 <br/>
 
 ## 12) for과 while 루프 뒤에는 else 블록을 쓰지 말자
+
+파이썬에는 루프에서 반복되는 내부 블록 바로 다음에 `else` 블록을 둘 수 있다.  아래의 예시를 보자.
+
+```python
+for i in range(3):
+    print('Loop %d' % i)
+else:
+    print('Else block!')
+>>>
+Loop 0
+Loop 1
+Loop 2
+Else block!
+```
+
+위의 코드를 실행하면 루프문이 끝나자마자 `else` 문이 실행된다. 
 
 
 
@@ -393,6 +444,63 @@ letters = [len(a) for n in names]
 
 ## 13) try/except/else/finally 에서 각 블록의 장점을 이용하자
 
+파이썬에서는 예외 처리 과정에서 동작을 넣을 수 있는 4번의 구분되는 시점이 있다. `try/except/else/finally` 블록 기능으로 각 시점을 처리한다. 각 블록은 복합문에서 독자적인 목적이 있으며, 이 블록들을 다양하게 조합하면 유용하다.
 
+- `finally`
+
+예외를 전달하고 싶지만 예외가 발생하더라도 정리 코드를 실행하고 싶을 때 `try/finally` 를 사용하면 된다. 일반적인 사용 예 중 하나는 파일 핸들러를 제대로 종료하는 작업이다.
+
+```python
+handle = open('/tmp/random_data.txt')	#IOError가 발생할 수 있음
+try:
+    data = handle.read()	#UnicodeDecodeError가 발생할 수 있음
+finally:
+    handle.close()	# try: 이후에 항상 실행됨
+```
+
+`read` 메서드에서 발생한 예외는 항상 호출 코드까지 전달되며, `close` 메서드 또한 `finally` 블록에서 실행되는 것이 보장된다. 
+
+- `else`
+
+코드에서 어떤 예외를 처리하고, 어떤 예외를 전달할지를 명확히 하려면 `try/except/else` 를 사용하자. 예를 들어 문자열에서 json 딕셔너리 데이터를 로드하여 그 안에 든 키 값을 반환하는 코드가 있다고 하자.
+
+```python
+def load_json_key(data, key):
+    try:
+        result_dict = json.loads(data)	#ValueError가 발생할 수 있음
+    except ValueError as e:
+        raise KeyError from e
+    else:
+        return result_dict[key]	#KeyError가 발생할 수 있음
+```
+
+- 모두 함께 사용하기
+
+복합문 하나로 모든 것을 처리하고 싶다면 `try/except/else/finally` 를 사용하면 된다. 여기서 `try` 블록은 파일을 읽고 처리하는데 사용하고, `except` 블록은 `try` 블록에서 일어난 예외를 처리하는 데 사용한다. `else` 블록은 파일을 즉석에서 업데이터하고 이와 관련된 예외가 전달되게 하는 데 사용한다. `finally` 블록은 파일 핸들을 정리하는 데 사용한다.
+
+```python
+UNDEFIND = object()
+
+def divide_json(path):
+    handle = open(path, 'r+')	#IOError가 발생할 수 있음
+    try:
+        data = handle.read()	#UnicodeDecodeError가 발생할 수 있음
+        op = json.loads(data)	#ValueError가 발생할 수 있음
+        value = (
+            op['numerator'] /
+            op['denominator']	#ZeroDivisionError가 발생할 수 있음
+        )
+    except ZeroDivisionError as e:
+        raise UNDEFIND
+    else:
+        op['result'] = value
+        result = json.dumps(op)
+        handle.seek(0)
+        handle.write(result)	#IOError가 발생할 수 있음
+        return value
+    finally:
+        handle.close()	#항상 실행함
+```
 
 <br/>
+
