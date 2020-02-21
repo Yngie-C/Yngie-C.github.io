@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 1.퍼셉트론(Per)
+title: 1.퍼셉트론(Perceptron)
 category: DL from Scratch
 tag: Deep-Learning
 ---
