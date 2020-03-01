@@ -235,7 +235,33 @@ tag: Data-structure
     
 
 - 다차원 배열
-  - 다차원 배열의 선언
+  - 다차원 배열의 선언 : 2차원과 3차원 배열의 선언 형태는 다음과 같다
+  
+  ```c
+  int arrTwoDim[5][5];
+  int arrThreeDim[3][3][3];
+  ```
+  
+  2차원 배열 선언시 `int arrTwoDim[a][b];` 에서 a는 세로 길이(행의 개수), b는 가로 길이(열의 개수)를 나타낸다. 2차원 배열도 `sizeof` 함수를 통해서 계산해낼 수 있다.
+  
+  ```c
+  #include <stdio.h>
+  
+  int main(void) {
+    int arr1[3][4];
+    int arr2[7][9];
+  
+    printf("세로 3, 가로 4: %d \n", sizeof(arr1));
+    printf("세로 7, 가로 9: %d \n", sizeof(arr2));
+    return 0;
+  }
+  >>>
+  세로 3, 가로 4 : 48
+  세로 7, 가로 9 : 252
+  ```
+  
+  
+  
   - 다차원 배열의 초기화
   - 문자 다차원 배열
 

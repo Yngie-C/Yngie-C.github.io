@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 2.신경망(NeuralNet)
+title: 2. 신경망(NeuralNet)
 category: DL from Scratch
 tag: Deep-Learning
 ---
@@ -79,18 +79,17 @@ $$
 
   <p align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Dirac_distribution_CDF.svg/1280px-Dirac_distribution_CDF.svg.png" alt="step_function" style="zoom:30%;" /></p>
 
-  
 - 이어서 시그모이드 함수를 파이썬 코드로 구현하면 아래와 같고, 이를 그래프로 그려보면 그 아래와 같은 결과를 얻을 수 있다. 
   
 ```python
   def sigmoid(x):
       return 1 / (1+np.exp(-x))
-  ```
-  
-![sigmoid](https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/480px-Logistic-curve.svg.png)
-  
+```
 
-  
+![sigmoid](https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/480px-Logistic-curve.svg.png)
+
+
+
 - **비선형 함수** : 계단 함수와 시그모이드 함수의 공통점은 비선형이라는 것이다. 계단 함수는 구부러진 형태로 나타나며, 시그모이드 함수는 곡선의 형태로 그려지기 때문. 신경망의 활성화 함수는 비선형의 형태여야 한다. 선형일 경우에는 신경망의 층을 깊게 하는 의미가 사라지기 때문이다. $l(x) = ax+b$ 형태의 선형 함수를 층을 쌓아 계속( $l(l(l(x)))$ 의 형태로)반복한다고 하더라도 함수의 형태는 그대로이다.
 
 
