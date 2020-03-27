@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 8. 차원 축소
-category: Hands on Machine Learning
+category: Machine Learning
 tag: Machine-Learning
 ---
 

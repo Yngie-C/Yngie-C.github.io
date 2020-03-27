@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 2. 머신러닝 프로젝트 처음부터 끝까지
-category: Hands on Machine Learning
+category: Machine Learning
 tag: Machine-Learning
 ---
 

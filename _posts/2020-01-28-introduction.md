@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 0. 들어가기 전에
-category: Hands on Machine Learning
+category: Machine Learning
 tag: Machine-Learning
 ---
 

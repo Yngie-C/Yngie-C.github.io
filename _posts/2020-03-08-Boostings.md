@@ -1,7 +1,7 @@
 ---
 layout: post
 title: XGBoost, LightGBM and Catboost
-category: Hands on Machine Learning
+category: Machine Learning
 tag: Machine-Learning
 ---
 

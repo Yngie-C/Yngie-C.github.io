@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 7. 앙상블 학습과 랜덤 포레스트
-category: Hands on Machine Learning
+category: Machine Learning
 tag: Machine-Learning
 ---
 

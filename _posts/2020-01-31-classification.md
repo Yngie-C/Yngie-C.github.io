@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 3. 분류
-category: Hands on Machine Learning
+category: Machine Learning
 tag: Machine-Learning
 ---
 

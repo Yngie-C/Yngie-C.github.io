@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 6. 결정 트리
-category: Hands on Machine Learning
+category: Machine Learning
 tag: Machine-Learning
 ---
 
