@@ -41,9 +41,9 @@ $$
 
 - 3차원 데이터의 합성곱 연산 : $k$ 개의 채널이 있는 경우 $k$ 개의 필터를 적용하여 병렬 연산을 한 뒤 그 합을 출력 데이터에 입력한다. 예를 들어 3개의 채널이 있는 입력 데이터는 3개의 커널과 각각 연산되어 그 총합을 새로운 출력 데이터로 받게 된다.
 
-- 블록으로 생각하기 :
+- 블록으로 생각하기 : 3차원의 합성곱 연산은 데이터와 필터를 직육면체 블록이라고 생각하면 좀 더 쉽게 상상할 수 있다. 3차원 데이터를 다차원 배열로 나타낼 때에는 (Channel, Height, Width) $(\mathbf{C}, \mathbf{H}, \mathbf{W})$ 순으로 쓰기로 하고, 3차원 필터도 (Channel,  Filter Height, Filter Width) $(\mathbf{C}, \mathbf{FH}, \mathbf{FW})$ 순으로 쓰기로 한다.
 
-- 배치 처리 :
+- 배치 처리 : CNN도 완전 연결 신경망과 동일하게 배치를 활용하여 처리 효율을 높일 수 있다. 배치의 크기가 N일 경우 데이터를 $(\mathbf{N}, \mathbf{C}, \mathbf{H}, \mathbf{W})$ 로 나타내며, 필터는 $(\mathbf{FN}, \mathbf{C}, \mathbf{FH}, \mathbf{FW})$ 로 나타낸다. 
 
   
 
@@ -78,10 +78,7 @@ im2col 함수는 아래와 같다.
 
 ```python
 im2col(input_data, filter_h, filter_w, stride=1, pad=0):
-    # input_data : 4차원 배열 형태의 입력 데이터
-    # filter_h, filter_w : 필터의 높이와 너비
-    # stride : 스트라이드, pad : 패딩
-    # col : 2차원 배열
+    #stride의 크기는 1, padding은 없는 것으로 한다.
     
     N, C, H, W = input_data.shape
     out_h = (H + 2*pad - filter_h)//stride + 1
@@ -97,6 +94,7 @@ im2col(input_data, filter_h, filter_w, stride=1, pad=0):
             col[:, :, y, x, :, :] = img[:, :, y:y_max:stride, x:x_max:stride]
 
     col = col.transpose(0, 4, 5, 1, 2, 3).reshape(N*out_h*out_w, -1)
+    # 2차원 배열 col으로 reshape
     return col
 ```
 
@@ -117,11 +115,11 @@ class Convolution:
         out_w = int(1 + (W + 2*self.pad - FW) / self.stride)
 
         col = im2col(x, FH, FW, self.stride, self.pad)
+        # 4차원 데이터(개수, 3차원)를 받아, im2col 함수를 사용하여 2차원(개수, 1차원) 벡터로 변환
         col_W = self.W.reshape(FN, -1).T
         out = np.dot(col, col_W) + self.b
         out = out.reshape(N, out_h, out_w, -1).transpose(0, 3, 1, 2)
-		# 4차원 데이터(개수, 3차원)를 받아, im2col 함수를 사용하여 2차원(개수, 1차원) 벡터로 변환
-        # 가중치를 곱하고 편향을 더해준 값을 다시 4차원으로 가공하여 반환
+        # 가중치(col_W)를 곱하고 편향(b)을 더해준 값을 다시 4차원으로 reshape
         
         return out
 ```
@@ -142,16 +140,16 @@ class Pooling:
         N, C, H, W = x.shape
         out_h = int(1 + (H - self.pool_h) / self.stride)
         out_w = int(1 + (W - self.pool_w) / self.stride)
-		
-        #입력 데이터 전개
+	
         col = im2col(x, self.pool_h, self.pool_w, self.stride, self.pad)
         col = col.reshape(-1, self.pool_h*self.pool_w)
+        # im2col 함수를 통해 이미지 데이터를 2차원으로 전개
 
-        # 최댓값 추출(Max pooling)
         out = np.max(col, axis=1)
+        # col 마다의 최댓값 추출
 
-        # 다음 Conv층에서 쓸 수 있도록 성형
         out = out.reshape(N, out_h, out_w, C).transpose(0, 3, 1, 2)
+        # 다음 합성곱 층에서 데이터를 받을 수 있도록 4차원으로 성형
 
         return out
 ```
@@ -169,11 +167,13 @@ class SimpleConvNet:
     def __init__(self, input_dim=(1, 28, 28), 
                  conv_param={'filter_num':30, 'filter_size':5, 'pad':0, 'stride':1},
                  hidden_size=100, output_size=10, weight_init_std=0.01):
-        # inp
+        
         filter_num = conv_param['filter_num']
         filter_size = conv_param['filter_size']
         filter_pad = conv_param['pad']
         filter_stride = conv_param['stride']
+        #conv_param으로부터 각 값을 추출하여 할당
+        
         input_size = input_dim[1]
         conv_output_size = (input_size - filter_size + 2*filter_pad) / filter_stride + 1
         pool_output_size = int(filter_num * (conv_output_size/2) * (conv_output_size/2))
@@ -209,12 +209,6 @@ class SimpleConvNet:
         return x
 
     def loss(self, x, t):
-        """손실 함수를 구한다.
-        Parameters
-        ----------
-        x : 입력 데이터
-        t : 정답 레이블
-        """
         y = self.predict(x)
         return self.last_layer.forward(y, t)
 
@@ -233,38 +227,17 @@ class SimpleConvNet:
         return acc / x.shape[0]
 
     def numerical_gradient(self, x, t):
-        """기울기를 구한다（수치미분）.
-        Parameters
-        ----------
-        x : 입력 데이터
-        t : 정답 레이블
-        Returns
-        -------
-        각 층의 기울기를 담은 사전(dictionary) 변수
-            grads['W1']、grads['W2']、... 각 층의 가중치
-            grads['b1']、grads['b2']、... 각 층의 편향
-        """
         loss_w = lambda w: self.loss(x, t)
 
         grads = {}
         for idx in (1, 2, 3):
             grads['W' + str(idx)] = numerical_gradient(loss_w, self.params['W' + str(idx)])
             grads['b' + str(idx)] = numerical_gradient(loss_w, self.params['b' + str(idx)])
+        # 수치 미분을 이용하여 그래디언트를 구하는 함수 (시간이 오래 걸림)
 
         return grads
 
     def gradient(self, x, t):
-        """기울기를 구한다(오차역전파법).
-        Parameters
-        ----------
-        x : 입력 데이터
-        t : 정답 레이블
-        Returns
-        -------
-        각 층의 기울기를 담은 사전(dictionary) 변수
-            grads['W1']、grads['W2']、... 각 층의 가중치
-            grads['b1']、grads['b2']、... 각 층의 편향
-        """
         # forward
         self.loss(x, t)
 
@@ -282,7 +255,8 @@ class SimpleConvNet:
         grads['W1'], grads['b1'] = self.layers['Conv1'].dW, self.layers['Conv1'].db
         grads['W2'], grads['b2'] = self.layers['Affine1'].dW, self.layers['Affine1'].db
         grads['W3'], grads['b3'] = self.layers['Affine2'].dW, self.layers['Affine2'].db
-
+		
+        # 오차 역전파법을 이용하여 그래디언트를 구하는 함수
         return grads
         
     def save_params(self, file_name="params.pkl"):
@@ -301,6 +275,8 @@ class SimpleConvNet:
         for i, key in enumerate(['Conv1', 'Affine1', 'Affine2']):
             self.layers[key].W = self.params['W' + str(i+1)]
             self.layers[key].b = self.params['b' + str(i+1)]
+            
+        # 각 가중치를 저장하고 불러온다.
 ```
 
 
@@ -313,7 +289,7 @@ class SimpleConvNet:
 
 - 1번째 층의 가중치 시각화하기
   - 학습 전의 필터는 무작위로 초기화되고 있기 때문에 흑백 정도에 규칙성이 없다. 
-  - 학습 후에는 특정
+  - 학습 후에는 필터마다 특정한 모양(패턴)이 드러나게 된다. 이는 각 영역의 엣지(Edge)를 나타내게 된다.
 
 
 
