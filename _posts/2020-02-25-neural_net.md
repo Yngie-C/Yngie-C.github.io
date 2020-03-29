@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 2. 신경망(NeuralNet)
-category: DL from Scratch
+category: Deep Learning
 tag: Deep-Learning
 ---
 

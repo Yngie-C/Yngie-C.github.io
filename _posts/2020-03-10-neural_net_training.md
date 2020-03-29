@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 3. 신경망 학습
-category: DL from Scratch
+category: Deep Learning
 tag: Deep-Learning
 ---
 

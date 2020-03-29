@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 5. 학습 관련 기술들
-category: DL from Scratch
+category: Deep Learning
 tag: Deep-Learning
 ---
 

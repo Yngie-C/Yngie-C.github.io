@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 4. 오차역전파법
-category: DL from Scratch
+category: Deep Learning
 tag: Deep-Learning
 ---
 

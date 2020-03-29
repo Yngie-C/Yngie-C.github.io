@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 1. 퍼셉트론(Perceptron)
-category: DL from Scratch
+category: Deep Learning
 tag: Deep-Learning
 ---
 
