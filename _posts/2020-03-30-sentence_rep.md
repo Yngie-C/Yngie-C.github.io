@@ -153,8 +153,91 @@ $$
 
 ## 4) Self Attention & RNN
 
-- ?
+- 위 모델들을 
+
+  - **RN** : 모든 토큰의 가중치를 1로 가정
+
+  $$
+  h_t = f(x_t, x_1) + \text{ ... } + f(x_t, x_{t-1}) + f(x_t, x_{t+1}) + \text{ ... } + f(x_t, x_T)
+  $$
+
+  
+
+  - **CNN** : 윈도우에 해당하는 토큰의 가중치만 1로, 나머지는 0으로 가정
+
+  $$
+  h_t = f(x_t, x_{t-k}) + \text{ ... } + f(x_t, x_t) + \text{ ... } + f(x_t, x_{t+k})
+  $$
+
+  
+
+  - **RN** 은 너무 전체를 고려 vs **CNN** 은 너무 구역에만 집중 : 둘의 장점을 살릴 수 없을까?
+
+
+
+- **Self-Attention** : 가중치를 0 혹은 1로 고정하지 말고, Neural Net에게 맡길 수는 없을까? 
+  $$
+  h_t = \sum^T_{t^\prime = 1} \alpha (x_t, x_t^\prime) f(x_t, x_t^\prime) \\ \alpha \text{ 가 가중치를 결정}
+  $$
+
+  - 가중치 함수
+
+    - DAG 내의 다른 subgraph
+
+    $$
+    \alpha (x_t, x_t^\prime) = \sigma (RN(x_t, x_t^\prime)) \in [0, 1]
+    $$
+
+    - 가중치를 모두 더했을 때 1이 되도록 Normalize
+
+    $$
+    \alpha (x_t, x_t^\prime) = \frac{\exp(\beta(x_t, x_t^\prime))}{\sum^T_{t^{\prime\prime} = 1} \exp(\beta(x_t, x_t^\prime))} \text{ , where } \beta(x_t, x_t^\prime) = RN((x_t, x_t^\prime))
+    $$
+
+  - 장점 : 먼 거리에 있는 토큰 사이의 관계도 찾아낼 수 있으며, 가까운 거리라도 관계가 없으면 무시
+
+  - Multi-head, Multi-hop attention and so on. (Generalization)
+
+$$
+\text{Self-Attention} \\ \text{ } \\
+x_t \rightarrow \alpha \text{(1D out) 와 } RN \text{ 계산} \\
+\Rightarrow h_t = \sum \alpha \cdot RN
+$$
+
+
+
+- **RNN(Recurrent Neural Network)**
+
+  - Self-Attention의 단점
+
+  1. 시간복잡도가 높음 $O(T^2)$
+  2. Counting을 포함한 몇 가지 operation에 잘 작동하지 않음
+
+  
+
+  - 그에 반해 RNN은 온라인으로 시퀀스를 압축. 시간복잡도 $O(T)$
+
+  $$
+  h_t = RNN(h_{t-1}, x_t) \text{ , where } h_0 = 0
+  $$
+
+  - $h_t = \text{ Memory}$ 에 지금까지 거쳐온 모든 토큰의 정보를 저장
+  - 한쪽 방향에서 RNN을 진행했을 때 벡터의 크기가 너무 커지는 것을 막기 위하여 양방향(Bidirectional) RNN을 사용하기도 함. 양방향의 RNN을 Concat
+  - 단점
+    - 순서대로 진행하는 구조상 Modern Hardware(분산 및 병렬처리)에 잘 맞지 않음
+  - 나머지 단점들은 LSTM(Long Short Term Memory) 이나 GRU(Gated Recurrent Unit)를 쓰면 극복가능
+    - 대부분의 프레임워크가 LSTM, GRU를 지원
 
 
 
 <br/>
+
+## Summary
+
+- 총 5개의 모델을 살펴봄 - CBoW, RN, CNN, Self-Attention, RNN
+  - CBoW : 문장을 토큰의 평균으로 표현
+  - RN, CNN, Self-Attention, RNN : 문장을 토큰의 벡터로 표현
+
+
+
+- 각 방법들은 쓰임새에 따라 조합하여 쓸 수 있다.
