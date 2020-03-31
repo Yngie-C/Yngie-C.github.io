@@ -233,7 +233,7 @@ $$
 
 <br/>
 
-# Summary
+# Summary & QnA
 
 - 총 5개의 모델을 살펴봄 - CBoW, RN, CNN, Self-Attention, RNN
   - CBoW : 문장을 토큰의 평균으로 표현
@@ -242,3 +242,6 @@ $$
 
 
 - 각 방법들은 쓰임새에 따라 조합하여 쓸 수 있다.
+
+
+
