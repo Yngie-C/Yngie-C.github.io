@@ -149,7 +149,7 @@ $$
     - Backoff : $p = 0$ 이 되는 경우에만 더 작은 N을 쓰도록 하는 방법이다. 해당 경우에는 적당한 보정치를 위해서 Correction factor $(\alpha, \beta)$ 를 취해준다.
 
     $$
-    c(x_{-N}, ... ,x) = \cases{{\alpha}c(x_{-N+1}, ... ,x) + \beta, \quad \text{if } c(x_{-N+1}, ... ,x) = 0 \\ c(x_{-N}, ... ,x) \qquad \qquad \text{ otherwise}}
+    c(x_{-N}, ... ,x) = \begin{cases}{\alpha}c(x_{-N+1}, ... ,x) + \beta, \quad \text{if } c(x_{-N+1}, ... ,x) = 0 \\ c(x_{-N}, ... ,x) \qquad \qquad \text{ otherwise}\end{cases}
     $$
 
     - 가장 널리 적용되는 방법은 Kneser-Ney smoothing/backoff 이다.
