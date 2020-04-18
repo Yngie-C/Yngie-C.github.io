@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Decision Tree
-category: Machine Learing
+category: Machine Learning
 tag: Machine-Learning
 ---
 
