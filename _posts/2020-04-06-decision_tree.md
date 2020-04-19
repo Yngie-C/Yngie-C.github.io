@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Decision Tree
+title: 결정 트리(Decision Tree)
 category: Machine Learning
 tag: Machine-Learning
 ---

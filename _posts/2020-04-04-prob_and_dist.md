@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Probability & Distribution
+title: 확률과 확률분포(Probability & Distribution)
 category: Machine Learning
 tag: Machine-Learning
 ---

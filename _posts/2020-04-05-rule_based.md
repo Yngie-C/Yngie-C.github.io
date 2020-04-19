@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Rule Based Learning
+title: 규칙 기반 학습(Rule Based Learning)
 category: Machine Learning
 tag: Machine-Learning
 ---
