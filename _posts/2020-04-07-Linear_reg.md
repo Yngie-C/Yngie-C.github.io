@@ -1,6 +1,6 @@
 ---
 <>layout: post
-title: Linear Regression
+title: 선형 회귀 (Linear Regression)
 category: Machine Learning
 tag: Machine-Learning
 ---
