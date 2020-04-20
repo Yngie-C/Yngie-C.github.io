@@ -121,9 +121,7 @@ $$
 특성 간에 조건부 독립이 성립하려면 서로의 관계가 전혀 없다는 가정을 해야 한다. 어떻게 속성 사이에 관계가 없다는 것을 증명할 수 있을까? 아래 그림에 있는 상관과 상관의 명령을 잘 듣는 2명의 직원 A, B 의 예시를 보며 생각해보자. 
 
 <p align="center"><img src="https://actruce.com/wp-content/uploads/2018/11/conditional_independence_commander.png"  /> </p>
-
 A가 상관의 명령을 듣지 못하는 상태라고 하자. 이런 상태에서 직원 B가 앞으로 가는 것을 볼 때와 보지 못했을 때 직원 A가 앞으로 갈 확률을 비교해보자. 아마도 전자가 더 클 것이다. 앞으로 가는 직원 B를 봤다면 상관이 명령을 내렸을 것이라고 판단하기 때문이다. 이를 $P$ 를 사용하여 나타내면 다음과 같다.
-
 
 $$
 P(\text{OfficerA=Go} \vert \text{OfficerB=Go}) > P(\text{OfficerA=Go})
