@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 2. 자료구조 구현을 위한 C 프로그래밍 기법
+title: 자료구조 구현을 위한 C 프로그래밍 기법
 category: Data Structure
 tag: Data-structure
 ---
