@@ -192,8 +192,8 @@ P(Y=y|X) = \frac{1}{1 + \frac{\pi_2 \prod_{1 \leq i \leq d} \frac{1}{\sigma^i_2 
 = \frac{1}{1 + \frac{\pi_2 \exp(-\sum_{1 \leq i \leq d} \{ \frac{1}{2}(\frac{x_i - \mu_2^i}{\sigma^i_2})^2\})}{\pi_1 \exp(-\sum_{1 \leq i \leq d} \{ \frac{1}{2}(\frac{x_i - \mu_1^i}{\sigma^i_1})^2\})}}
 = \frac{1}{1 + \frac{\exp(-\sum_{1 \leq i \leq d} \{ \frac{1}{2}(\frac{x_i - \mu_2^i}{\sigma^i_2})^2\} + \log \pi_2)}{\exp(-\sum_{1 \leq i \leq d} \{ \frac{1}{2}(\frac{x_i - \mu_1^i}{\sigma^i_1})^2\} + \log \pi_1)}} \\
 \qquad \qquad = \frac{1}{1 + \exp(-\sum_{1 \leq i \leq d} \{ \frac{1}{2}(\frac{x_i - \mu_2^i}{\sigma^i_2})^2\} + \log \pi_2 +\sum_{1 \leq i \leq d} \{ \frac{1}{2}(\frac{x_i - \mu_1^i}{\sigma^i_1})^2\} - \log \pi_1)} \\
-\qquad = \frac{1}{{1 + \exp(-\frac{1}{2(\sigma_1)^2}\sum_{1 \leq i \leq d} \{(x_i - \mu_1^i)^2 - (x_i - \mu_2^i)^2\}  + \log \pi_2 - \log \pi_1)}} \\
-\qquad = \frac{1}{{1 + \exp(-\frac{1}{2(\sigma_1)^2}\sum_{1 \leq i \leq d} \{2(\mu_2^i - \mu_1^i)X_i + {\mu_1^i}^2 - {\mu_2^i}^2\}  + \log \pi_2 - \log \pi_1)}}
+\qquad = \frac{1}{1 + \exp(-\frac{1}{2(\sigma_1)^2}\sum_{1 \leq i \leq d} \{(x_i - \mu_1^i)^2 - (x_i - \mu_2^i)^2\}  + \log \pi_2 - \log \pi_1)} \\
+\qquad = \frac{1}{1 + \exp(-\frac{1}{2(\sigma_1)^2}\sum_{1 \leq i \leq d} \{2(\mu_2^i - \mu_1^i)X_i + {\mu_1^i}^2 - {\mu_2^i}^2\}  + \log \pi_2 - \log \pi_1)}
 $$
 
 
