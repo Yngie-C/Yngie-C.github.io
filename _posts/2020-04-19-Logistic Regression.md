@@ -91,7 +91,7 @@ $$
 
 $$
 f(x) = f(a) + \frac{f^{\prime}(a)}{1!}(x-a) + \frac{f^{\prime\prime}(a)}{2!}(x-a)^2 + \cdots \\
-= \sum^{\infin}_{n=0}\frac{f^{(n)}(a)}{n!}(x-a)^n \qquad \qquad \qquad \qquad
+= \sum^{\infty}_{n=0}\frac{f^{(n)}(a)}{n!}(x-a)^n \qquad \qquad \qquad \qquad
 $$
 
 
