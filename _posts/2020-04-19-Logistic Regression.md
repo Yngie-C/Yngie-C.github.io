@@ -27,7 +27,7 @@ tag: Machine-Learning
 
 로지스틱 함수를 사용하는 이유는 간단하다. 미분 계산이 쉽기 때문이다. 최적화(Optimization) 하는 과정에서 미분 계산은 당연히 필요한 관문이다. 로지스틱은 이를 간단히 만들어주기 때문에 데이터셋이 많아지더라도 시간과 컴퓨팅 자원을 적절한 선에서 유지할 수 있다.
 
-로지스틱 함수가 생성되는 과정은 아래와 같다. 먼저 로짓(Logit)이라는 로지스틱 함수의 역함수에서 시작한다. 각각의 조건부 확률 $P(Y|X)$ 로부터의 모델이 필요하므로 역함수를 취하여 $x$ 에 관한 식으로 정리해준다. 그 다음 임의의 파라미터 $a, b$ 를 추가하여 모델을 데이터에 좀 더 잘 맞출 수 있다. 그리고 이를 특성 행렬 $X$ 와 파라미터 행렬 $\theta$ 로 나타낼 수 있다. 
+로지스틱 함수가 생성되는 과정은 아래와 같다. 먼저 로짓(Logit)이라는 로지스틱 함수의 역함수에서 시작한다. 각각의 조건부 확률 $P(Y  \vert X)$ 로부터의 모델이 필요하므로 역함수를 취하여 $x$ 에 관한 식으로 정리해준다. 그 다음 임의의 파라미터 $a, b$ 를 추가하여 모델을 데이터에 좀 더 잘 맞출 수 있다. 그리고 이를 특성 행렬 $X$ 와 파라미터 행렬 $\theta$ 로 나타낼 수 있다. 
 
 
 
@@ -37,7 +37,7 @@ $$
 
 
 
-최대 우도 추정(Maximum Likelihood Estimation, MLE) $\hat{\theta} = \text{argmax}_{\theta} P(D|\theta)$ 으로부터 최대 조건부 우도 추정 MCLE(Maximum Conditional Likelihood Estimation)을 유도할 수 있다. 아래의 식을 보자.
+최대 우도 추정(Maximum Likelihood Estimation, MLE) $\hat{\theta} = \text{argmax}_{\theta} P(D  \vert \theta)$ 으로부터 최대 조건부 우도 추정 MCLE(Maximum Conditional Likelihood Estimation)을 유도할 수 있다. 아래의 식을 보자.
 
 
 
@@ -48,7 +48,7 @@ $$
 
 
 
-베르누이 시행 $P(y|x) = \mu(x)^y (1-\mu(x))^{1-y}$ 에서 $P(Y_i|X_i;\theta) = \mu(X_i)^{Y_i} (1-\mu(X_i))^{1-Y_i}$ 의 식을 유도할 수 있다. 이 식에 로그함수를 취하면 다음과 같이 식을 변형할 수 있다.
+베르누이 시행 $P(y \vert x) = \mu(x)^y (1-\mu(x))^{1-y}$ 에서 $P(Y_i \vert X_i;\theta) = \mu(X_i)^{Y_i} (1-\mu(X_i))^{1-Y_i}$ 의 식을 유도할 수 있다. 이 식에 로그함수를 취하면 다음과 같이 식을 변형할 수 있다.
 
 
 
