@@ -47,7 +47,7 @@ $f$ 를 최적의 목적 함수, $g$ 를 ML이 학습하여 생성한 함수라�
 
 하나의 인스턴스로부터 발생하는 오류는 다음과 같이 나타낼 수 있다.
 
-  
+
 $$
 E_{\text{out}}(g^D (x)) = E_{X}[(g^D (x) - f(x))^2]
 $$
@@ -175,8 +175,8 @@ SVM(Support Vector Machine) 에도 규제가 적용된다. 규제를 적용한 �
 
 
 $$
-f = \text{argmin}_{f \in \Eta} \{\frac{1}{n} \sum^n_{i=1}V(y_i, f(x_i)) + \lambda||f||^2_{\Eta}\} \\
+f = \text{argmin}_{f \in H} \{\frac{1}{n} \sum^n_{i=1}V(y_i, f(x_i)) + \lambda||f||^2_{H}\} \\
 V(y_i, f(x_i)) = (1-yf(x))_{+} , (s)_{+} = \max(s,0) \text{ 이면}\\
-f = \text{argmin}_{f \in \Eta} \{\frac{1}{n} \sum^n_{i=1} (1-yf(x))_{+} + \lambda||f||^2_{\Eta}\} \\
-f = \text{argmin}_{f \in \Eta} \{C \sum^n_{i=1} (1-yf(x))_{+} + \frac{1}{2}||f||^2_{\Eta}\} \\ C = \frac{1}{2\lambda n}
+f = \text{argmin}_{f \in H} \{\frac{1}{n} \sum^n_{i=1} (1-yf(x))_{+} + \lambda||f||^2_{H}\} \\
+f = \text{argmin}_{f \in H} \{C \sum^n_{i=1} (1-yf(x))_{+} + \frac{1}{2}||f||^2_{H}\} \\ C = \frac{1}{2\lambda n}
 $$
