@@ -58,7 +58,7 @@ $$
 
 
 $$
-\left[{\begin{array}{ccc} x_1 \\ x_2 \\ ... \\ x_T  \end{array}} \right] \cdot W : \text{ Table Lookup } \Rightarrow \text{ Sentence Representation Extractor } \vert \text{ Average } \\ \Rightarrow \text{ An arbitrary sub-graph }(\theta) \Rightarrow \text{Softmax Classifier} \\ \text{ }
+\left[{\begin{array}{c} x_1 \\ x_2 \\ ... \\ x_T  \end{array}} \right] \cdot W : \text{ Table Lookup } \Rightarrow \text{ Sentence Representation Extractor } \vert \text{ Average } \\ \Rightarrow \text{ An arbitrary sub-graph }(\theta) \Rightarrow \text{Softmax Classifier} \\ \text{ }
 $$
 
 - 모든 토큰에 대하여 Text Classification 모델을 Training 시키는 것

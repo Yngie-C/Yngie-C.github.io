@@ -104,7 +104,7 @@ $$
 f(x) = f(a) + \frac{f^{\prime}(a)}{1!}(x-a) + O(||x-a||^2) \\
 a=x_1 \text{이고 } x=x_1+h\mathbf{u} \quad \mathbf{u} \text{ is unit direction vector} \\
 f(x_1+h\mathbf{u}) = f(x_1) + hf^{\prime}(x_1)\mathbf{u} + h^2O(1) \\
-f(x_1+h\mathbf{u}) - f(x_1) \sim hf^{\prime}(x_1)\mathbf{u} \qquad \qquad
+f(x_1+h\mathbf{u}) - f(x_1) \approx hf^{\prime}(x_1)\mathbf{u} \qquad \qquad1
 $$
 
 
