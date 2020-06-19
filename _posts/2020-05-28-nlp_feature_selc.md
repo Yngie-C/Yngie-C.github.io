@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 차원 축소 - 특성 선택(Feature selection)
+title: 특성 선택(Feature selection)
 category: NLP
 tag: NLP
 ---
