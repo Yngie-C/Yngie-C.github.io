@@ -2,7 +2,7 @@
 layout: post
 title: Linked List
 category: Data Structure
-tag: Machine Learning
+tag: Data Structure
 ---
 
 
