@@ -15,7 +15,7 @@ tag: Data Structure
 
 ## Repeating Problems
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Mandelbrot_sequence_new.gif/200px-Mandelbrot_sequence_new.gif" alt="fractal" style="zoom:150%;" />
+<p align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Mandelbrot_sequence_new.gif/200px-Mandelbrot_sequence_new.gif" alt="fractal" style="zoom:150%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://en.wikipedia.org/wiki/Fractal">wikipedia : Fractal</a></p>
 
@@ -23,7 +23,7 @@ tag: Data Structure
 
 문제를 더 작게 나눌수록 문제의 크기는 작아지지만 구조적으로는 동일함을 알 수 있다. 이렇게 쪼개도 원래의 문제와 동일한 구조를 가지는(Self-similar) 문제를 **Repeating Problem** 이라고 하며 나누는 행위를 **Divide** , 그리고 나눈 문제를 해결하는 것을 **Conquer** 라고 한다. 아래는 큰 인형을 분해하면 같은 모습의 더 작은 인형이 등장하는 러시아 전통인형 마트료시카다.
 
-<img src="https://www.dookinternational.com/blog/wp-content/uploads/2018/07/a2.jpeg" alt="Matryoshka" style="zoom: 80%;" />
+<p align="center"><img src="https://www.dookinternational.com/blog/wp-content/uploads/2018/07/a2.jpeg" alt="Matryoshka" style="zoom: 80%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://www.dookinternational.com/blog/russian-doll-centuries-old-tradition-and-masterart/">dookinternational.com</a></p>
 
