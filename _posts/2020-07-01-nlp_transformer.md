@@ -155,29 +155,121 @@ Self-Attention 층에서 어떤 계산이 일어나는 지를 좀 더 자세히 
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Jay alammar Github</a></p>
 
+다음으로 이전에 차원수를 다루면서 잠깐 언급되었던 **멀티헤드 어텐션(Multi-Head Attention)** 에 대해서 알아보자. Multi-Head Attention의 목적은 각 단어가 미치는 영향을 한 번이 아니라 여러 번 계산하기 위함이다. 예를 들어, *"it"* 이 어떤 단어를 지칭하는지(어떤 단어의 영향을 가장 많이 받는지) 알아내는 것이 Self-Attention의 문제였다면 한 번의 계산만으로 이 문제의 답을 결정하는 것이 아니라 여러 번 계산한 값을 모두 사용하겠다는 것이다.
+
+논문에서 사용한 HEAD의 개수는 8(=512/64) 이었으므로 총 8번의 다른 Self-Attention을 실행하여 8개의 아웃풋 $z_0, z_1, \cdots , z_7 $ 을 만들어낸다. (여기서 숫자는 다른 토큰을 나타내는 것이 아니라 모두 한 토큰으로부터 생성된 다른 H ead의 Attention 결과이다) 아래는 이 과정을 그림으로 나타낸 것이다.
+
+<p align="center"><img src="http://jalammar.github.io/images/t/transformer_attention_heads_z.png" alt="transformer_16" style="zoom:67%;" /></p>
+
+<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Jay alammar Github</a></p>
+
+이렇게 나온 각각의 아웃풋 행렬은 옆으로 길게 이어 붙여진(Concatenate) 후에 가중치 행렬인 $W_0$ 과의 내적을 통해서 Multi-Head Attention의 최종 결과인 행렬 $Z$  를 만들어낸다. 여기서 행렬 $W_0$ 의 요소는 학습을 통해 계속 갱신되는 미지수이다. 또한 이렇게 생성된 행렬 $Z$ 은 인풋 행렬인 $X$ 와 동일한 Shape을 가진다. 아래는 Concatenate 이후의 과정을 그림으로 나타낸 것이다.
+
+<p align="center"><img src="http://jalammar.github.io/images/t/transformer_attention_heads_weight_matrix_o.png" alt="transformer_17" style="zoom:67%;" /></p>
+
+<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Jay alammar Github</a></p>
+
+## Residual & Normalization
+
+Self-Attention층을 지난 아웃풋은 **Residual Block** 과 **Layer Normalization** 과정을 거치게 된다. Residual Block이란 Self-Attention을 통과한 아웃풋에 자기 자신을 더해주는 역할을 한다. 이렇게 더해주면 역전파 과정에서 그래디언트(Gradient)를 1이상으로 보존하여 기울기 소실(Gradient Vanishing) 때문에 발생하는 정보 유실을 막는 역할을 한다. 이런 방법은 컴퓨터 비전 분야 모델 중 하나인 ResNet에 사용된다. Residual Block을 지나면 Layer Normalization을 거치게 된다.
+
+<p align="center"><img src="http://jalammar.github.io/images/t/transformer_resideual_layer_norm_2.png" alt="transformer_18" style="zoom: 67%;" /></p>
+
+<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Jay alammar Github</a></p>
+
+위 과정은 Self-Attention 층이 끝나는 위치 뿐만 아니라 각 인코더 블록의 FFNN층 이후, 디코더의 모든 하위 레이어 이후에 위치함으로서 정보를 보존하는 역할을 한다.
+
+## FFNN
+
+Encoder에서 Self-Attention과 Residual & Normalization을 거친 벡터는 이제 Fully Connected **FFNN(Feed Forward Neural Networks)** 으로 들어가게 된다. 이전 이미지에서 볼 수 있듯 FFNN은 토큰마다 따로(Separately) 진행되기 때문에 병렬화가 가능하다. 하지만 같은 인코더 블록 내에 있는 FFNN들은 서로 동일한(Identically) 가중치를 적용하게 된다. FFNN에서 일어나는 계산은 아래와 같은 수식으로 나타낼 수 있다.
+
+
+$$
+FFN(x) = \max(0, xW_1 + b_1) W_2 +b_2
+$$
+
+
+FFNN에서 일어나는 과정을 이미지로 나타내면 아래와 같다. 
+
+![ffnn_1](https://user-images.githubusercontent.com/45377884/86258473-d4cfef00-bbf5-11ea-86ce-4019c22178a3.png) 
+
+<p align="center" style="font-size:80%">이미지 출처 : <a href="https://github.com/pilsung-kang/text-analytics">Text-Analytics Github</a></p>
+
+512차원의 입력 벡터가 활성화 함수(Activation function)인 ReLU를 지나면 2048차원의 벡터가 되며 다음 연산에서는 다시 512차원의 출력 벡터로 변하게 된다.
+
+## Masked Multi-Head Attention
+
+**Masked Multi-Head Attention** 은 디코더 블록 중 가장 첫 번째 하위 레이어에 적용되는 노래이다. 디코더는 시퀀스 자기 자신보다 뒤에 위치한 토큰에 대해서는 정보를 미리 알고 있으면 안된다. 때문에 해당 토큰 이전에 있는 토큰들에 대한 정보만 남기고 나머지는 마스킹(Masking)을 해준다.
+
+<p align="center"><img src="http://jalammar.github.io/images/gpt2/self-attention-and-masked-self-attention.png" alt="transformer_19" style="zoom: 50%;" /></p>
+
+<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Jay alammar Github</a></p>
+
+Masked Multi-Head Attention 과정을 그림으로 나타내면 다음과 같다.
+
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/86260921-e4046c00-bbf8-11ea-8c7c-f8b58b8b46e9.png" alt="masked_attn"/></p>
+
+<p align="center" style="font-size:80%">이미지 출처 : <a href="https://github.com/pilsung-kang/text-analytics">Text-Analytics Github</a></p>
+
+프로세싱 중인 토큰 이후에 토큰에 대해서는 $q \cdot k$ 의 값을 계산한 후 $-\infty$ 로 마스킹해준다. 이렇게 되면 마스킹된 부분은 소프트맥스를 해주었을 때 Score가 0이 되고 밸류 벡터가 아무런 영향을 미치지 못하게 된다. 
+
+<p align="center"><img src="http://jalammar.github.io/images/xlnet/masked-self-attention-2.png" alt="transformer_20" style="zoom: 50%;" /></p>
+
+<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Jay alammar Github</a></p>
+
+Masked Multi-Head Attention이 진행되는 전체 과정을 나타내면 다음과 같다.
+
+<p align="center"><img src="http://jalammar.github.io/images/gpt2/transformer-decoder-attention-mask-dataset.png" alt="transformer_21" style="zoom: 50%;" /></p>
+
+<p align="center"><img src="http://jalammar.github.io/images/gpt2/queries-keys-attention-mask.png" alt="transformer_21" style="zoom:50%;" /></p>
+
+<p align="center"><img src="http://jalammar.github.io/images/gpt2/transformer-attention-mask.png" alt="transformer_22" style="zoom:50%;" /></p>
+
+<p align="center"><img src="http://jalammar.github.io/images/gpt2/transformer-attention-masked-scores-softmax.png" alt="transformer_23" style="zoom:50%;" /></p>
+
+<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Jay alammar Github</a></p>
+
+## Encoder-Decoder Attention
+
+Masked Multi-Head Attention에서의 출력 벡터는 그 다음으로 **인코더-디코더 어텐션(Encoder-Decoder Attention)** 과정을 거치게 된다. 인코더를 지나온 벡터가 해당 키와 밸류를 가지고 각 디코더 블록의 Masked Multi-Head Attention 아웃풋과 Attention 메커니즘을 다시 한 번 수행한다. 
+
+![transformer_24](http://jalammar.github.io/images/t/transformer_decoding_2.gif)
+
+<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Jay alammar Github</a></p>
+
+## Final Linear and Softmax Layer
+
+트랜스포머 속 마지막 메커니즘은 최상단 층에 있는 **Linear & Softmax Layer** 이다. 리니어 레이어(Linear Layer)는 단순한 완전 연결(Fully Connected) 신경망이며 가장 마지막 디코더 블록의 출력 벡터를 로짓 벡터(Logit Vector)라고 불리는 훨씬 더 큰 벡터로 바꾸어 준다.
+
+그리고 소프트맥스 레이어는 이 로짓 벡터를 각 토큰의 확률(Probability)로 바꿔준다. 이 마지막 과정을 그림으로 나타내면 다음과 같다.
+
+<p align="center"><img src="http://jalammar.github.io/images/t/transformer_decoder_output_softmax.png" alt="transformer_25" style="zoom: 80%;" /></p>
+
+<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Jay alammar Github</a></p>
 
 
 
+## Complexity & Performance
 
+각 레이어 타입 마다의 **복잡도(Complexity)** 를 비교하면 다음과 같다.
 
+| Layer Type                  | Complexity per Layer   | Sequential Operations | Maximum Path Length |
+| --------------------------- | ---------------------- | --------------------- | ------------------- |
+| Self Attention              | $O(n^2 \cdot d)$       | $O(1)$                | $O(1)$              |
+| Recurrent                   | $O(n \cdot d^2)$       | $O(n)$                | $O(n)$              |
+| Convolutional               | $O(k \cdot n \cdot d)$ | $O(1)$                | $O(\log_k (n))$     |
+| Self-Attention (restricted) | $O(r \cdot n \cdot d)$ | $O(1)$                | $O(n / r)$          |
 
+BLEU Score[^1]를 통해서 비교한 모델의 성능은 다음과 같다. 트랜스포머의 크기를 키운 Big 모델은 당시 SOTA(State-of-the-Art)를 기록하였으며 학습에 필요한 비용도 트랜스포머를 활용했을 때 가장 적은 것을 이전 모델보다 훨씬 더 줄어드는 것을 볼 수 있다.  
 
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/86265841-4c564c00-bbff-11ea-995a-c8049836a356.png" alt="trans_perform_1" style="zoom:67%;" /></p>
 
+<p align="center" style="font-size:80%">이미지 출처 : <a href="https://github.com/pilsung-kang/text-analytics">Text-Analytics Github</a></p>
 
+또한 인코더-디코더 블록의 개수나 차원 등 다양한 하이퍼파라미터를 조정함에 따라 여러가지 변화된 트랜스포머의 형태가 있다. 이는 다음 이미지를 통해 확인할 수 있다. 
 
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/86266384-1c5b7880-bc00-11ea-8c56-48405bbb625a.png" alt="trans_variation" style="zoom:67%;" /></p>
 
+<p align="center" style="font-size:80%">이미지 출처 : <a href="https://github.com/pilsung-kang/text-analytics">Text-Analytics Github</a></p>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+[^1]: [김동화님 블로그](https://donghwa-kim.github.io/BLEU.html) 에 잘 정리되어 있다
