@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 리스트(List)에서의 튜플(Tuple) 혹은 객체(Object)의 정렬
+title: 튜플(tuple) 혹은 객체(object) 요소를 갖는 리스트 정렬
 category: Python
 tag: Python
 ---
