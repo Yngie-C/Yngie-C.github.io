@@ -100,21 +100,25 @@ $$
 $g(N)$ 의 차수가 더 작아지면 어떻게 될까? $g(N) = N$ 이라고 하면 $f(N) \leq c \cdot g(N)$ 을 다음과 같이 정리할 수 있다.
 
 
+
 $$
-f(N) \leq c \cdot g(N) \\
 \frac{3}{2}N^2 - \frac{1}{2}N + 1 \leq c \cdot N \\
 -\frac{3}{2}N^2 + (c-\frac{1}{2})N -1 \geq 0
 $$
+
+
 맨 아래 있는 식은 위로 볼록한 포물선이 되므로 언젠가는 0보다 작아지게 되고, 이 경우에는 $N \geq n_0$ 인 모든 $N$ 에 대해 식을 만족하는 $n_0$ 를 찾을 수 없다. 따라서 $O(N)$ 은 버블 정렬의 빅-오 표기법으로 적절하지 않다.
 
 반대로 $g(N)$ 의 차수가 더 커지면 어떻게 될까? $g(N) = N^3$ 이라고 하면 $f(N) \leq c \cdot g(N)$ 을 다음과 같이 정리할 수 있다.
 
 
+
 $$
-f(N) \leq c \cdot g(N) \\
 \frac{3}{2}N^2 - \frac{1}{2}N + 1 \leq c \cdot N^3 \\
 c \cdot N^3-\frac{3}{2}N^2 + \frac{1}{2}N -1 \geq 0
 $$
+
+
 $c$ 는 임의의 양의 상수이므로 마지막 식은 우상향 하는 삼차함수의 식을 그리게 된다. $c=1$ 로 가정했을 때의 그래프는 다음과 같다. 아래와 같은그래프에서 근은 약 $1.584$ 정도의 값을 가진다. 따라서 $n_0 = 1.584$ 이라고 하면 $N \geq n_0$ 인 모든 $N$ 에 대하여 $f(N) \leq c \cdot g(N)$ 을 만족하므로 $O(N^3)$ 는 버블 정렬 알고리즘을 빅-오 표기법으로 잘 나타낸 것이라 할 수 있다.
 
 <p align="center"><img src="https://user-images.githubusercontent.com/45377884/86918571-deaba200-c161-11ea-9f8b-06bf63f3c464.png" alt="bubblesort_graph2" style="zoom: 67%;" /></p>
