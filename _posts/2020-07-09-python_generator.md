@@ -7,7 +7,7 @@ tag: Python
 
  
 
-아래 내용은 [스쿨오브웹-제너레이터]([http://schoolofweb.net/blog/posts/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%A0%9C%EB%84%88%EB%A0%88%EC%9D%B4%ED%84%B0-generator/](http://schoolofweb.net/blog/posts/파이썬-제너레이터-generator/)) 와 [처음 시작하는 파이썬](http://www.yes24.com/Product/Goods/29289816) , [파이썬 코딩의 기술](http://www.yes24.com/Product/Goods/26850854?scode=032&OzSrank=1) 참조하여 작성하였습니다.
+아래 내용은 [스쿨오브웹-제너레이터](http://schoolofweb.net/blog/posts/파이썬-제너레이터-generator/) 와 [처음 시작하는 파이썬](http://www.yes24.com/Product/Goods/29289816) , [파이썬 코딩의 기술](http://www.yes24.com/Product/Goods/26850854?scode=032&OzSrank=1) 을 참조하여 작성하였습니다.
 
 
 
