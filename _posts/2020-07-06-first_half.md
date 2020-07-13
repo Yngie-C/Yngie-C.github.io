@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 2020-1
+title: 2020년 상반기 회고
 category: Daily
 tag: Daily
 ---
