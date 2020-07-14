@@ -53,7 +53,7 @@ P(C_i|x_1, x_2) = \frac{P(x_1, x_2|C_i) \cdot P(C_i)}{P(x_1, x_2)} = \frac{P(x_1
 $$
 
 
-위 수식에서 $P(C_i)$ 로 나타나는 것은 사전확률(Priority probability)이며 $P(x_1|C_i), P(x_2|C_i)$ 는 클래스가 주어졌을 때 각 특성이 등장할 조건부 확률이다. 각 부분을 구하는 방법은 다음과 같다.
+위 수식에서 $P(C_i)$ 로 나타나는 것은 사전확률(Priority probability)이며 $P(x_1 \vert C_i), P(x_2 \vert C_i)$ 는 클래스가 주어졌을 때 각 특성이 등장할 조건부 확률이다. 각 부분을 구하는 방법은 다음과 같다.
 
 
 $$
