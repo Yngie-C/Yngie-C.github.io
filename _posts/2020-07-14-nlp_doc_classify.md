@@ -49,16 +49,16 @@ $$
 
 
 $$
-P(C_i|x_1, x_2) = \frac{\color{blue}P(x_1, x_2|C_i) \cdot \color{red}P(C_i)}{P(x_1, x_2)} = \frac{\color{blue}P(x_1|C_i) \cdot P(x_2|C_i) \cdot \color{red}P(C_i)}{P(x_1, x_2)}
+P(C_i|x_1, x_2) = \frac{P(x_1, x_2|C_i) \cdot P(C_i)}{P(x_1, x_2)} = \frac{P(x_1|C_i) \cdot P(x_2|C_i) \cdot P(C_i)}{P(x_1, x_2)}
 $$
 
 
-위 수식에서 빨간색으로 표시된 부분은 사전확률(Priority probability)이며 파란색으로 표시된 부분은 클래스가 주어졌을 때 각 특성이 등장할 조건부 확률이다. 각 부분을 구하는 방법은 다음과 같다.
+위 수식에서 $P(C_i)$ 로 나타나는 것은 사전확률(Priority probability)이며 $P(x_1|C_i), P(x_2|C_i)$ 는 클래스가 주어졌을 때 각 특성이 등장할 조건부 확률이다. 각 부분을 구하는 방법은 다음과 같다.
 
 
 $$
-{\color{red}\hat{P}(c_j)} = \frac{N.Doc(C = c_j)}{\text{Total number of documents}} \\
-{\color{blue}\hat{P}(w_i|c_j)} = \frac{\text{count}(w_i,c_j)}{\sum_{w \in V} \text{count}(w,c_j)} \\
+\hat{P}(c_j) = \frac{N.Doc(C = c_j)}{\text{Total number of documents}} \\
+\hat{P}(w_i|c_j) = \frac{\text{count}(w_i,c_j)}{\sum_{w \in V} \text{count}(w,c_j)} \\
 $$
 
 
@@ -68,9 +68,9 @@ $$
 
 
 $$
-\text{count}({\color{ProcessBlue}\text{fantastic}},{\color{RedOrange}\text{negative}}) = 0 \quad 이면 \\
-\hat{P}({\color{ProcessBlue}\text{fantastic}}|{\color{RedOrange}\text{negative}}) = 0 \quad 이므로 \\
-\hat{P}({\color{RedOrange}\text{negative}}|\cdots, {\color{ProcessBlue}\text{fantastic}}, \cdots) = 0
+\text{count}(\text{fantastic},\text{negative}) = 0 \quad 이면 \\
+\hat{P}(\text{fantastic}|\text{negative}) = 0 \quad 이므로 \\
+\hat{P}(\text{negative}|\cdots, \text{fantastic}, \cdots) = 0
 $$
 
 
