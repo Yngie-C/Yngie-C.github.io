@@ -19,7 +19,8 @@ tag: Machine-Learning
 
 $$
 P(E) \in R, \quad P(E) \geq 0, \quad P(\Omega) = 1 \\
-P(E_1 \cup E_2 \cup ...) = \sum^{\infty}_{i=1} P(E_i) \quad \text{단, 서로 상호 배타적(Mutually Exclusive)일 경우}
+P(E_1 \cup E_2 \cup ...) = \sum^{\infty}_{i=1} P(E_i) \\
+\text{단, } E_i \text{ 가 서로 상호 배타적(Mutually Exclusive)일 경우}
 $$
 
 
@@ -121,7 +122,7 @@ $$
 
 
 $$
-f(x;\mu, \sigma) = \frac{1}{\sigma \sqrt{2 \pi}} \exp \bigg\{{-\frac{(x - \mu)^2}{2 \sigma^2}}\bigg\} \\
+f(x;\mu, \sigma) = \frac{1}{\sigma \sqrt{2 \pi}} \exp \bigg\{-\frac{(x - \mu)^2}{2 \sigma^2}\bigg\} \\
 \mu : \text{mean} \qquad \sigma^2 : \text{variance}
 $$
 
