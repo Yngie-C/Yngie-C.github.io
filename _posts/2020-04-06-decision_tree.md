@@ -33,6 +33,7 @@ I(X) = \log_2 \frac{1}{p(X)}
 $$
 
 
+
 위 식에서 $p(X)$ 는 사건 $X$ 가 발생할 확률을 나타냅니다. 해당 수식으로부터 특정 사건이 가지고 있는 정보량은 그 사건깅 일어날 확률의 로그값에 반비례하는 것을 알 수 있습니다. 엔트로피 $H(X)$ 는 이 정보량의 평균을 나타내는 것으로 수식은 다음과 같습니다.
 
 
@@ -45,10 +46,9 @@ $$
 
 
 $$
-H(Y\vert X) = \sum_X P(X=x) \log_b H(Y\vert X=x) \qquad \qquad \qquad \qquad \qquad\\
+H(Y\vert X) = \sum_X P(X=x) \log_b H(Y\vert X=x) \qquad \qquad \qquad \qquad \qquad \\
 \qquad \qquad \qquad = \sum_X P(X=x) \{ -\sum_Y P(Y=y\vert X=x) \log_b H(Y=y\vert X=x)\}
 $$
-
 
 
 위 식을 이용하여 원래 데이터셋의 엔트로피와 이 데이터셋을 각각 A1과 A9으로 나누었을 때의 엔트로피를 계산해봅시다.
@@ -57,22 +57,19 @@ $$
 $$
 H(Y) = -\sum_{Y \in \{+,-\}} P(Y=y) \log_2 P(Y=y) = 0.991 \\
 H(Y\vert A1) = \sum_{X \in \{a,b,?\}} \sum_{Y \in \{+,-\}} P(A1= x, Y=y) \log_2 \frac {P(A1=x)}{P(A1= x, Y=y)} = 0.989 \\
-H(Y\vert A9) = \sum_{X \in \{t,f\}} \sum_{Y \in \{+,-\}} P(A9= x, Y=y) \log_2 \frac {P(A9=x)}{P(A9= x, Y=y)} = 0.566\\
+H(Y\vert A9) = \sum_{X \in \{t,f\}} \sum_{Y \in \{+,-\}} P(A9= x, Y=y) \log_2 \frac {P(A9=x)}{P(A9= x, Y=y)} = 0.566
 $$
+
 
 
 이제는 **정보 획득도(Information Gain, IG)** 에 대해 알아봅시다. 정보 획득도는 엔트로피가 얼마나 줄어들었는 지를 나타내는 것으로 데이터셋의 불확실성이 얼마나 줄어들었는지 나타내는 수치기이도 합니다. 정보 획득도를 구하는 식은 다음과 같습니다. 아래는 이를 사용하여 각 특성으로 나누었을 때의 정보 획득도입니다.
 
 
-
-
-
 $$
 IG(Y,A_i) = H(Y) - H(Y \vert A_i) \\
 IG(Y,A_1) = H(Y) - H(Y \vert A_1) = 0.991 - 0.989 = 0.002 \\
-IG(Y,A_9) = H(Y) - H(Y \vert A_9) = 0.991 - 0.566 = 0.425 \\
+IG(Y,A_9) = H(Y) - H(Y \vert A_9) = 0.991 - 0.566 = 0.425
 $$
-
 
 
 A9 특성을 기준으로 나누었을 때가 A1 특성을 기준으로 나누었을 때보다 훨씬 더 높은 정보 획득도를 보이는 것을 알 수 있습니다. 이를 기준으로 노드를 나눌 때 A1보다 A9가 더 나은 특성임을 판가름하게 됩니다.
@@ -101,6 +98,7 @@ $$
 $$
 J(k, t_k) = \frac{m_{\text{left}}}{m}G_{\text{left}} + \frac{m_{\text{right}}}{m}G_{\text{right}}
 $$
+
 
 
 CART는 다양한 XGboost 등 부스팅 알고리즘의 기본 알고리즘으로 사용되고 있습니다.
