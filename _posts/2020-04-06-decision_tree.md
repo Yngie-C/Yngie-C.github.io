@@ -3,6 +3,7 @@ layout: post
 title: 의사 결정 나무 (Decision Tree)
 category: Machine Learning
 tag: Machine-Learning
+mathjax: true
 ---
 
  본 포스트는 [카이스트 문일철 교수님의 강의](https://www.edwith.org/machinelearning1_17/joinLectures/9738) 를 바탕으로 작성하였습니다. 책은 [핸즈온 머신러닝](http://www.yes24.com/Product/Goods/59878826) 을 참조하여 작성하였습니다. 다양한 결정 트리 알고리즘에 대한 부분은 [이곳](https://ai-times.tistory.com) 을 참조하였습니다.
@@ -28,10 +29,9 @@ tag: Machine-Learning
 위와 같은 결과가 나왔다면 어떤 특성을 기준으로 나누었을 때가 더 좋은 기준이라고 할 수 있을까요? 더 좋은 분류를 평가하기 위한 수치(Metric)로 **정보 엔트로피 혹은 섀넌 엔트로피(Shannon Entropy)** 가 있습니다. 정보 엔트로피가 무엇인지 알기 전에 정보 이론에서 사용되는 정보량에 대해 알아봅시다. 정보량 $I$ 를 표현하는 수식은 아래와 같습니다.
 
 
-$$$
+$$
 I(X) = \log_2 \frac{1}{p(X)}
-$$$
-
+$$
 
 
 위 식에서 $p(X)$ 는 사건 $X$ 가 발생할 확률을 나타냅니다. 해당 수식으로부터 특정 사건이 가지고 있는 정보량은 그 사건깅 일어날 확률의 로그값에 반비례하는 것을 알 수 있습니다. 엔트로피 $H(X)$ 는 이 정보량의 평균을 나타내는 것으로 수식은 다음과 같습니다.
