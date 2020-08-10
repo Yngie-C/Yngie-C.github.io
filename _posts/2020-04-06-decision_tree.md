@@ -46,8 +46,10 @@ $$
 
 
 $$
-H(Y\vert X) = \sum_X P(X=x) \log_b H(Y\vert X=x) \qquad \qquad \qquad \qquad \qquad \\
-\qquad \qquad \qquad = \sum_X P(X=x) \{ -\sum_Y P(Y=y\vert X=x) \log_b H(Y=y\vert X=x)\}
+\begin{aligned}
+H(Y\vert X) &= \sum_X P(X=x) \log_b H(Y\vert X=x) \\
+&= \sum_X P(X=x) \{ -\sum_Y P(Y=y\vert X=x) \log_b H(Y=y\vert X=x)\}
+\end{aligned}
 $$
 
 
@@ -55,9 +57,11 @@ $$
 
 
 $$
-H(Y) = -\sum_{Y \in \{+,-\}} P(Y=y) \log_2 P(Y=y) = 0.991 \\
-H(Y\vert A1) = \sum_{X \in \{a,b,?\}} \sum_{Y \in \{+,-\}} P(A1= x, Y=y) \log_2 \frac {P(A1=x)}{P(A1= x, Y=y)} = 0.989 \\
-H(Y\vert A9) = \sum_{X \in \{t,f\}} \sum_{Y \in \{+,-\}} P(A9= x, Y=y) \log_2 \frac {P(A9=x)}{P(A9= x, Y=y)} = 0.566
+\begin{aligned}
+H(Y) &= -\sum_{Y \in \{+,-\}} P(Y=y) \log_2 P(Y=y) = 0.991 \\
+H(Y\vert A1) &= \sum_{X \in \{a,b,?\}} \sum_{Y \in \{+,-\}} P(A1= x, Y=y) \log_2 \frac {P(A1=x)}{P(A1= x, Y=y)} = 0.989 \\
+H(Y\vert A9) &= \sum_{X \in \{t,f\}} \sum_{Y \in \{+,-\}} P(A9= x, Y=y) \log_2 \frac {P(A9=x)}{P(A9= x, Y=y)} = 0.566
+\end{aligned}
 $$
 
 
@@ -66,9 +70,11 @@ $$
 
 
 $$
-IG(Y,A_i) = H(Y) - H(Y \vert A_i) \\
-IG(Y,A_1) = H(Y) - H(Y \vert A_1) = 0.991 - 0.989 = 0.002 \\
-IG(Y,A_9) = H(Y) - H(Y \vert A_9) = 0.991 - 0.566 = 0.425
+\begin{aligned}
+IG(Y,A_i) &= H(Y) - H(Y \vert A_i) \\
+IG(Y,A_1) &= H(Y) - H(Y \vert A_1) = 0.991 - 0.989 = 0.002 \\
+IG(Y,A_9) &= H(Y) - H(Y \vert A_9) = 0.991 - 0.566 = 0.425
+\end{aligned}
 $$
 
 
