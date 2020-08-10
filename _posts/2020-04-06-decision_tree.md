@@ -3,7 +3,7 @@ layout: post
 title: 의사 결정 나무 (Decision Tree)
 category: Machine Learning
 tag: Machine-Learning
-use_math: true
+mathjax: true
 ---
 
  본 포스트는 [카이스트 문일철 교수님의 강의](https://www.edwith.org/machinelearning1_17/joinLectures/9738) 를 바탕으로 작성하였습니다. 책은 [핸즈온 머신러닝](http://www.yes24.com/Product/Goods/59878826) 을 참조하여 작성하였습니다. 다양한 결정 트리 알고리즘에 대한 부분은 [이곳](https://ai-times.tistory.com) 을 참조하였습니다.
