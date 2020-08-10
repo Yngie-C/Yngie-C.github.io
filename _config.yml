@@ -12,7 +12,9 @@ gems:
 markdown: kramdown
 kramdown:
   input: GFM
-excerpt_separator: "<!-- more -->"
+lsi: false
+excerpt_separator: "\n\n"
+incremental: false
 sass:
   style: compressed
   sass_dir: _scss    
