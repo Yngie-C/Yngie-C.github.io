@@ -31,11 +31,13 @@ $$
 
 
 $$
-1.\quad \text{만약 } A \subset B \text{ 이면 } P(A) \leq P(B) \qquad \qquad \\
-2. \quad P(\phi) = 0 \qquad \qquad \qquad \qquad \quad \qquad \qquad \\
-3. \quad 0 \leq P(A) \leq 1 \qquad \qquad \qquad \quad \qquad \qquad \\
-4. \quad P(X \cup Y) = P(X) + P(Y) - P(X \cap Y) \\
-5. \quad P(E^c) = 1 - P(E) \qquad \qquad \qquad \qquad \quad
+\begin{aligned}
+& 1.\quad \text{만약 } A \subset B \text{ 이면 } P(A) \leq P(B) \\
+& 2. \quad P(\phi) = 0 \\
+& 3. \quad 0 \leq P(A) \leq 1 \\
+& 4. \quad P(X \cup Y) = P(X) + P(Y) - P(X \cap Y) \\
+& 5. \quad P(E^c) = 1 - P(E)
+\end{aligned}
 $$
 
 
