@@ -65,11 +65,13 @@ $$
 
 
 $$
-E_D[(g^D (x) - f(x))^2] = E_D[(g^D (x) - \bar{g}(x) + \bar{g}(x) - f(x))^2] \qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad \\
-\qquad \qquad \qquad \qquad = E_D[(g^D (x) - \bar{g}(x))^2 + (\bar{g}(x) - f(x))^2 + 2(g^D (x) - \bar{g}(x))(\bar{g}(x) - f(x))] \\
-\qquad \qquad \qquad \quad \qquad = E_D[(g^D (x) - \bar{g}(x))^2] + (\bar{g}(x) - f(x))^2 + E_D[2(g^D (x) - \bar{g}(x))(\bar{g}(x) - f(x))] \\
-= E_D[(g^D (x) - \bar{g}(x))^2] + (\bar{g}(x) - f(x))^2 \qquad \qquad \qquad \\
-\because E_D[2(g^D (x) - \bar{g}(x))(\bar{g}(x) - f(x))] = 0
+\begin{aligned}
+E_D[(g^D (x) - f(x))^2] &= E_D[(g^D (x) - \bar{g}(x) + \bar{g}(x) - f(x))^2]\\
+&= E_D[(g^D (x) - \bar{g}(x))^2 + (\bar{g}(x) - f(x))^2 + 2(g^D (x) - \bar{g}(x))(\bar{g}(x) - f(x))] \\
+&= E_D[(g^D (x) - \bar{g}(x))^2] + (\bar{g}(x) - f(x))^2 + E_D[2(g^D (x) - \bar{g}(x))(\bar{g}(x) - f(x))] \\
+&= E_D[(g^D (x) - \bar{g}(x))^2] + (\bar{g}(x) - f(x))^2\\
+&\because E_D[2(g^D (x) - \bar{g}(x))(\bar{g}(x) - f(x))] = 0
+\end{aligned}
 $$
 
 
@@ -107,9 +109,11 @@ Confusion Matrix로부터 **정확도(Accuracy), 정밀도(Precision)** , **재�
 
 
 $$
-\text{Accuracy} = \frac{\text{TP+TN}}{\text{TP + TN + FP + FN}} : \text{전체 데이터 중 제대로 판별한 데이터의 비율} \\
-\text{Precision} = \frac{\text{TP}}{\text{TP + FP}} : \text{Positive로 판별한 것 중 실제로 Positive인 데이터의 비율}\\
-\text{Recall(Sensitivity)} = \frac{\text{TP}}{\text{TP + FN}} : \text{실제 Positive 데이터 중 Positive로 판별된 데이터의 비율}
+\begin{aligned}
+\text{Accuracy} &= \frac{\text{TP+TN}}{\text{TP + TN + FP + FN}} : \text{전체 데이터 중 제대로 판별한 데이터의 비율} \\
+\text{Precision} &= \frac{\text{TP}}{\text{TP + FP}} : \text{Positive로 판별한 것 중 실제로 Positive인 데이터의 비율}\\
+\text{Recall(Sensitivity)} &= \frac{\text{TP}}{\text{TP + FN}} : \text{실제 Positive 데이터 중 Positive로 판별된 데이터의 비율}
+\end{aligned}
 $$
 
 
@@ -140,8 +144,10 @@ $$
 
 
 $$
-\text{Ridge : }E(w) = \frac{1}{2} \sum^N_{n=0}(\text{Train}_n - g(x_n, w))^2 + \frac{\lambda}{2} \vert\vert w\vert\vert^2 \\
-\text{Lasso : }E(w) = \frac{1}{2} \sum^N_{n=0}(\text{Train}_n - g(x_n, w))^2 + \lambda \vert\vert w\vert\vert
+\begin{aligned}
+\text{Ridge : }E(w) &= \frac{1}{2} \sum^N_{n=0}(\text{Train}_n - g(x_n, w))^2 + \frac{\lambda}{2} \vert\vert w\vert\vert^2 \\
+\text{Lasso : }E(w) &= \frac{1}{2} \sum^N_{n=0}(\text{Train}_n - g(x_n, w))^2 + \lambda \vert\vert w\vert\vert
+\end{aligned}
 $$
 
 
@@ -149,11 +155,13 @@ Ridge에 의해 구해지는 $w$ 가 어떻게 달라지는지 수식으로 나�
 
 
 $$
-\frac{d}{dw}E(w) = \frac{d}{dw}(\frac{1}{2}||\text{Train} - Xw||^2 + \frac{\lambda}{2}||w||^2) \qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad \\
-= \frac{d}{dw}(\frac{1}{2}(\text{Train} - Xw)^T(\text{Train} - Xw) + \frac{\lambda}{2}w^Tw) \qquad \qquad \qquad \\
-= \frac{d}{dw}(\frac{1}{2}\text{Train}^T\text{Train} - X^Tw \cdot \text{Train} + \frac{1}{2}X^TXw^Tw + \frac{\lambda}{2}w^Tw) \\
-= - X^T \cdot \text{Train} + - X^TXw + \lambda w = 0 \qquad \qquad \qquad \qquad \qquad \quad \\
-\therefore w = (X^TX+\lambda I)^{-1} X^T \cdot \text{Train}
+\begin{aligned}
+\frac{d}{dw}E(w) &= \frac{d}{dw}(\frac{1}{2}||\text{Train} - Xw||^2 + \frac{\lambda}{2}||w||^2)\\
+&= \frac{d}{dw}(\frac{1}{2}(\text{Train} - Xw)^T(\text{Train} - Xw) + \frac{\lambda}{2}w^Tw)\\
+&= \frac{d}{dw}(\frac{1}{2}\text{Train}^T\text{Train} - X^Tw \cdot \text{Train} + \frac{1}{2}X^TXw^Tw + \frac{\lambda}{2}w^Tw) \\
+&= - X^T \cdot \text{Train} + - X^TXw + \lambda w = 0\\
+&\therefore w = (X^TX+\lambda I)^{-1} X^T \cdot \text{Train}
+\end{aligned}
 $$
 
 
@@ -166,8 +174,10 @@ $$
 
 $$
 \text{argmax}_{\theta} \sum^m_{i=1} \log p(y_i | x_i, \theta) - \alpha R(\theta) \\
-\text{L1 : } R(\theta) = ||\theta||_1 = \sum^m_{i=1} |\theta_i| \\
-\text{L2 : } R(\theta) = ||\theta||_2^2 = \sum^m_{i=1} \theta_i^2
+\begin{aligned}
+\text{L1 : } R(\theta) &= ||\theta||_1 = \sum^m_{i=1} |\theta_i| \\
+\text{L2 : } R(\theta) &= ||\theta||_2^2 = \sum^m_{i=1} \theta_i^2
+\end{aligned}
 $$
 
 
@@ -175,8 +185,12 @@ SVM(Support Vector Machine) 에도 규제가 적용된다. 규제를 적용한 �
 
 
 $$
-f = \text{argmin}_{f \in H} \{\frac{1}{n} \sum^n_{i=1}V(y_i, f(x_i)) + \lambda||f||^2_{H}\} \\
-V(y_i, f(x_i)) = (1-yf(x))_{+} , (s)_{+} = \max(s,0) \text{ 이면}\\
-f = \text{argmin}_{f \in H} \{\frac{1}{n} \sum^n_{i=1} (1-yf(x))_{+} + \lambda||f||^2_{H}\} \\
-f = \text{argmin}_{f \in H} \{C \sum^n_{i=1} (1-yf(x))_{+} + \frac{1}{2}||f||^2_{H}\} \\ C = \frac{1}{2\lambda n}
+\begin{aligned}
+f &= \text{argmin}_{f \in H} \{\frac{1}{n} \sum^n_{i=1}V(y_i, f(x_i)) + \lambda||f||^2_{H}\} \\
+V(y_i, &f(x_i)) = (1-yf(x))_{+} , (s)_{+} = \max(s,0) \text{ 이면}\\
+f &= \text{argmin}_{f \in H} \{\frac{1}{n} \sum^n_{i=1} (1-yf(x))_{+} + \lambda||f||^2_{H}\} \\
+f &= \text{argmin}_{f \in H} \{C \sum^n_{i=1} (1-yf(x))_{+} + \frac{1}{2}||f||^2_{H}\} \\
+C &= \frac{1}{2\lambda n}
+\end{aligned}
 $$
+
