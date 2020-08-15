@@ -65,7 +65,7 @@ class Stack(object):
 
 큐 또한 연결된 리스트와 유사합니다. 하지만 큐는 통로가 둘 뿐이므로 맨 앞 혹은 맨 뒷 노드에만 접근할 수 있습니다. 아래 그림을 보며 설명을 이어 나가겠습니다.
 
-![queue](https://cdn.programiz.com/sites/tutorial2program/files/queue.png)
+<p align="center"><img src="https://cdn.programiz.com/sites/tutorial2program/files/queue.png" alt="queue"  /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://www.programiz.com/dsa/queue">programiz.com</a></p>
 

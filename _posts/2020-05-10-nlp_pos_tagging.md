@@ -25,7 +25,7 @@ tag: NLP
 
 이 중 최대 엔트로피 모델이 어떻게 작동하는지 알아보도록 합시다. 최대 엔트로피 모델은 접두사(prefix), 접미사(suffix) 및 주변 단어들로부터 해당 품사에 대한 정보를 얻어내는 방식입니다. 아래 표를 참고하여 쉬운 예시를 들어보겠습니다.
 
-<img src="https://t1.daumcdn.net/cfile/tistory/2705994D590C9E0B15" alt="tagging_table" style="zoom: 80%;" />
+<p align="center"><img src="https://t1.daumcdn.net/cfile/tistory/2705994D590C9E0B15" alt="tagging_table" style="zoom: 80%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://t1.daumcdn.net/cfile/tistory/2705994D590C9E0B15">t1.daumcdn.net</a></p>
 
@@ -90,13 +90,13 @@ $$
 
 신경망을 기반으로 품사를 태깅하는 모델(Neural Network based models)도 있습니다. 신경망 기반의 모델도 크게 두 가지로 나눌 수 있습니다. 첫 번째는 Window 기반의 모델입니다. 이 모델은 특정 크기의 Window를 선정하여 타겟 단어 주위의 단어로부터 타겟 단어의 품사를 예측합니다. 아래는 Window 기반의 모델을 도식화하여 나타낸 것입니다.
 
-![windowBased](https://user-images.githubusercontent.com/45377884/89735051-be417100-da9a-11ea-8d23-273c8f076966.png)
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/89735051-be417100-da9a-11ea-8d23-273c8f076966.png" alt="windowBased" style="zoom:120%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://jmlr.csail.mit.edu/papers/volume12/collobert11a/collobert11a.pdf">Natural Language Processing (almost) from Scratch by Collobert</a></p>
 
 두 번째는 Sentence 기반의 모델입니다. 문장 내 단어들을 특성화한 뒤 문장을 특성으로 표현하여 신경망 모델에 넣어 품사를 태깅하게 됩니다.
 
-![sentenceBased](https://user-images.githubusercontent.com/45377884/89735050-bd104400-da9a-11ea-82da-29c2f2641ef8.png)
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/89735050-bd104400-da9a-11ea-82da-29c2f2641ef8.png" alt="sentenceBased" style="zoom:120%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://jmlr.csail.mit.edu/papers/volume12/collobert11a/collobert11a.pdf">Natural Language Processing (almost) from Scratch by Collobert</a></p>
 
@@ -110,6 +110,6 @@ $$
 
 최근에는 다양한 모델을 혼합하여 사용하기도 합니다. 아래는 장단기 기억망(LSTM)과 합성공 신경망(ConvNet), 그리고 CRF를 혼합하여 사용한 모델을 도식화한 것입니다.
 
-![hybridPOS](https://user-images.githubusercontent.com/45377884/89735415-580a1d80-da9d-11ea-9b3a-c9f5e6c79bb2.png)
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/89735415-580a1d80-da9d-11ea-9b3a-c9f5e6c79bb2.png" alt="hybridPOS" style="zoom:100%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://arxiv.org/pdf/1603.01354.pdf">End-to-end Sequence Labeling via Bi-directional LSTM-CNNs-CRF by Ma and Hovy</a></p>

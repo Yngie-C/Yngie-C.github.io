@@ -15,7 +15,7 @@ tag: Machine-Learning
 
 
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Linear_regression.svg/1920px-Linear_regression.svg.png" alt="linear_reg1" style="zoom: 30%;" />
+<p align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Linear_regression.svg/1920px-Linear_regression.svg.png" alt="linear_reg1" style="zoom: 30%;" /></p>
 
 
 
@@ -108,7 +108,7 @@ $$
 
 **경사 하강법(Gradient Descent)** 은 최소제곱법과 같이 최적의 $\theta$ 를 찾아가는 알고리즘입니다. 경사 하강법에는 **비용 함수(Cost function)** 라는 개념이 등장합니다. 비용 함수 마다 약간의 차이가 있기는 하지만 큰 범주에서는 예측값과 실제값의 차이, 즉 $f - \hat{f}$ 라고 할 수 있습니다. 우리는 실제값과 가장 유사한 예측값을 알아내는 것이 목적이므로 비용 함수를 최소화하는 방향으로 파라미터 $\theta$ 를 조정해나가게 됩니다. 아래는 경사 하강법이 진행되는 과정을 이미지로 나타낸 것입니다.
 
-![grad_desc](https://cdn-images-1.medium.com/max/600/1*iNPHcCxIvcm7RwkRaMTx1g.jpeg)
+<p align="center"><img src="https://cdn-images-1.medium.com/max/600/1*iNPHcCxIvcm7RwkRaMTx1g.jpeg" alt="grad_desc"  /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://mc.ai/an-introduction-to-gradient-descent-2/">mc.ai</a></p>
 
@@ -140,7 +140,7 @@ $$
 
 이제 그래디언트를 구할 수 있게 되었습니다. 이제는 이 그래디언트를 우리의 목표에 맞게 사용하기 위해 목표를 다시 상기시켜 봅시다. 우리의 목표는 비용 함수가 최소가 되는 점, 즉 아래 그림에서 $\theta^*$ 에 해당하는 점을 찾는 것이었습니다. 아래 그림을 보면 $\theta_0$ 에서 시작하여 $\theta^*$ 까지 $\theta_1, \theta_2, \theta_3$ 으로 나아갈수록 그래디언트(기울기)가 점점 감소하는 것을 볼 수 있습니다. 그렇기 때문에 우리는 그래디언트(경사)가 $0$ 이 되는 순간까지 감소하는 방향으로 나아가야 합니다.
 
-<img src="https://www.researchgate.net/profile/Victor_Suarez-Paniagua/publication/334643403/figure/fig2/AS:783985458282496@1563928107803/3-steps-of-a-Gradient-Descent-with-learning-decay-rate-a-starting-from-the-initial.png" alt="grad_desc" style="zoom:67%;" />
+<p align="center"><img src="https://www.researchgate.net/profile/Victor_Suarez-Paniagua/publication/334643403/figure/fig2/AS:783985458282496@1563928107803/3-steps-of-a-Gradient-Descent-with-learning-decay-rate-a-starting-from-the-initial.png" alt="grad_desc" style="zoom:67%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://www.researchgate.net/figure/3-steps-of-a-Gradient-Descent-with-learning-decay-rate-a-starting-from-the-initial_fig2_334643403">researchgate.net</a></p>
 
@@ -156,13 +156,13 @@ $$
 
 위 식에서 새로운 항 $\eta$ 가 등장했습니다. **학습률(Learning rate)** 을 나타내는 $\eta$ 는 경사 하강법에서 가장 중요한 하이퍼파라미터(hyperparameter, 사용자 지정 매개변수) 중 하나입니다. 학습률은 경사 하강법에서 보폭의 크기를 지정하는 것으로 사용자가 지정한 값에 따라 달라지게 됩니다. 아래의 이미지를 참고하여 설명을 이어나가겠습니다. 
 
-![learning_rate](https://www.deeplearningwizard.com/deep_learning/boosting_models_pytorch/images/lr1.png)
+<p align="center"><img src="https://www.deeplearningwizard.com/deep_learning/boosting_models_pytorch/images/lr1.png" alt="learning_rate"  /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://www.deeplearningwizard.com/deep_learning/boosting_models_pytorch/lr_scheduling/">deeplearningwizard.com</a></p>
 
 위 그림에서 왼쪽은 학습률을 너무 작게 설정한 경우입니다. 학습률이 너무 작으면 특정 반복횟수 내에서 최소점을 찾지 못하는 경우가 있습니다. 물론 반복을 계속하게 되면 최소점에 다다를 수 있겠지만 너무 많은 시간과 컴퓨팅 자원을 소비하게 됩니다. 반대로 오른쪽은 학습률을 너무 크게 설정한 경우입니다. 학습률이 크면 빠르게 최소점으로 다가갈 수 있지만 진행 도중에 최소점을 지나쳐버리는 사고가 발생할 수 있습니다. 이런 문제 때문에 여러 학습률을 설정해보면서 가장 적절한 학습률을 찾아야 합니다. 경우에 따라서는 아래 그림과 같이 처음에는 학습률을 크게 설정한 뒤 점점 감소시켜 나가는 학습률 감소(Learning rate decay) 방법을 사용하기도 합니다. (아래 그림에서 학습률 감소 방법을 사용했을 때에 고정된 학습률을 사용했을 때보다 더 적은 반복수로 최솟값에 다다르는 것을 볼 수 있습니다)
 
-<img src="https://www.deeplearningwizard.com/deep_learning/boosting_models_pytorch/images/lr2.png" alt="lr_decay" style="zoom: 25%;" />
+<p align="center"><img src="https://www.deeplearningwizard.com/deep_learning/boosting_models_pytorch/images/lr2.png" alt="lr_decay" style="zoom: 25%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://www.deeplearningwizard.com/deep_learning/boosting_models_pytorch/lr_scheduling/">deeplearningwizard.com</a></p>
 
@@ -189,7 +189,7 @@ $$
 
 모든 데이터셋이 직선의 형태를 보이는 것은 아닙니다. 아래 그림을 보며 설명을 이어가도록 하겠습니다.
 
-<img src="https://animoidin.files.wordpress.com/2018/07/polim_vs_linear.jpg" alt="poly_reg" style="zoom: 67%;" />
+<p align="center"><img src="https://animoidin.files.wordpress.com/2018/07/polim_vs_linear.jpg" alt="poly_reg" style="zoom: 67%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://animoidin.wordpress.com/2018/07/01/polynomial-regression/">animoidin.wordpress.com</a></p>
 

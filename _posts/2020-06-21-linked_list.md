@@ -21,7 +21,7 @@ tag: Data Structure
 
 **연결된 리스트(Linked List)** 는 노드(Node)와 레퍼런스(Reference)로 되어있습니다. 연결된 리스트가 이런 형식을 택한 이유는 인덱스로 구성된 선형 구조를 피하기 위해서 입니다. 연결된 리스트의 노드는 두 가지 변수로 이루어져 있습니다. 첫 번째는 해당 노드에 저장되는 값을 가리키는 레퍼런스를 저장하는 변수입니다. 그리고 두 번째 변수는 다음 노드를 가리키는 레퍼런스를 저장하는 변수입니다. 아래 그림은 간단한 연결된 리스트의 구조를 이미지로 나타낸 것입니다. 이미지의 연결된 리스트는 총 4개의 노드로 구성되어 있는 것을 볼 수 있습니다.
 
-<img src="https://user-images.githubusercontent.com/45377884/85203968-2487fe00-b34c-11ea-80e2-a83b6594d131.png" alt="linkedlist0" style="zoom: 80%;" />
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/85203968-2487fe00-b34c-11ea-80e2-a83b6594d131.png" alt="linkedlist0" style="zoom: 80%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://www.edwith.org/datastructure-2019s/notice/1658">데이터 구조 및 분석 수업자료</a></p>
 
@@ -70,7 +70,7 @@ nodeHead = Node(binHead=True, nodeNext=node1)
 
 연결된 리스트에서 요소를 탐색하는 과정은 배열과 크게 다르지 않습니다. 연결된 리스트는 배열에서 삽입과 삭제만을 개선하기 위한 자료구조이기 때문이지요. 비록 접근 방법은 다르지만 요소를 하나하나 확인한다는 점에서는 별 차이가 없습니다. 배열에서는 요소를 탐색할 때 인덱스로 접근했지만 연결된 리스트는 인덱스를 사용하지 않기 때문에 노드와 레퍼런스로 접근합니다. 아래 그림을 보며 설명을 이어가겠습니다.
 
-![search_in_ll](https://user-images.githubusercontent.com/45377884/89987576-40a77c00-dcb9-11ea-8f2f-c1de60655858.png)
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/89987576-40a77c00-dcb9-11ea-8f2f-c1de60655858.png" alt="search_in_ll"  /></p>
 
 가장 먼저 헤드를 찾은 뒤 헤드의 레퍼런스가 가리키는 노드로 이동합니다. 그리고 이동한 노드가 참조하는 값을 비교한 뒤 맞으면 거기서 함수를 끝내고 아니면 레퍼런스를 따라 다음 노드로 이동합니다. 이 과정을 찾고자 하는 요소가 나올 때까지 반복하면 됩니다. 만약 요소가 없다면 테일이 나올 때까지 반복한 후 False를 반환하면 됩니다.
 
@@ -86,7 +86,7 @@ nodeHead = Node(binHead=True, nodeNext=node1)
 
 연결된 리스트에서는 이 $3$ 번의 Operation 만으로 자료구조 내에 요소를 삽입할 수 있습니다. 정해진 길이없이 노드와 레퍼런스만 조작해주면 되기 때문입니다. 아래는 연결된 리스트에서 요소를 삽입하는 과정을 이미지로 나타낸 것입니다.
 
-<img src="https://user-images.githubusercontent.com/45377884/85203979-38cbfb00-b34c-11ea-81fd-3203ffb478e3.png" alt="linkedlist1" style="zoom: 67%;" />
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/85203979-38cbfb00-b34c-11ea-81fd-3203ffb478e3.png" alt="linkedlist1" style="zoom: 67%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://www.edwith.org/datastructure-2019s/notice/1658">데이터 구조 및 분석 수업자료</a></p>
 
@@ -100,7 +100,7 @@ nodeHead = Node(binHead=True, nodeNext=node1)
 
 그런데 우리가 다루어주지 않는 한 노드가 있습니다. 바로 `Node_remove` 인데요. 이 노드는 이제 어떻게 처리되는 것일까요? 파이썬에는 이런 부분을 처리하는 가비지 콜렉터(Garbage collector)라는 장치가 있습니다. (헤드 노드를 제외한다면) 연결된 리스트에서 어떤 레퍼런스의 지목도 받지 못하는 노드는 바로 이 가비지 콜렉터에 의해서 제거됩니다.
 
-<img src="https://user-images.githubusercontent.com/45377884/85203980-39fd2800-b34c-11ea-9cf3-46b42626916d.png" alt="linkedlist2" style="zoom: 67%;" />
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/85203980-39fd2800-b34c-11ea-9cf3-46b42626916d.png" alt="linkedlist2" style="zoom: 67%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://www.edwith.org/datastructure-2019s/notice/1658">데이터 구조 및 분석 수업자료</a></p>
 

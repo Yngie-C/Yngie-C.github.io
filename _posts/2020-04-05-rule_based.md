@@ -71,7 +71,7 @@ tag: Machine-Learning
 
 
 
-![find_s](http://www.aistudy.com/learning/images/%EA%B7%9C%EC%B9%99%EA%B3%B5%EA%B0%84%EC%9D%98%20%EB%8F%84%ED%95%B4.gif)
+<p align="center"><img src="http://www.aistudy.com/learning/images/%EA%B7%9C%EC%B9%99%EA%B3%B5%EA%B0%84%EC%9D%98%20%EB%8F%84%ED%95%B4.gif" alt="find_s"  /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="http://www.aistudy.com/learning/version_space.htm">aistudy.com</a></p>
 
@@ -89,13 +89,13 @@ $$
 VS_{H,D} = \{h \in H \vert \quad \exists s \in S, \exists g \in G, \quad g \geq h \geq s \}
 $$
 
-![version_space](http://www.aistudy.com/learning/images/%EA%B7%9C%EC%B9%99%EA%B3%B5%EA%B0%84%EC%97%90%EC%84%9C%20G%EC%99%80%20S.gif)
+<p align="center"><img src="http://www.aistudy.com/learning/images/%EA%B7%9C%EC%B9%99%EA%B3%B5%EA%B0%84%EC%97%90%EC%84%9C%20G%EC%99%80%20S.gif" alt="version_space"  /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="http://www.aistudy.com/learning/version_space.htm">aistudy.com</a></p>
 
 위에서 알아 본 것처럼 4개의 데이터셋으로부터 Find-S Algorithm을 통해 구할 수 있는 특수한 경계 $S$ 는 *(맑음, 따듯함, ?, 강함, ?, ?)* 입니다. 그리고 가장 일반적인 경계 $G$ 로는 *{(맑음, ?, ?, ?, ?, ?), (?, 따듯함, ?, ?, ?, ?)}* 이 있습니다. 이 사이에는 *(맑음, ?, ?, 강함, ?, ?), (맑음, 따듯함, ?, ?, ?, ?), (?, 따듯함, ?, 강함, ?, ?)* 등의 많은 가설이 존재할 수 있습니다.
 
-![version_space_ex](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=http%3A%2F%2Fcfile8.uf.tistory.com%2Fimage%2F21598438583AED83334DD5)
+<p align="center"><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=http%3A%2F%2Fcfile8.uf.tistory.com%2Fimage%2F21598438583AED83334DD5" alt="version_space_ex"  /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://excelsior-cjh.tistory.com/43">excelsior-cjh.tistory.com</a></p>
 
@@ -124,19 +124,19 @@ Find-S 알고리즘은 너무 특수한 가설에 빠질 경우 이를 개선할
 
 두 번째 인스턴스를 적용하면 $S_2 = (맑음, 따듯함, ?, 강함, 따듯함, 일정함)$, $G_2 = (?, ?, ?, ?, ?, ?)$ 이 됩니다. 앞선 과정과 동일하며 여기까지는 Find-S 알고리즘과도 유사합니다. 첫 번째와 두 번째 인스턴스 모두 Positive 하므로 $S$ 만 점점 General 해지는 것을 볼 수 있습니다.
 
-<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=http%3A%2F%2Fcfile7.uf.tistory.com%2Fimage%2F2569BF4B583AF0150843FA" alt="cand_eli_algo2"  />
+<p align="center"><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=http%3A%2F%2Fcfile7.uf.tistory.com%2Fimage%2F2569BF4B583AF0150843FA" alt="cand_eli_algo2" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://excelsior-cjh.tistory.com/43">excelsior-cjh.tistory.com</a></p>
 
 이번에는 세 번째 인스턴스를 적용해봅시다. 여기서 Find-S 알고리즘과의 차이가 발생합니다. Find-S 알고리즘에서는 레이블링이 *"아니오"* 인 인스턴스는 적용하지 않았기 때문입니다. 세 번째 인스턴스를 적용하여 변한 가설은 $S_3 = (맑음, 따듯함, ?, 강함, 따듯함, 일정함), G_3 = \{(맑음, ?, ?, ?, ?, ?), (?, 따듯함, ?, ?, ?, ?), (?, ?, ?, ?, ?, 일정함)\}$ 입니다. 앞선 두 인스턴스와 세 번째 인스턴스는 *"하늘 상태, 온도, 일기 예보"* 세 가지 특성에서 다른 값을 나타냅니다. 각 특성들에서 세 번째 인스턴스 특성값은 *"흐림, 추움, 가변적"* 입니다. 이와 반대되는 특성값으로 이루어진 가설을 각각 $G$ 에 추가해주면 위와 같이 $G_3 = \{(맑음, ?, ?, ?, ?, ?), (?, 따듯함, ?, ?, ?, ?), (?, ?, ?, ?, ?, 일정함)\}$ 를 나타내게 됩니다.
 
-![cand_eli_algo3](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=http%3A%2F%2Fcfile10.uf.tistory.com%2Fimage%2F231D964B583AF016035263)
+<p align="center"><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=http%3A%2F%2Fcfile10.uf.tistory.com%2Fimage%2F231D964B583AF016035263" alt="cand_eli_algo3"  /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://excelsior-cjh.tistory.com/43">excelsior-cjh.tistory.com</a></p>
 
 마지막으로 네 번째 인스턴스를 적용하여 가설을 개선해봅시다. 개선된 가설은 $S_4 = (맑음, 따듯함, ?, 강함, ?, ?), G_4 = \{(맑음, ?, ?, ?, ?, ?), (?, 따듯함, ?, ?, ?, ?)\}$ 입니다. 먼저 $S$ 쪽은 *"해수 온도"* 와 *"일기 예보"* 에서 기존 가설과 네 번째 인스턴스의 특성값이 다르므로 *"?"* 로 처리해주어 일반화합니다. 그리고 $G$ 쪽은 네 번째 인스턴스에서 *"일기 예보"* 의 특성값이 *"가변적"* 임에도 레이블이 *"예"* 이므로 $(?, ?, ?, ?, ?, 일정함)$ 에 해당하는 가설을 탈락시킵니다.
 
-![cand_eli_algo](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=http%3A%2F%2Fcfile24.uf.tistory.com%2Fimage%2F25396E4B583AF0162E4F4A)
+<p align="center"><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=http%3A%2F%2Fcfile24.uf.tistory.com%2Fimage%2F25396E4B583AF0162E4F4A" alt="cand_eli_algo"  /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://excelsior-cjh.tistory.com/43">excelsior-cjh.tistory.com</a></p>
 

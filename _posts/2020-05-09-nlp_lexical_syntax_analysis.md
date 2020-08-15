@@ -59,7 +59,7 @@ if __name__ == "__main__":
 
 
 
-![tokenizer](https://user-images.githubusercontent.com/45377884/81628131-cc033e00-943a-11ea-8582-303e3d175b92.png)
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/81628131-cc033e00-943a-11ea-8582-303e3d175b92.png" alt="tokenizer"  /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://github.com/pilsung-kang/text-analytics">Text-Analytics Github</a></p>
 
@@ -109,13 +109,13 @@ if __name__ == "__main__":
 
 구조 분석을 표현하는 방식은 트리 방식과 리스트 방식이 있습니다. 아래 그림은 *"John ate the apple"* 을 분석할 경우 아래와 같이 나타낼 수 있습니다.
 
-<img src="https://user-images.githubusercontent.com/45377884/81628477-b9d5cf80-943b-11ea-999e-316ff531f9ef.png" alt="syntax_rep" style="zoom: 50%;" />
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/81628477-b9d5cf80-943b-11ea-999e-316ff531f9ef.png" alt="syntax_rep" style="zoom: 50%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://github.com/pilsung-kang/text-analytics">Text-Analytics Github</a></p>
 
 구조 분석을 한다고 해서 항상 한 가지 트리만 생성되는 것은 아닙니다. 언어의 모호함 때문에 어떤 알고리즘 방식을 채택하는지에 따라서 같은 문장에서도 다른 트리가 생성됩니다. 여기서 말하는 언어의 모호함에는 어휘로부터 발생하는 모호함(Lexical ambiguity)과 구조로부터 발생하는 모호함(Structural ambiguity)이 있습니다. 아래는 *"Time flies like an arrow"* 라는 문장에 구조 분석을 수행했을 때 어휘의 모호함 때문에 발생할 수 있는 두 가지 트리입니다.
 
-<img src="https://user-images.githubusercontent.com/45377884/81628534-e12c9c80-943b-11ea-91d6-5a7a550d767d.png" alt="lex_ambi" style="zoom:50%;" />
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/81628534-e12c9c80-943b-11ea-91d6-5a7a550d767d.png" alt="lex_ambi" style="zoom:50%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://github.com/pilsung-kang/text-analytics">Text-Analytics Github</a></p>
 

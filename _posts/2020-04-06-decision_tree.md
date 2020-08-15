@@ -16,7 +16,7 @@ mathjax: true
 
 이번 게시물에서는 UCI 신용평가 데이터셋을 분석하며 의사 결정 나무에 대해서 알아보도록 합시다. 이 데이터셋에서는 총 690개의 인스턴스가 있으며 각 인스턴스는 15개의 특성을 가지고 있습니다. 아래 사진은 학습 데이터셋이 첫 번째 특성(A1) 또는 아홉 번째 특성(A9)으로 나누었을 때 각각의 결과가 어떻게 나오는지 도식화한 것이다.
 
-![decisionTree](https://user-images.githubusercontent.com/45377884/89735560-5f7df680-da9e-11ea-9f12-7e796828966a.png)
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/89735560-5f7df680-da9e-11ea-9f12-7e796828966a.png" alt="decisionTree"  /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://www.edwith.org/machinelearning1_17/lecture/10581/">인공지능 및 기계학습 개론 학습자료</a></p>
 
