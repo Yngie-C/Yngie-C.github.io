@@ -1,74 +1,84 @@
 ---
 layout: post
-title: 나이브 베이즈 (Naive Bayes)
+title: 나이브 베이즈 분류기 (Naive Bayes Classifier)
 category: Machine Learning
 tag: Machine-Learning
 ---
 
- 본 포스트는 [카이스트 문일철 교수님의 강의](https://www.edwith.org/machinelearning1_17/joinLectures/9738) 를 바탕으로 작성하였습니다. 본 게시물에 사용된 두 이미지 또한 [해당 링크](https://www.edwith.org/machinelearning1_17/lecture/10585/) 의 강의 자료를 첨부하였습니다.
+ 본 포스트는  [문일철 교수님의 인공지능 및 기계학습 개론 I](https://www.edwith.org/machinelearning1_17/joinLectures/9738) 강의를 바탕으로 작성하였습니다.
 
 
 
-# Optimal Classifier
+# Bayes Decision Theory
 
-## Bayes classifier
+**나이브 베이즈 분류기(Naive Bayes Classifier)** 는 간단하고 여러 분류 문제에 적용하기 쉬우면서도 뛰어난 성능을 보이는 분류기 중 하나입니다. 인스턴스의 레이블을 예측할 때 베이즈 결정 이론(Bayes decision theory) 을 사용하여 판단하기 때문에 이러한 이름이 붙었습니다. 이번 게시물에서는 베이즈 결정 이론이란 무엇인지? 그리고 베이즈 분류기는 이름 앞에 왜 나이브(Naive)라는 수식어가 붙는 지를 알아봅시다.
 
-우리의 목적은 예측 $f(X)$ 이 실제 클래스 $Y$와 비교했을 때 어긋날 확률을 최소로 하는 분류기 $f$ 를 찾는 것이다. 이를 최적의 베이즈 분류기라고 하며 간단히 아래와 같이 나타낼 수 있다. (클래스가 2개일 때는 그 아래처럼 쓸 수도 있다.)
+
+
+## 최적(Optimal)의 분류기란?
+
+다음의 그림을 통해 최적의 분류기란 어떤 것인지 알아보도록 합시다. 아래 그림에는 점선으로 나타나는 분류기 하나와 실선으로 나타나는 분류기 하나가 있습니다. 
+
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/90311284-4361d580-df34-11ea-8823-0d3c6af0b254.png" alt="nb1" style="zoom: 67%;" /></p>
+
+<p align="center" style="font-size:80%">이미지 출처 : <a href="https://www.edwith.org/machinelearning1_17/lecture/10581/">인공지능 및 기계학습 개론 학습자료</a></p>
+
+위 그림에서 $x$ 축은 특성값을 나타내며 각 $x$ 에서의 $y$ 값은 특정 클래스를 나타낼 확률을 나타냅니다. 중간에 두 그래프가 만나는 부분을 **결정 경계(Decision boundary)** 라고 하며 이 결정 경계를 기준으로 $x$ 가 왼쪽인지 오른쪽인지에 따라 분류기가 예측하는 값인 $\hat{y}$ 가 달라지게 됩니다. 그렇다면 두 분류기 중 어떤 것이 더 좋은 분류기일까요? 분류기의 성능은 위 그림에도 나와있는 **베이즈 위험(Bayes Risk)** 에 따라 판단할 수 있습니다. 베이즈 위험이 무엇인지 알아보기 위해 위 그림에 임의의 $x_1$ 에 해당하는 세로선을 그어 보겠습니다.
+
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/90311798-f680fd80-df39-11ea-8417-64c9355589e9.png" alt="nb1_1" style="zoom:67%;" /></p>
+
+<p align="center" style="font-size:80%">이미지 출처 : <a href="https://www.edwith.org/machinelearning1_17/lecture/10581/">인공지능 및 기계학습 개론 학습자료</a></p>
+
+위 그림에서 $x_1$ 은 결정 경계 왼쪽에 위치하고 있으므로 $x_1$ 을 입력한다면 두 분류기 모두 초록 클래스로 분류할 것입니다. 하지만 이 점에서도 각각의 분류기는 빨강 클래스일 확률을 가지고 있습니다. 점선 분류기는 주황색 점으로 나타나는 위치의 $y$ 값인 $y_1$ , 실선 분류기는 파란색 점으로 나타나는 위치의 $y$ 값인 $y_2$ 만큼이 특성값 $x_1$ 에 대하여 빨강 클래스일 확률입니다. 하지만 분류기는 이런 확률을 무시하고 초록 클래스를 선택합니다. 이렇게 무시되는 확률을 모든 $x$ 에 대해 적분한 것이 베이즈 위험입니다. 따라서 점선 분류기의 베이즈 위험은 위 그림에서 (하늘색 + 갈색)으로 나타나는 부분인 $S_1 + S_2 + S_3$ 가 됩니다. 그리고 실선 분류기의 베이즈 위험은 위 그림에서 갈색으로 나타나는 부분인 $S_3$ 이 됩니다. 더 좋은 분류기라면 클래스를 선택할 때 해당 클래스가 아닐 확률, 즉 베이즈 위험을 더 작게 할 것입니다. 따라서 위 그림에서는 베이즈 위험이 더 적은 실선 분류기가 더 좋은 성능을 보인다고 할 수 있습니다.
+
+최적의 분류기라면 베이즈 위험을 최소화해야 할 것입니다. 클래스를 잘못 선택할 확률을 가장 적게 하는 것이므로 최적의 분류기 $f^*$ 를 다음과 같은 수식으로 나타낼 수 있습니다.
+
+
+$$
+f^* = \text{argmin}_f P(f(X) \neq Y)
+$$
+
+
+
+위 식을 전체 클래스가 2개 뿐인 이진 분류(Binary classification)에 대해서는 다음과 같이 쓸 수도 있습니다.
 
 
 
 $$
-f^* = \text{argmin}_f P(f(X) \neq Y) \\
 f^* = \text{argmax}_{Y=y} P(Y=y\vert X=x)
 $$
 
 
 
-최적의 분류기가 실수할 위험도를 나타낸 것을 베이즈 리스크(Bayes Risk, $R(f^*)$ )라고 하자. 베이즈 리스크가 발생하는 이유는 우리가 각 특성 사이에 어떤 관계가 있는지에 관한 정보가 없기 때문이다. 
+## Bayes Classifier
 
-조건부 확률(Conditional Probability)의 정의를 사용하여 $P(Y=y \vert X=x)$ 를 나타내면 아래와 같다. 이를 위에서 구했던 분류기 $f^*$ 식에 대입하면 $\text{argmax}$ 이하의 식을 Class conditional density 와 Class Prior 로 나타낼 수 있다.
-
-
-
-$$
-P(Y=y \vert X=x) = \frac{P(Y=y \vert X=x)P(Y=y)}{P(X=x)} \\
-f^* = \text{argmax}_{Y=y} P(Y=y\vert X=x) = \text{argmax}_{Y=y} P(X=x\vert Y=y)P(Y=y)
-$$
-
-
-
-아래의 이미지는 (결정 경계가 같은) 임의의 2쌍의 분류기가 만드는 4가지 곡선(직선)을 나타낸 것이다. 분류기의 종류에 상관없이 한 분류기에 속한 두 곡선이 만나는 점의 $Y$ 값은 0.5이다. 이 때의 $X$ 값을 결정 경계(Decision Boundary)라고 한다. 
-
-<p align="center"><img src="https://1.bp.blogspot.com/-QLzfRxOxETc/Xab3Ki2lQTI/AAAAAAAABoo/uZV1YhtNKNklTzImfwCiDwTSlpwB7trUgCLcBGAsYHQ/s640/IE661-Week%2B3-Part%2B1-icmoon-ver-1-07.png" alt="optimalClassification" style="zoom: 80%;" /></p> 
-
-
-
-좋은 분류기는 결정 경계 부근에서 급격하게 변한다. 위 그림에서 실선으로 나타난 분류기는 점선 분류기보다 결정 경계 부근에서 더 급격하게 변하기 때문에 더 좋은 분류기다.
-
-두 분류기 모두 결정 경계를 기준으로 확률이 높은 클래스를 선택하므로 왼쪽 구간에서는 초록색을, 오른쪽 구간에서는 빨간색을 나타낼 것이다. 이 때 비어있는 확률, 즉 왼쪽에서 붉은색이 차지하고 있는 부분과 오른쪽에서 초록색이 차지하고 있는 부분은 에러가 된다. 이 에러를 **Bayes Risk** $R(f^*)$ 라고 한다. Bayes Risk 가 작을수록 좋은 분류기이며 점선 분류기보다는 실선 분류기가 푸르게 칠해진 부분만큼 Bayes Risk 가 작기 때문에 더 좋은 분류기라고 할 수 있다. 
-
-
-
-## Optimal Classifier
-
-위에서 베이즈 분류기에 대해 도출한 식은 다음과 같다.
+이제는 최적의 분류기 $f^*$ 에 대한 식을 우리가 다룰 수 있는 형태로 식을 변형할 차례입니다. [최대 사후확률 추정](https://yngie-c.github.io/machine learning/2020/04/04/mle_map/) 에서 주어진 데이터셋으로부터 특정 클래스일 확률을 추정하는 방법을 배웠습니다. 최대 사후확률 추정에서 사용했던 베이즈 정리를 사용하여 위 식을 다음과 같이 바꿔쓸 수 있습니다.
 
 
 
 $$
-f^* = \text{argmax}_{Y=y} P(Y = y \vert X = x) \\
-\qquad \quad\qquad = \text{argmax}_{Y=y} P(X = x \vert Y = y) P(Y = y)
+f^* = \text{argmax}_{Y=y} P(Y=y\vert X=x) = \text{argmax}_{Y=y} P(X=x\vert Y=y)P(Y=y) \\
+\text{ } \\
+\because P(Y=y \vert X=x) = \frac{P(X=x \vert Y=y)P(Y=y)}{P(X=x)} \quad \text{and} \quad P(X) \text{ is constant} \\
 $$
 
 
 
-이제 우리는 두 가지에 대해 더 알아야 한다. $P(Y=y)$ 로 나타나는 Class Prior 와 $P(X = x \vert Y = y)$ 로 나타나는 Class Conditional Density 가 그것이다.
+변형한 베이즈 분류기 $f^*$ 의 수식을 다시 써보겠습니다.
+
+
+$$
+f^* = \text{argmax}_{Y=y} P(X=x\vert Y=y)P(Y=y)
+$$
+
+
+위 식에서 $\text{argmax}$ 이하의 두 항 중에서 왼쪽을 Class conditional density라 하고 Class prior라고 합니다.
 
 
 
-# Conditional Independence
+# Naive Bayes Classifier
 
-[규칙 기반 학습]([https://yngie-c.github.io/machine%20learning/2020/04/05/rule_based/](https://yngie-c.github.io/machine learning/2020/04/05/rule_based/)) 에서 사용했던 예시를 통해 분류기를 만들어보자.
+이제 왜 나이브 베이즈 분류기의 앞에 나이브(Naive)라는 수식어가 붙는지 알아볼 것입니다. 분류기를 만들 때 가장 문제가 되는 것은 데이터셋 내에 있는 특성끼리 어떤 관계를 맺고 있는지 알 수 없기 때문입니다. 데이터셋 내에 있는 모든 특성이 관계를 맺고 있다면 클래스가 $k$ 개이고 특성이 $d$ 개일 때 Class conditional density를 구하기 위해서는 $(2^d-1)k$ 개의 파라미터가 필요합니다. 그리고 Class prior를 구하기 위해서는 $k-1$ 개의 파라미터가 필요하지요. [규칙 기반 학습](https://yngie-c.github.io/machine learning/2020/04/05/rule_based/) 에서 사용했던 예시 데이터셋에서 모든 특성이 관계를 맺고 있다면 몇 개의 파라미터가 필요할까요?
 
 | 하늘 상태 |  온도  | 습도 | 바람 | 해수 온도 | 일기 예보 | 물놀이를 나갈까? |
 | :-------: | :----: | :--: | :--: | :-------: | :-------: | :--------------: |
@@ -77,58 +87,42 @@ $$
 |   흐림    |  추움  | 높음 | 강함 |  따듯함   |  가변적   |      아니오      |
 |   맑음    | 따듯함 | 높음 | 강함 |  차가움   |  가변적   |        예        |
 
-표의 첫 번째 데이터가 나타내는 Class Conditional Density 와 Class Prior를 각각 다음과 같이 나타낼 수 있다.
-
-
-$$
-P(X = x \vert Y = y) = P(x_1=맑음, x_2=따듯함, x_3=높음, x_4=강함, x_5=따듯함, x_6=일정함 
-\vert y=예) \\
-P(Y=y) = P(y=예)
-$$
-
-
-데이터셋 내에 있는 모든 특성이 서로 관계를 맺고 있다고 가정해보자. 클래스가 $k$ 개이고 특성이 $d$ 개일 때 Class Conditional Density를 구하기 위해서는 $(2^d-1)k$ 개의 파라미터가 필요하고 Class Prior를 구하기 위해서는 $k-1$ 개의 파라미터가 필요하다. 6개의 특성과 2개의 클래스를 가진 데이터셋을 위한 분류기를 위해서만도 63개의 파라미터 값을 구해야 한다. 실제의 데이터는 수십~수백 개의 특성과 2개 이상의 클래스를 가진 경우가 많다. 이 때 파라미터의 갯수는 엄청나게 많아지고 우리에게 필요한 데이터셋은 상상이상으로 커지게 된다. 필요한 데이터셋의 크기를 줄이기 위해서 우리는 새로운 가정을 더 추가하게 된다.
+클래스의 개수 $k = 1$ 이고, 특성의 개수 $d = 6$ 이므로 $2 \cdot (2^6-1) \times (2 - 1) = 126$ 개의 파라미터가 필요하게 됩니다. 모든 특성이 관계를 맺고 있다면 상당히 간단해보이는 데이터셋으로부터 분류 기준을 이끌어 내는 데만도 많은 파라미터를 필요로 하게 됩니다. 실제 데이터는 수십 ~ 수백 개의 특성을 가지고 있는 경우가 많습니다. 특성의 개수에 따라 필요한 파라미터의 개수는 기하급수적으로 늘어나므로 특성 사이의 관계를 어떻게 해결해주지 않으면 필요한 파라미터의 개수는 엄청나게 늘어날 것입니다. 실제로 20개의 특성을 가진 데이터셋이라면 필요한 파라미터의 개수는 100만개가 넘습니다. 이 문제를 해결해줄 조건부 독립에 대해 알아봅시다.
 
 
 
 ## Conditional Independence
 
-특성의 개수인 d를 줄이지 않고도 생성되는 파라미터의 개수를 획기적으로 줄일 수 있는 방법이 있다. **조건부 독립(Conditional Independence)** 이 그 주인공. 조건부 독립이면 어떤 일이 일어나길래 파라미터의 갯수가 줄어드는 것일까? 결론부터 말하면 조건부 독립인 $x_i$ 에 대해서 다음과 같은 식이 성립한다.
+**조건부 독립(Conditional Independence)** 은 특성의 개수를 줄이지 않고도 필요한 파라미터의 개수를 줄일 수 있는 방법입니다. 조건부 독립이 무엇이길래 이런 일을 할 수 있는 것일까요? 조건부 독립은 임의의 관계에 있는 두 사건이 주어진 조건하에서는 독립이 되는 경우를 말합니다. 조건부 독립의 예시를 몇 가지 들어봅시다.
 
-
+*"비가 오는 사건"* 과 *"천둥이 치는 사건"* 이 있다고 해봅시다. 두 사건 사이에는 어떤 관계가 있어 보입니다. 그런데 가운데 *"번개가 쳤다"* 라는 조건이 주어졌다고 해봅시다. *"번개가 쳤다"* 라는 조건하에서는 *"천둥이 치는 사건"* 과 *"비가 오는 사건"* 은 독립이 되어버립니다. 각각을 확률로 나타내어 보겠습니다. (해당 예시에서 마른 하늘에 번개가 치는 것은 예외로 합니다.)
 $$
-P(X= (x_1, ..., x_i)\vert Y=y) \rightarrow \prod_i P(X_i = x_i \vert Y=y)
+\begin{aligned}
+P(천둥=침|비=옴) &\neq P(천둥=침)\\
+P(천둥=침|비=옴, 번개=침) &= P(천둥=침|번개=침)\\
+P(비|천둥=침, 번개=침) &= P(비=옴|번개=침)\\
+\because P(천둥=침, 비|번개=침) &= P(천둥=침|번개=침)P(비=옴|번개=침)
+\end{aligned}
 $$
-조건부 독립일 경우 한 사건이 다른 사건에 영향을 주지 않는다. 실제로 비가 오고 번개가 쳤을 때 천둥이 치는 확률과 번개가 쳤을 때 천둥이 치는 확률이 같다. 방금 예시를 조건부 확률을 사용하여 나타내면 다음과 같다.
+천둥과 비는 독립이 아니므로 비가 왔을 때 천둥이 칠 확률 $P(천둥 \vert 비)$ 와 아무런 조건이 없을 때 천둥이 칠 확률 $P(천둥)$ 은 같지 않습니다. 비가 올 때 천둥이 칠 확률이 훨씬 높겠지요. 하지만 번개라는 조건이 주어지면 다른 두 사건은 이 조건에 
+
+두 번째 예시는 그림과 함께 알아봅시다. 아래 그림은 지휘관과 지휘관의 명령을 따르는 직원 A,B 를 그림으로 나타낸 것입니다. 
+
+<p align="center"><img src="https://actruce.com/wp-content/uploads/2018/11/conditional_independence_commander.png"  /></p>
 
 
+
+<p align="center" style="font-size:80%">이미지 출처 : <a href="https://www.edwith.org/machinelearning1_17/lecture/10581/">인공지능 및 기계학습 개론 학습자료</a></p>
+
+먼저 A가 지휘관의 명령을 듣지 못하는 상태, 즉 지휘관의 명령을 알 수 없는 상태라고 가정해 봅시다. 이 경우에는 B가 앞으로 가는 것을 보았을 때와 그렇지 않을 때 A가 앞으로 갈 확률은 다를 것입니다. 아무래도 B가 앞으로 가는 것을 본다면 '지휘관이 B에게 명령을 내렸겠구나'라고 생각하고 앞으로 가게 되겠지요. 수식으로는 아래와 같이 나타낼 수 있습니다.
+
+ 
 $$
-P(\text{Thunder} \vert \text{Rain, Lightning}) = P(\text{Thunder} \vert \text{Lightning})
-$$
-
-
-이 때 천둥이 치는 것은 비와는 상관이 없으므로 비와 천둥은 조건부 독립이라고 할 수 있다. 조건부 독립의 정의는 아래의 첫번째 식과 같이 나타낼 수 있다. 그리고 이를 통해 아래 식도 이끌어낼 수 있고 이를 확장하면 Class Conditional Density를 위에서 보았던 식처럼 표현할 수 있다. 
-
-
-$$
-( \forall x_1, x_2,y) \qquad P(x_1 \vert x_2, y) = P(x_1 \vert y) \\
-P(x_1,x_2 \vert y) = P(x_1 \vert y)P(x_2 \vert y)
-$$
-
-
-## Conditional Independence vs Marginal Independence
-
-특성 간에 조건부 독립이 성립하려면 서로의 관계가 전혀 없다는 가정을 해야 한다. 어떻게 속성 사이에 관계가 없다는 것을 증명할 수 있을까? 아래 그림에 있는 상관과 상관의 명령을 잘 듣는 2명의 직원 A, B 의 예시를 보며 생각해보자. 
-
-<p align="center"><img src="https://actruce.com/wp-content/uploads/2018/11/conditional_independence_commander.png"  /> </p>
-A가 상관의 명령을 듣지 못하는 상태라고 하자. 이런 상태에서 직원 B가 앞으로 가는 것을 볼 때와 보지 못했을 때 직원 A가 앞으로 갈 확률을 비교해보자. 아마도 전자가 더 클 것이다. 앞으로 가는 직원 B를 봤다면 상관이 명령을 내렸을 것이라고 판단하기 때문이다. 이를 $P$ 를 사용하여 나타내면 다음과 같다.
-
-$$
-P(\text{OfficerA=Go} \vert \text{OfficerB=Go}) > P(\text{OfficerA=Go})
+P(\text{OfficerA=Go} \vert \text{OfficerB=Go}) \neq P(\text{OfficerA=Go})
 $$
 
 
-따라서 상관의 명령을 확인할 수 없다면 직원 A, B가 앞으로 갈 확률은 **독립(Marginal Independence)** 이 아니다. 만약 둘이 독립이라면 B가 앞으로 가든 말든 A가 갈 확률은 같아야 하기 때문이다. 하지만 상관의 명령을 분명히 확인할 수 있는 상태라면 어떨까? 이 때는 B가 앞으로 가든 말든 상관없이 상사가 가라면 앞으로 가야한다. 이를 $P$ 를 사용하여 아래와 같이 나타낼 수 있다.
+이번에는 A가 지휘관의 명령을 들을 수 있는 상태라고 가정하고 같은 상황에 대한 확률을 구해봅시다. 지휘관의 명령을 들을 수 있다면 B가 앞으로 가든 말든 A가 앞으로 갈 확률에는 차이가 없습니다. B가 앞으로 가든지 말든지 지휘관의 명령만 따라서 움직이면 되기 때문입니다.
 
 
 $$
@@ -136,19 +130,36 @@ P(\text{OfficerA=Go} \vert \text{OfficerB=Go, Commander = Go}) = P(\text{Officer
 $$
 
 
-이를 조건부 독립이라고 하며 조건부 독립은 상관의 명령, 즉 클래스를 볼 수 있을 때에만 유효하다.
+이렇게 독립이 아닌 두 사건에 대해 특정 조건이 개입했을 때 조건부 확률이 독립이 되는 관계를 조건부 독립이라고 합니다. 조건 $y$ 에 대하여 조건부 독립인 사건 $x_1, \cdots, x_n$ 은 다음과 같은 수식을 만족합니다.
+
+
+$$
+( \forall x_1, x_2,y) \\
+\begin{aligned}
+P(x_1 \vert x_2, y) &= P(x_1 \vert y) \\
+\therefore P(x_1,x_2 \vert y) &= P(x_1 \vert y)P(x_2 \vert y)
+\end{aligned}
+$$
+
+
+마지막 등식을 사용하여 Class conditional density의 항을 다음과 같이 변형할 수 있습니다.
+
+ 
+$$
+P(X= \{x_1, ..., x_d\} \vert Y=y) \rightarrow \prod^d_{i=1} P(X_i = x_i \vert Y=y)
+$$
+
 
 ## Naive Bayes Classifier
 
-그렇다면 이 조건부 독립을 적용한 $f^*$ 의 식은 어떻게 될까?
-
-
+베이즈 분류기를 수식으로 나타낸 $f^*$ 에 변형된 수식을 적용해봅시다.
 $$
-f^* = \text{argmax}_{Y=y} P(X = x \vert Y = y) P(Y = y) \\
-\qquad \qquad \sim \text{argmax}_{Y=y} P(Y = y) \prod_{1 \leq i \leq d} P(X_i = x_i \vert Y=y)
+\begin{aligned}
+f^* &= \text{argmax}_{Y=y} P(X = x \vert Y = y) P(Y = y) \\
+&\approx \text{argmax}_{Y=y} P(Y = y) \prod_{1 \leq i \leq d} P(X_i = x_i \vert Y=y)
+\end{aligned}
 $$
 
+특성 $x_1, ... ,x_d$ 가 모두 관계를 맺고 있을 때 Class conditional density 항을 구하기 위해서 필요한 파라미터의 개수는 $(2^d-1)k$ 였습니다. 식을 변형한 후에는 어떻게 될까요? 변형한 식에서 Class conditional density 부분을 구하기 위해 필요한 파라미터의 개수는 $d \cdot k$ 개가 됩니다. 위에서 했던 것처럼 특성이 $6$ 개, 클래스가 $2$ 개인 분류 문제를 위해서 필요한 파라미터의 개수를 구해봅시다. Class prior 항을 구하기 위해 필요한 파라미터의 개수는 $k-1$ 로 동일하므로 $6 \cdot 2 \times 1 = 12$ 개가 됩니다. 훨씬 더 줄어든 것을 볼 수 있습니다.
 
-조건부 독립을 적용하여 식을 변형시키면 Class Conditional Density 에서 우리가 필요한 파라미터의 개수는 $dk$ 개가 된다. 하지만 특성이 모두 조건부 독립이라는 가정은 너무나도 Naive 하기에 이 분류기를 **나이브 베이즈 분류기(Naive Bayes Classifier)** 라고 한다. 사전 확률이 정확하고 특성이 조건부 독립이라면 나이브 베이즈 분류기는 최적의 분류기(Optimal classifier)가 된다.
-
-하지만 나이브 베이즈 분류기는 몇 가지 문제점을 가지고 있다. 먼저 조건부 독립이라는 가정 자체가 말 그대로 너무 Naive 하다. 실제 데이터에서 특성들은 서로 관계를 가지고 있는 경우가 많기 때문이다. 다음으로 정확한 Class prior 를 추정하기가 어렵다.
+하지만 현실세계에서는 특성들이 서로 조건부독립을 만족하지 않는 경우가 대부분입니다. 파라미터의 개수를 줄이기 위한 가정이 말 그대로 너무 **순진한(Naive, 나이브)** 한 가정이기 때문에 이 가정을 사용한 베이즈 분류기를 **나이브 베이즈 분류기(Naive Bayes Classifier)** 라고 부릅니다. 나이브 베이즈 분류기는 비록 특수한 가정을 사용하였지만 몇몇 태스크에서 다른 복잡한 모델보다도 더 좋은 성능을 내기도 합니다.
