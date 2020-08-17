@@ -13,7 +13,7 @@ tag: Machine-Learning
 
 [나이브 베이즈 분류기]([https://yngie-c.github.io/machine%20learning/2020/04/19/Logistic-Regression/](https://yngie-c.github.io/machine learning/2020/04/19/Logistic-Regression/)) 에서는 최적의 분류기란 어떤 것인지에 대해 아래의 그림을 통해 알아보았습니다. 아래는 두 분류기의 확률 밀도 함수를 점선과 실선으로 각각 나타낸 것입니다.
 
-<img src="https://user-images.githubusercontent.com/45377884/90317862-3e6a4980-df67-11ea-9a44-6376a8d176e9.png" alt="nb1_1"  />
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/90317862-3e6a4980-df67-11ea-9a44-6376a8d176e9.png" alt="nb1_1"  /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://www.edwith.org/machinelearning1_17/lecture/10581/">인공지능 및 기계학습 개론 학습자료</a></p>
 
@@ -70,7 +70,7 @@ $$
 
 로짓 함수의 그래프는 다음과 같이 생겼습니다.
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Logit.svg/1920px-Logit.svg.png" alt="logit" style="zoom: 25%;" />
+<p align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Logit.svg/1920px-Logit.svg.png" alt="logit" style="zoom: 25%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://en.wikipedia.org/wiki/Logit">위키피디아 - 로짓</a></p>
 
@@ -104,7 +104,7 @@ $$
 
 이렇게 도출된 로지스틱 함수는 특성값이 $x$ 인 인스턴스가 특정 클래스에 속할 확률을 구하는 데 사용됩니다. 로지스틱 함수는 로짓 함수의 역함수이므로 다음과 같은 그래프를 나타냅니다.
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/1920px-Logistic-curve.svg.png" alt="logistic" style="zoom: 25%;" />
+<p align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/1920px-Logistic-curve.svg.png" alt="logistic" style="zoom: 25%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://ko.wikipedia.org/wiki/%EB%A1%9C%EC%A7%80%EC%8A%A4%ED%8B%B1_%ED%9A%8C%EA%B7%80">위키피디아 - 로지스틱 회귀</a></p>
 
