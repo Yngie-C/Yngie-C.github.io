@@ -138,7 +138,7 @@ $$
 $$
 
 
-이제 그래디언트를 구할 수 있게 되었습니다. 이제는 이 그래디언트를 우리의 목표에 맞게 사용하기 위해 목표를 다시 상기시켜 봅시다. 우리의 목표는 비용 함수가 최소가 되는 점, 즉 아래 그림에서 $\theta^*$ 에 해당하는 점을 찾는 것이었습니다. 아래 그림을 보면 $\theta_0$ 에서 시작하여 $\theta^*$ 까지 $\theta_1, \theta_2, \theta_3$ 으로 나아갈수록 그래디언트(기울기)가 점점 감소하는 것을 볼 수 있습니다. 그렇기 때문에 우리는 그래디언트(경사)가 $0$ 이 되는 순간까지 감소하는 방향으로 나아가야 합니다.
+이제 그래디언트를 구할 수 있게 되었습니다. 이제는 이 그래디언트를 우리의 목표에 맞게 사용하기 위해 목표를 다시 상기시켜 봅시다. 우리의 목표는 비용 함수가 최소가 되는 점, 즉 아래 그림에서 $\theta^\star$ 에 해당하는 점을 찾는 것이었습니다. 아래 그림을 보면 $\theta_0$ 에서 시작하여 $\theta^\star$ 까지 $\theta_1, \theta_2, \theta_3$ 으로 나아갈수록 그래디언트(기울기)가 점점 감소하는 것을 볼 수 있습니다. 그렇기 때문에 우리는 그래디언트(경사)가 $0$ 이 되는 순간까지 감소하는 방향으로 나아가야 합니다.
 
 <p align="center"><img src="https://www.researchgate.net/profile/Victor_Suarez-Paniagua/publication/334643403/figure/fig2/AS:783985458282496@1563928107803/3-steps-of-a-Gradient-Descent-with-learning-decay-rate-a-starting-from-the-initial.png" alt="grad_desc" style="zoom:67%;" /></p>
 
