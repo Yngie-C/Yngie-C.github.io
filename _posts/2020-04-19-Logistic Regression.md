@@ -160,7 +160,7 @@ $$
 
 
 $$
-\hat{\theta} = \text{argmax}_\theta \prod_{1 \leq i \leq N} P(Y_i|X_i;\theta) = \text{argmax}_\theta \sum_{1 \leq i \leq N} \log \big(P(Y_i|X_i;\theta) \big)
+\hat{\theta} = \text{argmax}_\theta \prod^m_{i = 1} P(Y_i|X_i;\theta) = \text{argmax}_\theta \sum^m_{i = 1} \log \big(P(Y_i|X_i;\theta) \big)
 $$
 
 
@@ -183,8 +183,8 @@ $$
 
 $$
 \begin{aligned}
-\hat{\theta} &= \text{argmax}_\theta \sum_{1 \leq i \leq N} \log \big(P(Y_i|X_i;\theta) \big) \\
-&= \text{argmax}_\theta \sum_{1 \leq i \leq N} \big\{Y_i X_i \theta - \log (1+e^{X_i\theta})\big\}
+\hat{\theta} &= \text{argmax}_\theta \sum^m_{i = 1} \log \big(P(Y_i|X_i;\theta) \big) \\
+&= \text{argmax}_\theta \sum^m_{i = 1} \big\{Y_i X_i \theta - \log (1+e^{X_i\theta})\big\}
 \end{aligned}
 $$
 
@@ -196,10 +196,10 @@ $$
 
 $$
 \begin{aligned}
-\frac{\partial}{\partial \theta} \bigg\{\sum_{1 \leq i \leq N} Y_i X_i \theta - \log (1+e^{X_i\theta})\bigg\}
-&= \bigg\{ \sum_{1 \leq i \leq N}Y_iX_{i,j} \bigg\} + \bigg\{ \sum_{1 \leq i \leq N} -\frac{1}{1+e^{X_i\theta}} \times e^{X_i\theta} \times X_{i,j}\bigg\} \\
-&= \sum_{1 \leq i \leq N} X_{i,j} \bigg( Y_i -  \frac{e^{X_i \theta}}{1+e^{X_i \theta}}\bigg) \\
-&= \sum_{1 \leq i \leq N} X_{i,j} \big( Y_i -  P(Y_i = 1|X_i;\theta\big) = 0
+\frac{\partial}{\partial \theta} \bigg\{\sum^m_{i = 1} Y_i X_i \theta - \log (1+e^{X_i\theta})\bigg\}
+&= \bigg\{ \sum^m_{i = 1}Y_iX_i \bigg\} + \bigg\{ \sum^m_{i = 1} -\frac{1}{1+e^{X_i\theta}} \times e^{X_i\theta} \times X_i\bigg\} \\
+&= \sum^m_{i = 1} X_i \bigg( Y_i -  \frac{e^{X_i \theta}}{1+e^{X_i \theta}}\bigg) \\
+&= \sum^m_{i = 1} X_i \big( Y_i -  P(Y_i = 1|X_i;\theta)\big) = 0
 \end{aligned}
 $$
 
@@ -231,7 +231,84 @@ $$
 
 $$
 \begin{aligned}
-\theta^{t+1}_j \leftarrow \theta^t_j + h\frac{\partial f(\theta^t)}{\partial \theta} &= \theta^t_j + h \bigg\{\sum_{1 \leq i \leq N} X_{i,j} \big( Y_i -  P(Y_i = 1|X_i;\theta^t\big)\bigg\} \\
-&= \theta^t_j + \frac{h}{C} \bigg\{\sum_{1 \leq i \leq N} X_{i,j} \bigg( Y_i -  \frac{e^{X_i \theta^t}}{1+e^{X_i \theta^t}}\bigg)\bigg\}
+\theta^{t+1}_j \leftarrow \theta^t_j + h\frac{\partial f(\theta^t)}{\partial \theta} &= \theta^t_j + h \bigg\{\sum^m_{i = 1} X_{i,j} \big( Y_i -  P(Y_i = 1|X_i;\theta^t\big)\bigg\} \\
+&= \theta^t_j + \frac{h}{C} \bigg\{\sum^m_{i = 1} X_{i,j} \bigg( Y_i -  \frac{e^{X_i \theta^t}}{1+e^{X_i \theta^t}}\bigg)\bigg\}
 \end{aligned}
+$$
+
+
+
+## 비용 함수로 생각하기
+
+위에서 등장한 것을 활용하여 비용 함수를 최소화하는 과정으로도 생각해 볼 수 있습니다. (위와 같은 과정이지만 비용 함수를 사용하여 설명하는 책들이 많을 것입니다.) 여기서 비용 함수는 **음의 로그 우도(Negative log-likelihood)** 함수를 사용합니다. 음의 로그 우도 함수는 추정한 우도에 음의 로그를 취해준 $- \log P(Y \vert X)$ 로 표현됩니다. 비용 함수의 식을 다음과 같이 쓸 수 있습니다.
+
+
+$$
+\begin{aligned}
+-\log P(Y \vert X;\theta) &= -\log \sum^m_{i = 1} \big\{ Y_i \log \mu(X_i) + (1-Y_i) \log (1-\mu(X_i)) \big\} \\
+\because P(Y_i|X_i;\theta) &= \mu(X_i)^{Y_i}(1 - \mu(X_i))^{1-Y_i}
+\end{aligned}
+$$
+
+
+우리의 목적은 비용 함수를 최소화하는 것이므로 $\text{argmin}_\theta$ 을 사용하여 나타낼 수 있습니다.
+
+
+$$
+\begin{aligned}
+&\text{argmin}_\theta \big(-\log P(Y \vert X;\theta)\big)\\ = &\text{argmin}_\theta 
+\bigg(-\log \sum_{1 \leq i \leq N} \big\{ Y_i \log \mu(X_i) + (1-Y_i) \log (1-\mu(X_i)) \big\}\bigg)
+\end{aligned}
+$$
+
+
+위에서  $\text{argmin}$ 이하의 식을 미분하여 나온 식의 값이 0이 되는 $\theta$ 를 경사 하강법으로 찾는 과정은 경사 상승법으로 최대 조건부 우도를 추정한 것과 동일하게 됩니다.
+
+
+
+## Softmax Regression
+
+개념을 확장시켜 인스턴스를 다중 클래스로 분류하는 작업에 로지스틱 회귀를 적용시켜 봅시다. 로지스틱 회귀의 방법을 다중 분류에 적용한 것을 다항 로지스틱 회귀(Multinomial logistic regression) 또는 **소프트맥스 회귀(Softmax regression)** 라고 합니다. 샘플 $x$ 에 대해 일련의 파라미터를 곱하여 각 클래스에 속할 점수(Score)를 구합니다. 다음과 같이 클래스 $k$ 에 대한 점수 $s_k(x)$ 를 구할 수 있습니다.
+
+
+$$
+s_k(x) = \theta^T_k x
+$$
+
+
+모든 클래스에 대해 구해진 점수에 소프트맥스 함수 $\sigma(x)$ 를 취해주어 $k$ 클래스에 속할 확률 $P(Y=k \vert X)$ 를 구할 수 있습니다.
+
+
+$$
+P(Y=k|X) = \sigma(s_k(x)) = \frac{\exp(s_k(x))}{\sum^K_{i=1}\exp(s_j(x))}
+$$
+
+
+소프트맥스 회귀 모델은 로그  **범주 사이의 크로스 엔트로피(Categorical Cross entropy)** 를 비용 함수로 사용합니다. 식 자체는 로지스틱 회귀의 비용 함수였던 음의 로그 우도와 동일합니다.
+
+
+$$
+\begin{aligned}
+-\log P(Y|X;\theta) &= -\log \prod^m_{i=1}\prod^K_{k=1}\pi_k^{y_k} \\
+&= - \sum^m_{i=1}\sum^K_{k=1} y_k \log \pi_k
+\end{aligned}
+$$
+
+
+여기서도 비용 함수를 최소화 해야 하므로 $\text{argmin}$ 을 사용하여 나타낼 수 있습니다.
+
+
+$$
+\begin{aligned}
+&\text{argmin}_\theta \big( -\log P(Y|X;\theta) \big) \\
+= &\text{argmin}_\theta \bigg(- \sum^m_{i=1}\sum^K_{k=1} y_k \log \pi_k \bigg)
+\end{aligned}
+$$
+
+
+$\text{argmin}$ 이하의 식을 미분하여 0이되는 $\theta$ 를 찾는 수식은 다음과 같습니다. 아래 식을 만족하는 $\theta$ 의 값 역시 열린 해의 형태이므로 경사 하강법을 통해 근사해나가야 합니다.
+
+
+$$
+\frac{1}{m}\sum^m_{i = 1}\sum^K_{k=1} X_{i,j} \big(P(Y_i = k|X_i;\theta) - Y_i\big) = 0
 $$
