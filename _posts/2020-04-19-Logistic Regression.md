@@ -160,7 +160,7 @@ $$
 
 
 $$
-\hat{\theta} = \text{argmax}_{\substack{\theta}} \prod_{1 \leq i \leq N} P(Y_i|X_i;\theta) = \text{argmax}_{\substack{\theta}} \sum_{1 \leq i \leq N} \log \big(P(Y_i|X_i;\theta) \big)
+\hat{\theta} = \text{argmax}_\theta \prod_{1 \leq i \leq N} P(Y_i|X_i;\theta) = \text{argmax}_\theta \sum_{1 \leq i \leq N} \log \big(P(Y_i|X_i;\theta) \big)
 $$
 
 
@@ -183,15 +183,15 @@ $$
 
 $$
 \begin{aligned}
-\hat{\theta} &= \argmax_{\substack{\theta}} \sum_{1 \leq i \leq N} \log \big(P(Y_i|X_i;\theta) \big) \\
-&= \argmax_{\substack{\theta}} \sum_{1 \leq i \leq N} \big\{Y_i X_i \theta - \log (1+e^{X_i\theta})\big\}
+\hat{\theta} &= \text{argmax}_\theta \sum_{1 \leq i \leq N} \log \big(P(Y_i|X_i;\theta) \big) \\
+&= \text{argmax}_\theta \sum_{1 \leq i \leq N} \big\{Y_i X_i \theta - \log (1+e^{X_i\theta})\big\}
 \end{aligned}
 $$
 
 
 
 
-최대 우도 추정에서 했던 것과 같이 $\argmax$ 이하의 식을 $\theta$ 로 미분하여 0이 되는 $\theta$ 를 찾아야 합니다.
+최대 우도 추정에서 했던 것과 같이 $\text{argmax}$ 이하의 식을 $\theta$ 로 미분하여 0이 되는 $\theta$ 를 찾아야 합니다.
 
 
 $$
@@ -204,7 +204,7 @@ $$
 $$
 
 
-이 식은 선형 회귀에서의 최소제곱법 처럼 하나의 닫힌 해가 나오지 않습니다. 그러므로 우리는 경사법을 통해 해를 근사해 나갈 수 밖에 없습니다. 여기서는 최대 조건부 우도를 구하는, 즉 $\argmax$ 인 지점을 구하는 것이므로 경사 상승법을 사용합니다.
+이 식은 선형 회귀에서의 최소제곱법 처럼 하나의 닫힌 해가 나오지 않습니다. 그러므로 우리는 경사법을 통해 해를 근사해 나갈 수 밖에 없습니다. 여기서는 최대 조건부 우도를 구하는, 즉 $\text{argmax}$ 인 지점을 구하는 것이므로 경사 상승법을 사용합니다.
 
 
 
