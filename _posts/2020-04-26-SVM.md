@@ -5,7 +5,7 @@ category: Machine Learning
 tag: Machine-Learning
 ---
 
- 본 포스트는 [카이스트 문일철 교수님의 강의](https://www.edwith.org/machinelearning1_17/joinLectures/9738) 를 바탕으로 작성하였습니다.
+ 본 포스트는  [문일철 교수님의 인공지능 및 기계학습 개론 I](https://www.edwith.org/machinelearning1_17/joinLectures/9738) 강의를 바탕으로 작성하였습니다.
 
 
 

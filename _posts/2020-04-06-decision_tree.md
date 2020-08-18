@@ -5,7 +5,7 @@ category: Machine Learning
 tag: Machine-Learning
 ---
 
- 본 포스트는  [문일철 교수님의 인공지능 및 기계학습 개론 I](https://www.edwith.org/machinelearning1_17/joinLectures/9738) 강의를 바탕으로 작성하였습니다.다양한 결정 트리 알고리즘에 대한 부분은 [이곳](https://ai-times.tistory.com) 을 참조하였습니다.
+ 본 포스트는  [문일철 교수님의 인공지능 및 기계학습 개론 I](https://www.edwith.org/machinelearning1_17/joinLectures/9738) 강의를 바탕으로 작성하였습니다. 다양한 결정 트리 알고리즘에 대한 부분은 [이곳](https://ai-times.tistory.com) 을 참조하였습니다.
 
 
 
