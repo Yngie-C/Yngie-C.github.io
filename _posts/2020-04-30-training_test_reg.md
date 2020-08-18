@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 학습/시험과 규제 (Training/Testing & Regulation)
+title: 과적합과 과소적합 (Overfitting & Underfitting)
 category: Machine Learning
 tag: Machine-Learning
 ---
