@@ -21,7 +21,7 @@ tag: Data Structure
 
 어떤 문제들은 위 그림에서 볼 수 있는 것처럼 작게 나누더라도 동일한 구조를 가지는 경우가 있습니다. 예를 들어, 그림과 같은 조직도를 가진 회사에서 예산을 나누는 경우를 생각해보겠습니다.
 
-<img src="http://www.kinfra.co.kr/eng/images/company_info/ori_img.gif" alt="org_chart" style="zoom:67%;" />
+<p align="center"><img src="http://www.kinfra.co.kr/eng/images/company_info/ori_img.gif" alt="org_chart" style="zoom:67%;" /></p>
 
 정해진 총 예산을 $\mathbf{N}$ 이라 합시다. 이를 Manangement, Investment, Other group에 $N_1, N_2, N_3$ 로 나눠 배정하게 됩니다. 그리고 Investment group내에 있는 Department는 $N_2$ 는 또 다시 부서 내부의 각 팀에 $n_1, n_2,n_3$ 만큼 나누어져 배정됩니다. 그리고 Division1에 배정된 $n_1$ 역시 또 3개로 나누어져 받게 될 것입니다.
 
@@ -75,7 +75,7 @@ def Fibonacci(n):
 
 
 
-<img src="https://www.andreagrandi.it/images/2015/08/fibo.png" alt="fib"  />
+<p align="center"><img src="https://www.andreagrandi.it/images/2015/08/fibo.png" alt="fib"  /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://www.andreagrandi.it/2015/08/31/understanding-python-decorators-optimizing-a-recursive-fibonacci-implementation/">andreagrandi.it</a></p>
 
@@ -91,7 +91,7 @@ def Fibonacci(n):
 
 아래는 재귀로 구현한 피보나치 함수를 호출했을 때 스택 프레임 $fib(5)$ 는 너무 복잡하므로 한 단계 낮은 인자인 $fib(4)$를 컴퓨터가 어떻게 처리하는 지에 대한 그림입니다. 
 
-![stackframe](http://knowledge-cess.com/wp-content/uploads/2014/07/Call-stack-of-Fibonacci.jpg)
+<p align="center"><img src="http://knowledge-cess.com/wp-content/uploads/2014/07/Call-stack-of-Fibonacci.jpg" alt="stackframe" style="zoom:120%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="http://knowledge-cess.com/recursion-vs-iteration-an-analysis-fibonacci-and-factorial/">knowledge-cess.com</a></p>
 
@@ -167,19 +167,23 @@ def performMergeSort(lstElementToSort):
 
 재귀 호출에도 문제점이 있습니다. 재귀 호출의 문제점을 단적으로 보여줄 수 있는 사례가 바로 피보나치 수열입니다. 위에서 보았던 피보나치 함수의 호출 그래프를 다시 가져와 보겠습니다.
 
-<img src="https://www.andreagrandi.it/images/2015/08/fibo.png" alt="fib"  />
+<p align="center"><img src="https://www.andreagrandi.it/images/2015/08/fibo.png" alt="fib"  /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://www.andreagrandi.it/2015/08/31/understanding-python-decorators-optimizing-a-recursive-fibonacci-implementation/">andreagrandi.it</a></p>
 
 이어서 피보나치 함수의 인자를 5에서 7로 늘리면 어떻게 되는 지도 보겠습니다.
 
-![fib7](https://d3i71xaburhd42.cloudfront.net/24720d0d6a8869a7674daf3860b2fd463f41a646/2-Figure3.1-1.png)
+<p align="center"><img src="https://d3i71xaburhd42.cloudfront.net/24720d0d6a8869a7674daf3860b2fd463f41a646/2-Figure3.1-1.png" alt="fib7" style="zoom:80%;" /></p>
+
+<p align="center" style="font-size:80%">이미지 출처 : <a href="https://www.semanticscholar.org/paper/CHAPTER-3-Dynamic-Programming-3-.-1-Fibonacci-Are-Borras/24720d0d6a8869a7674daf3860b2fd463f41a646/figure/0">semanticscholar.org</a></p>
 
 인자가 5에서 7로만 늘어났는데도 함수 호출 그래프가 엄청나게 복잡해진 것을 볼 수 있습니다. 만약 $fib(10), fib(20)$ 정도를 호출한다면 지면이 허용하지 않을 정도로 함수 그래프가 복잡해질 것입니다. 함수 그래프가 이렇게 복잡해지는 이유는  무엇일까요? 바로 탈출문이 나올 때까지 분할 과정을 계속하기 때문입니다. 위 그림에서도 $fib(0), fib(1)$이 나올 때까지 모두 분할하기 때문에 $fib(0)$은 8번, $fib(1)$은 무려 13번이나 호출되고 있습니다.
 
 이 때문에 재귀를 사용했을 때 걸리는 시간은 $N$이 일정 수준 이상으로 커지면 기하급수적으로 늘어나게 됩니다. 아래는 재귀로 구현된 피보나치 함수를 사용했을 때 걸리는 시간을 그래프로 나타낸 것입니다. $N \geq 30$ 일 때는 엄청나게 많은 시간이 걸리는 것을 볼 수 있지요.
 
-![time_comp](https://3.bp.blogspot.com/-ysurZDrHGpg/UcxGQtzAp7I/AAAAAAAAB-Y/r-89E6xliVk/s640/SGPlot1.png)
+<p align="center"><img src="https://3.bp.blogspot.com/-ysurZDrHGpg/UcxGQtzAp7I/AAAAAAAAB-Y/r-89E6xliVk/s640/SGPlot1.png" alt="time_comp" style="zoom:80%;" /></p>
+
+<p align="center" style="font-size:80%">이미지 출처 : <a href="http://proc-x.com/2013/06/the-complexity-for-fibonacci-numbers-in-sas/">proc-x.com</a></p>
 
 이런 문제를 어떻게 해결할 수 있을까요? 재귀의 문제는 모든 함수를 탈출문이 나올 때까지 쪼갠다는 것이었습니다. 끝까지 쪼개지 않고 $fib(2)$를 한 번 구한다면 분할 없이 그 값을 바로 가져오고, $fib(3)$도 값을 알고난 후에는 분할 없이 그 값을 그대로 가져올 수 있다면 훨씬 빠르게 원하는 값을 구할 수 있을 것입니다. $fib(2), fib(3), \cdots$ 등의 값을 구하여 어디엔가 저장해 놓고 가져오기만 하는 것이지요.
 
