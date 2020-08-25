@@ -13,137 +13,160 @@ tag: NLP
 
 # Transformer
 
-## Attention is All You Need
+2013년 [Word2Vec](https://yngie-c.github.io/nlp/2020/05/28/nlp_word2vec/)이 발표된 후 [GloVe, Fasttext](https://yngie-c.github.io/nlp/2020/06/03/nlp_glove/) 등이 등장하면서 단어 수준의 임베딩에 대한 방법론이 어느 정도 마무리 되었습니다. 그 뒤로는 문장 수준의 임베딩을 위한 방법론들이 등장하게 됩니다. 대표적인 것이 2017년 6월에 *["Attention is All You Need"(Ashish Vaswani et al.)](https://arxiv.org/abs/1706.03762)* 논문에서 발표한 **트랜스포머(Transformer)**입니다. 트랜스포머는 [Seq2Seq](https://yngie-c.github.io/nlp/2020/06/30/nlp_seq2seq/)에 등장했던 Attention 메커니즘을 극대화하기 위한 방법입니다.
 
-2013년 Word2Vec이 발표된 후에 GloVe, Fasttext 등이 등장하면서 단어 임베딩에 대한 방법론이 어느 정도 마무리 되었다. 그 뒤를 이어 문장 임베딩을 위한 기술들이 등장하게 되었고 2017년도 6월에 *"Attention is All You Need"(Ashish Vaswani et al.)* 라는 논문에 등장한 것이 **트랜스포머(Transformer)** 이다. 트랜스포머는 어텐션(Attention) 메커니즘을 극대화하기 위한 방법이다. 시퀀스를 입력받아 시퀀스를 내뱉는다는 점에서는 RNN과 유사하다. 하지만 내부에서는 시퀀스가 RNN처럼 순차적으로 처리되지 않고 한꺼번에 계산된다. 그렇기 때문에 학습 과정에서 병렬화(Parallelize)가 용이하여 속도를 높일 수 있다.    
+Attention은 아이템으로 이루어진 시퀀스를 입력받아 시퀀스 RNN과 유사합니다. 하지만 Attention은 시퀀스를 RNN처럼 순차적으로 처리하지 않고 한 번에 계산한다는 차이점이 있습니다. 이 때문에 병렬화(Parallelize)에 용이하여 GPU연산을 통헤 속도를 높일 수 있습니다.
 
-![transformer_1](http://jalammar.github.io/images/t/the_transformer_3.png)
+<p align="center"><img src="http://jalammar.github.io/images/t/the_transformer_3.png" alt="transformer_1"  /></p>
 
-<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Jay alammar Github</a></p>
+<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/illustrated-transformer/">jalammar.github.io</a></p>
 
-트랜스포머의는 이전에 배운 모델과 유사한 인코더(Encoder)-디코더(Decoder) 구조를 가지고 있다. 하지만 둘을 구성하고 연결하는 방법, 그리고 내부에서 일어나는 연산과정에서 이전 모델과의 차이점을 가진다.
+트랜스포머도 Seq2Seq모델과 유사한 인코더(Encoder)-디코더(Decoder) 구조를 가지고 있습니다. 아래는 트랜스포머의 전체적인 구조를 나타내는 이미지입니다. 이전까지의 Seq2Seq를 도식화한 이미지와 매우 유사하지만 "Encoder**'s'**, Decoder**'s'**가 
 
 <p align="center"><img src="http://jalammar.github.io/images/t/The_transformer_encoders_decoders.png" alt="transformer_2" style="zoom:67%;" /></p>
 
-<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Jay alammar Github</a></p>
+<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/illustrated-transformer/">jalammar.github.io</a></p>
 
-## 트랜스포머의 내부구조
+## Structure
 
-이전의 모델은 내부에 인코더-디코더 하나씩을 가지고 있었다. 하지만 트랜스포머는 인코더와 디코더를 각각 여러 개 중첩(Stack)한 구조를 갖는다. 발표된 논문에서는 6개씩의 인코더와 디코더를 쌓았다. (하지만, 6개라는 숫자가 특별한 의미를 가지는 것은 아니다) 아래 이미지는 논문에서 발표한 트랜스포머의 구조를 인코더와 디코더 개수까지 도식화하여 나타낸 것이다.
+이전에 등장했던 모델은 인코더와 디코더 하나씩을 가지고 있었습니다. 트랜스포머가 이들과 다른 점은 **인코더와 디코더 여러 개를 중첩**한 구조를 갖고 있다는 것입니다. 각각의 인코더와 디코더를 블록(Block)이라고 일컫습니다. 논문에서는 6개씩의 인코더 블록과 디코더 블록을 중첩시킨 구조를 사용하였습니다. 아래 이미지는 논문에서 발표한 트랜스포머의 구조를 인코더와 디코더의 내부 구조까지 도식화하여 나타낸 것입니다.
 
 <p align="center"><img src="http://jalammar.github.io/images/t/The_transformer_encoder_decoder_stack.png" alt="transformer_3" style="zoom:67%;" /></p>
 
-<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Jay alammar Github</a></p>
+<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/illustrated-transformer/">jalammar.github.io</a></p>
 
-이렇게 구성된 각 인코더 블록의 구조는 모두 동일하다. 하지만 그들이 서로 가중치를 공유하거나 하지는 않는다. 인코더의 블록의 구조부터 자세히 살펴보자. 인코더 블록은 2개의 하위 레이어(Sub-Layer)로 구성되어 있다. 첫 번째는 셀프 어텐션(Self-Attention) 층이며 두 번째는 FFNN(Feed Forward Neural Network) 층이다. Self-Attention은 한 토큰에 대한 정보를 처리할 때 이를 처리하기 위해서 입력 시퀀스의 다른 토큰을 얼마나 중요하게 생각할 것인가를 계산한다. Self-Attention 으로부터 계산된 아웃풋은 FFNN으로 들어가게 된다. FFNN에서는 이를 활용하여 가장 적절한 출력을 산출하게 된다. 
+먼저 인코더의 내부 구조부터 살펴보겠습니다. 각 인코더 블록의 구조는 모두 동일합니다. 인코더 블록 내부에는 2개의 하위 레이어(Sub)가 있습니다. 데이터 흐름 순서대로 볼 때 첫 번째로 만나는 층이 **Self-Attention** 층이며, 이 층을 지나서 만나는 **FFNN(Feed forward neural network)** 층입니다. Self-Attention 층에서는 한 토큰에 대한 정보가 다른 토큰의 정보와 얼마나 관련이 있는 지에 대한 가중치를 계산합니다.
 
 <p align="center"><img src="http://jalammar.github.io/images/t/Transformer_encoder.png" alt="transformer_4" style="zoom: 67%;" /></p>
 
-<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Jay alammar Github</a></p>
+<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/illustrated-transformer/">jalammar.github.io</a></p>
 
-디코더는 인코더보다 하나의 하위 레이어를 더 가지고 있다. 가장 아랫부분에 Self-Attention층, 가장 윗부분에 FFNN을 가지는 것은 동일하지만 가운데 하나의 층이 더 들어간다. 이 하위 레이어는 인코더-디코더 어텐션이라고 불리며 인코더가 가지고 온 정보에 대해서 어텐션 메커니즘을 실시한다. 아래 그림은 인코더의 2중 구조, 디코더의 3중 구조를 도식화한 것이다.
+다음으로는 디코더를 보겠습니다. 디코더는 총 3개의 층을 가지고 있습니다. 데이터가 흐르는 순서대로 볼 때 첫 번째로 **(masked) Self-Attention** 층을 만나게 됩니다. 이는 인코더와 동일한 부분입니다. 두 번째로 만나는 층이 새로 추가된 **인코더-디코더 Attention** 층입니다. 인코더-디코더 Attention 층에서는 인코더가 처리한 정보를 받아서 Attention 메커니즘을 수행합니다. 마지막은 인코더와 동일하게 FFNN 층으로 구성되어 있습니다. 아래 그림은 인코더 블록을 구성하고 있는 2개의 하위 레이어와 디코더 블록을 구성하고 있는 3개의 하위 레이어를 도식화하여 나타낸 것입니다.
 
-![transformer_5](http://jalammar.github.io/images/t/Transformer_decoder.png)
+<p align="center"><img src="http://jalammar.github.io/images/t/Transformer_decoder.png" alt="transformer_5"  /></p>
 
-<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Jay alammar Github</a></p>
+<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/illustrated-transformer/">jalammar.github.io</a></p>
 
-## Input Embedding & Positional Encoding
+## Input Embedding
 
-트랜스포머의 전체적인 메커니즘을 도식화하면 다음과 같이 나타낼 수 있다. 아래 이미지에서는 인코더와 디코더 블록 하나씩만을 나타냈으며 실제로는 각 N개의 블록 스택(논문에선 N=6)을 쌓아 구성한다. 아래 그림에서 주목할 것 하나는 Self-Attention이 Multi-Head Attention이라는 것이며 두 번째는 디코더에서는 일부가 마스킹된 Masked Self-Attention을 사용한다는 것이다.
+트랜스포머의 전체적인 세부 구조는 아래 이미지와 같습니다. 아래에서는 이미지를 단순화하기 위해 인코더와 디코더 블록 하나씩을 나타내었으나, 실제로는 $N$(논문에서는 6)개의 블록 스택을 쌓아 구성합니다.
 
-![transformer_6](https://paul-hyun.github.io/assets/2019-12-19/transformer-model-architecture.png)
+<p align="center"><img src="https://miro.medium.com/max/1000/1*o0pS0LbXVw7i41vSISrw1A.png" alt="transformer_6" style="zoom:120%;" /></p>
 
-<p align="center" style="font-size:80%">이미지 출처 : <a href="https://paul-hyun.github.io/transformer-03/">Paul-Hyun Github</a></p>
+<p align="center" style="font-size:80%">이미지 출처 : <a href="https://mc.ai/transformer-self-attention-part-1/">mc.ai</a></p>
 
-먼저 가장 첫 과정인 **입력 시퀀스를 임베딩(Input Embedding)** 하는 과정부터 알아보자. 인풋 임베딩은 입력 시퀀스의 아이템을 첫 번째 인코더 블록에 입력할 수 있도록 벡터화하는 것이다. 또한 첫 번째 블록에 입력할 때만 진행한 후 이후로는 진행하지 않는다. 일반적으로는 Word2Vec, GloVe, Fasttext 등의 단어 임베딩 방법을 사용한다. 트랜스포머의 인코더와 디코더는 입출력시 512차원의 벡터를 다루기 때문에 인풋 임베딩을 거친 단어는 512차원의 벡터로 변하게 된다. 하나의 시퀀스로 처리할 리스트의 크기는 따로 설정해주어야 하는 하이퍼파라미터이며 기본적으로는 훈련 데이터셋에 있는 가장 긴 문장의 길이로 사용한다.
+먼저 **인풋 임베딩(Input embedding)**에 대하여 알아보겠습니다. 인풋 임베딩은 입력 시퀀스의 아이템을 첫 번째 인코더 블록에 입력할 수 있는 벡터로 만드는 작업입니다. 일반적으로는 Word2Vec, GloVe, Fasttext 등의 방법에 의해 Pretrained된 임베딩 벡터를 사용합니다. 트랜스포머의 인코더와 디코더는 512차원의 벡터를 다루기 때문에 인풋 임베딩을 거치면 512차원의 벡터로 변하게 됩니다. 얼마만큼의 아이템을 하나의 시퀀스로 처리할 것인지에 대해서는 하이퍼파라미터를 통해서 조정할 수 있습니다. 일반적으로는 가장 긴 문장의 길이를 사용하고 짧은 문장에 대해서는 패딩(`<pad>`)을 처리해줍니다.
 
-그 다음 해주어야 할 작업은 **포지셔널 인코딩(Positional Encoding)** 이다. 트랜스포머는 RNN처럼 토큰을 순차적으로 다루지 않기 때문에 연산 과정에서 단어의 순서 정보를 무시하게 된다. 이를 완벽히 보존하지는 못하더라도 단어의 위치를 어느정도 보완해줄 수 있는 장치가 필요한데 이를 위해 동작하는 것이 포지셔널 인코딩이다. 인풋 임베딩을 거친 벡터에 포지셔널 인코딩된 벡터를 더해주어 단어의 위치정보를 조금이나마 복원한다.
+## Positional Encoding
 
-포지셔널 인코딩에 대해 좀 더 자세히 들여다보자. 좋은 포지셔널 인코딩은 다음과 같은 조건을 만족하여야 한다. 먼저 인코딩 벡터의 거리(Norm)는 모든 위치에 대해서 동일하게 주어져야 한다. 위에서 보았듯 포지셔널 인코딩을 거쳐 나온 벡터는 인풋 임베딩 벡터에 더해지게 된다. 그런데 위치마다 벡터의 거리(크기)가 달라지게 되면 같은 방향, 같은 크기로 변한다는 것을 보장할 수 없게 된다. 두 번째는 둘 사이의 거리가 멀어지게 되면 포지셔널 인코딩 벡터 사이의 거리도 멀어져야 한다. 아래는 이러한 조건을 대략적으로 만족시키는 포지셔널 인코딩의 예시를 나타낸 수식이며 표는 생성된 벡터 사이의 거리를 L2 노름(Norm)으로 나타낸 결과를 시각화한 것이다.
+다음으로 필요한 작업은 **포지셔널 인코딩(Positional encoding)**입니다. Attention 메커니즘에서는 RNN처럼 순차적으로 토큰을 다루지 않기 때문에 연산 과정에서 단어의 순서 정보를 무시하게 됩니다. 이를 완벽히 복구할 수는 없더라도 단어의 상대적인 위치를 어느 정도 보완해줄 수 있는 장치가 바로 포지셔널 인코딩입니다. 좋은 포지셔널 인코딩을 하려면 어떤 조건을 만족해야 할까요?
 
+일단, 각 위치마다 유일한 값을 출력해야 합니다. 두 단어의 위치가 같은 값일 수는 없겠지요. 그리고 길이가 다른 문장의 단어 위치를 나타낼 때에도 단어의 거리가 같으면 같은 차이를 보여야 합니다. 단어의 거리가 같다는 것은 무엇일까요?
+
+> "어머님 나 는 별 하나 에 아름다운 말 한마디 씩 불러 봅니다"
+>
+> "소학교 때 책상 을 같이 했 던 아이 들 의 이름 과 패 경 옥 이런 이국 소녀 들 의 이름 과 벌써 애기 어머니 된 계집애 들 의 이름 과 가난 한 이웃 사람 들 의 이름 과 비둘기 강아지 토끼 노새 노루 프란시스 쟘 라이너 마리아 릴케 이런 시인 의 이름 을 불러 봅니다"
+
+첫 번째 문장에서 *"나"*와 *"아름다운"*은 사이에 4개의 형태소를 두고 있습니다. 마찬가지로 두 번째 문장에서도 *"책상"*과 *"아이"*는 4개의 형태소를 사이에 두고 떨어져 있는데 이 때 상대적인 단어의 거리가 같다고 할 수 있습니다. 그렇다면 각 단어마다 *"1, 2, 3, 4 ..."* 처럼 고유한 값을 부여하면 안될까요? 이런 방식을 사용하여 각 문장의 포지셔널 인코딩을 출력하면 아래와 같습니다.
+
+> 1: '어머님', 2: '나', 3: '는', 4: '별', 5: '하나', 6: '에', 7: '아름다운', 8: '말', 9: '한마디', 10: '씩', 11: '불러', 12: '봅니다'
+>
+> 1: '소학교', 2: '때', 3: '책상', 4: '을', 5: '같이', 6: '했', 7: '던', 8: '아이', 9: '들', 10: '의', 11: '이름', 12: '과', 13: '패', 14: '경', 15: '옥', 16: '이런', 17: '이국', 18: '소녀', 19: '들', 20: '의', 21: '이름', 22: '과', 23: '벌써', 24: '애기', 25: '어머니', 26: '된', 27: '계집애', 28: '들', 29: '의', 30: '이름', 31: '과', 32: '가난', 33: '한', 34: '이웃', 35: '사람', 36: '들', 37: '의', 38: '이름', 39: '과', 40: '비둘기', 41: '강아지', 42: '토끼', 43: '노새', 44: '노루', 45: '프란시스', 46: '쟘', 47: '라이너', 48: '마리아', 49: '릴케', 50: '이런', 51: '시인', 52: '의', 53: '이름', 54: '을', 55: '불러', 56: '봅니다'
+
+이렇게 되면 긴 문장에서 맨 뒤에 위치한 값의 포지셔널 인코딩 값은 매우 커지게 됩니다. 이렇게 포지셔널 인코딩 값이 커지게 되면 원래의 인풋 임베딩 값에 영향을 주게 됩니다. 그렇다면 범위를 정해놓고 등분하여 나타내면 되지 않을까요? $[0,1]$ 범위를 등분하여 각 단어의 포지셔널 인코딩 값을 나타내어 보겠습니다.
+
+> 0: '어머님', 0.091: '나', 0.182: '는', 0.273: '별', 0.364: '하나', 0.455: '에', 0.545: '아름다운', 0.636: '말', 0.727: '한마디', 0.818: '씩', 0.909: '불러', 1: '봅니다'
+>
+> 0: '소학교', 0.018: '때', 0.036: '책상', 0.055: '을', 0.073: '같이', 0.091: '했', 0.109: '던', 0.127: '아이', 0.145: '들', 0.164: '의', 0.182: '이름', 0.2: '과', 0.218: '패', 0.236: '경', 0.255: '옥', 0.273: '이런', 0.291: '이국', 0.309: '소녀', 0.327: '들', 0.345: '의', 0.364: '이름', 0.382: '과', 0.4: '벌써', 0.418: '애기', 0.436: '어머니', 0.455: '된', 0.473: '계집애', 0.491: '들', 0.509: '의', 0.527: '이름', 0.545: '과', 0.564: '가난', 0.582: '한', 0.6: '이웃', 0.618: '사람', 0.636: '들', 0.655: '의', 0.673: '이름', 0.691: '과', 0.709: '비둘기', 0.727: '강아지', 0.745: '토끼', 0.764: '노새', 0.782: '노루', 0.8: '프란시스', 0.818: '쟘', 0.836: '라이너', 0.855: '마리아', 0.873: '릴케', 0.891: '이런', 0.909: '시인', 0.927: '의', 0.945: '이름', 0.964: '을', 0.982: '불러', 1: '봅니다'
+
+이렇게 되면 문장 길이, 즉 문장을 구성하는 단어 개수에 따라 단어 사이의 거리가 달라져 두 번째 조건을 어기게 됩니다. 첫 번째 문장에서 *"어머님"*과 *"나"*, 두 번째 문장에서 *"소학교"*와 *"때"*는 모두 바로 옆 단어이지만 첫 번째 문장에서의 차이는 $0.091$이고 두 번째 문장에서는 $0.018$으로 5배나 차이나는 것을 볼 수 있습니다. 그리하여 논문에서는 이런 조건을 모두 만족하는 함수로 $\sin, \cos$ 을 사용했습니다. 논문에서 사용한 포지셔널 인코딩 함수의 수식은 다음과 같습니다.
 
 $$
-PE_{(\text{pos}, 2i)} = \sin(\text{pos}/10000^{2i/d_{\text{model}}}) \\
-PE_{(\text{pos}, 2i+1)} = \cos(\text{pos}/10000^{2i/d_{\text{model}}})
+\begin{aligned}
+PE_{(\text{pos}, 2i)} &= \sin(\text{pos}/10000^{2i/d_{\text{model}}}) \\
+PE_{(\text{pos}, 2i+1)} &= \cos(\text{pos}/10000^{2i/d_{\text{model}}})
+\end{aligned}
 $$
 
-<p align="center"><img src="https://user-images.githubusercontent.com/45377884/86228459-5e1cfc80-bbc9-11ea-9443-355859646b0f.png" alt="posi_encode1" style="zoom:80%;" /></p>
+아래의 그림은 위 함수를 사용하여 사용하여 포지셔널 인코딩한 단어 사이의 거리를 시각화하여 나타낸 것입니다. 왼쪽 그래프는 10개의 단어로 이루어진 문장의 모든 단어 사이의 거리를 시각화한 것이고, 오른쪽 그래프는 50개의 단어로 이루어진 문장에서 앞부분 10개의 단어 사이의 거리를 시각화한 것입니다. 차원은 논문에서 사용한 $d_\text{model} = 512$ 를 사용하였습니다.
 
-<p align="center" style="font-size:80%">이미지 출처 : <a href="https://github.com/pilsung-kang/text-analytics">Text-Analytics Github</a></p>
+![pos_encode](https://user-images.githubusercontent.com/45377884/91164716-824d1380-e70a-11ea-8279-f4c2b8d6e0f6.png)
 
-위 표에서 수치를 대체로 살펴보면 가까이 있는 단어는 값이 낮고 멀리 있을 수록 수치가 커지는 것을 알 수 있다. 물론 멀리 있는 토큰에 대하여 무조건 숫자가 커지지는 않지만 일반적인 경향성은 만족하면서 대체적인 거리 관계를 반영하고 있음을 알 수 있다.
+두 그래프로부터 문장의 길이가 달라지더라도 단어 사이의 거리는 보존되는 것을 볼 수 있습니다. 문장의 단어가 몇 개이든 항상 바로 옆 단어는 3.714만큼, 그 옆 단어는 6.967만큼 차이가 나게 됩니다. 게다가 점점 문장의 길이가 길어지더라도 포지셔널 인코딩을 통해 나타낸 거리 사이의 값이 한없이 커지지 않습니다. 멀리 떨어질수록 증가폭이 점점 떨어지기 때문에 *"W1"*과 *"W2"*사이의 거리는 3이상이지만, *"W1"*과 *"W10"*사이의 거리는 12.37로 9배의 차이가 나지 않는 것을 볼 수 있습니다. 증가폭이 점점 줄기 때문에 *"W1"*과 *"W20"*사이의 거리를 구해보아도 13.98밖에 되지 않습니다.
 
-
+이렇게 구한 포지셔널 인코딩 벡터는 단어의 임베딩 벡터에 더해진 후에 인코더 블록으로 들어가게 됩니다.
 
 ## Encoder Block
 
-포지셔널 인코딩 벡터가 더해진 인풋 임베딩 벡터는 이제 인코더의 첫 번째 블록에 들어가게 된다. 위에서 설명한 바와 같이 인코더의 각 블록에는 2개의 하위 레이어가 있다. 
+인코더 블록의 각 하위 레이어가 어떤 역할을 하는지에 대해 자세히 알아보겠습니다. 아래는 첫 번째 인코더 블록에 들어가는 벡터 $x_1, x_2$가 어떤 과정을 거치는 지를 나타낸 이미지입니다. 
 
-<p align="center"><img src="http://jalammar.github.io/images/t/encoder_with_tensors_2.png" style="zoom:50%;" /></p>
+<p align="center"><img src="http://jalammar.github.io/images/t/encoder_with_tensors_2.png" style="zoom:66%;" /></p>
 
-<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Jay alammar Github</a></p>
+<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/illustrated-transformer/">jalammar.github.io</a></p>
 
-포지셔널 인코딩까지 마친 토큰 벡터 $x_1, x_2$ 가 인코더 블록에서 가장 먼저 만나는 층은 **셀프 어텐션(Self-Attention)** 이고 이를 거쳐 나온 출력 벡터 $z_1, z_2$ 는 **FFNN(Feed Forward Neural Network)** 층을 지나게 된다. Self-Attention 층에서는 각 토큰 벡터가 서로 영향을 끼치는(Dependency) 관계에 있지만 FFNN에서는 서로 영향을 끼치지 않는다. 그렇기 때문에 FFNN 단계에서는 병렬화가 가능하며 학습 속도를 더욱 빠르게 가져갈 수 있다. 첫 번째 블록의 최종 아웃풋인 $r_1, r_2$ 벡터는 두 번째 인코더 블록의 인풋으로 사용된다.
+위에서 말한 것처럼 인코더 블록에서 가장 먼저 만나게 되는 층은 **Self-Attention**이고 이를 거쳐 나온 출력 벡터 $z_1, z_2$는 각각 **FFNN**층을 거쳐 인코더 블록을 빠져나오게 됩니다. 위 그림에서도 볼 수 있는 것처럼 Self-Attention층에서는 각각의 입력 벡터가 서로 영향을 끼치는(Dependency) 관계에 있습니다. 하지만 FFNN에서는 각자가 따로 들어가기 때문에 서로 영향을 끼치지 않는 것을 볼 수 있지요. 그렇기 때문에 FFNN에서는 병렬화가 가능하며 더 빠르게 학습이 가능합니다. 인코더 블록가 출력하는 벡터 $r_1, r_2$는 그 다음 인코더 블록의 인풋으로 다시 사용됩니다.
 
+### Self-Attention
 
-
-## Self-Attention
-
-셀프 어텐션의 역할은 무엇일까? 다음과 같은 문장이 있다고 해보자.
-
+다음의 예시 문장을 통해서 Self-Attention층이 하는 역할을 알아보겠습니다.
 
 $$
 \text{"The animal didn't cross the street because it was too tired"}
 $$
 
+사람은 위 문장에서의 *"it"*이 어떤 단어를 지칭하는지 쉽게 알 수 있습니다. 하지만 컴퓨터에게 학습없이 이를 맞춘다는 것은 쉽지 않은 일입니다. 이런 지시대명사 외에도 문장에 있는 단어는 시퀀스 내에 있는 다른 단어와 깊은 관계를 맺고 있습니다. 이 관계가 어떻게 맺어져 있는 지를 정량적으로 표현하겠다는 것이 바로 Self-Attention의 목적입니다. 아래는 5번째 인코더 블록에서 "it"이 어떤 단어와 가장 깊은 관계를 맺고 있는 지를 나타내는 그림입니다.
 
-사람은 위 문장에서의 *"it"* 이 무엇을 가리키는지 쉽게 알 수 있지만 컴퓨터에게는 쉽지만은 않은 문제다. 이렇게 문장에 있는 어떤 단어는 다른 단어에 많은 영향을 끼치고 있다. 그래서 각 단어가 시퀀스 내에 있는 다른 단어에게 어떤 영향을 끼치는지 살펴보겠다는 것이 바로 Self-Attention의 목적이다. 아래는 6개의 인코더 블록 중 5번째 블록에서 *"it"* 이 어떤 단어에 영향을 가장 많이 끼치는 지를 나타낸 그림이다. 
+<p align="center"><img src="http://jalammar.github.io/images/t/transformer_self-attention_visualization.png" alt="transformer_8" style="zoom:110%;" /></p>
 
-![transformer_8](http://jalammar.github.io/images/t/transformer_self-attention_visualization.png)
+<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/illustrated-transformer/">jalammar.github.io</a></p>
 
-<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Jay alammar Github</a></p>
+위 그림에서 *"it"*이 *"The animal"*을 정확히 가리키고 있는 것을 볼 수 있습니다. Self-Attention층은 어떤 과정을 통해 이를 알아낼 수 있는 것일까요? Self-Attention층 내부에서 일어나는 일에 대해서 알아보겠습니다.
 
-Self-Attention 층에서 어떤 계산이 일어나는 지를 좀 더 자세히 알아보자. 문제를 풀기 위해서 세 가지 벡터를 준비해야 한다. 각각의 벡터는 **쿼리(Query, Q), 키(Key, k), 밸류(Value, V)** 라고 부른다. 가장 먼저 쿼리는 현재 프로세싱 하고 있는 토큰을 나타내는(Representation) 벡터이다. 키는 일종의 레이블로서 시퀀스 내 모든 토큰에 대한 아이덴티티를 나타낸다. 키는 프로세싱 중인 토큰의 쿼리 벡터와의 연산을 통해 얼마나 영향을 미치는 지에 대한 Score를 매긴다. 마지막으로 밸류는 키와 연결된 실제 토큰을 나타내는 벡터이다. 아래의 그림을 보자.
+먼저 인풋 벡터가 들어오면 Self-Attention층에서는 세 가지 벡터를 인풋 벡터 갯수만큼씩 준비합니다. 이 세 가지 벡터는 각각 **쿼리(Query, Q), 키(Key, k), 밸류(Value, V)**라고 부릅니다. 가장 먼저 쿼리는 현재 처리하고자 하는 토큰을 나타내는 벡터입니다. 키는 일종의 레이블(label)로, 시퀀스 내에 있는 모든 토큰에 대한 아이덴티티(Identity)를 나타냅니다. 마지막으로 밸류는 키와 연결된 실제 토큰을 나타내는 벡터입니다. 아래는 쿼리, 키, 밸류의 특징을 잘 살린 그림입니다.
 
 <p align="center"><img src="http://jalammar.github.io/images/gpt2/self-attention-example-folders-3.png" alt="transformer_9" style="zoom:50%;" /></p>
 
-<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Jay alammar Github</a></p>
+<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/illustrated-transformer/">jalammar.github.io</a></p>
 
-위의 그림에서 쿼리로 나타나는 Query #9 벡터는 10번째 단어인 "it"을 표현한다. 컴퓨터는 이 쿼리를 보고 모든 키를 살펴본 뒤 가장 잘 맞는 키를 찾는다. 가장 잘 맞는지 확인하는 방법은 벡터의 내적(Dot product)으로 이루어지며 내적을 통해 나온 값은 서로가 얼마나 영향을 끼치고 있는지를 나타내는 점수(Score)가 된다. 마지막으로 이 스코어를 밸류와 곱하여 어떤 단어와 얼마나 영향을 끼치는 지를 구하게 된다.
+위 그림에서 `Query #9` 벡터는 10번째 단어인 *"it"*을 나타내는 벡터입니다. 컴퓨터는 이 쿼리(=조건)를 보고 그 조건을 가장 잘 만족하는 키를 찾습니다. 그리고 파일 안에 있는 내용을 가져가는 것처럼 키에 걸려있는 실제 밸류를 가져가게 되지요. 그렇다면 각각의 쿼리, 키, 밸류 벡터는 어떻게 만들어지는 것일까요?
+
+Self-Attention 층 내부에는 세 벡터를 만들기 위한 행렬 $W^Q, W^K, W^V$ 가 초기화된 값으로 미리 준비되어 있습니다. 입력되는 토큰 벡터는 각 행렬과의 곱을 통해서 그에 맞는 쿼리, 키, 밸류 벡터를 만들게 됩니다. 아래 그림은 미리 준비된 행렬로부터 각 벡터가 만들어지는 것을 보여주는 이미지입니다.
 
 <p align="center"><img src="http://jalammar.github.io/images/t/transformer_self_attention_vectors.png" alt="transformer_10" style="zoom: 80%;" /></p>
 
-<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Jay alammar Github</a></p>
+<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/illustrated-transformer/">jalammar.github.io</a></p>
 
-각각의 쿼리, 키, 밸류 벡터는 어떻게 만들어질까? Self-Attention 층 내부에는 세 벡터를 만들기 위한 행렬 $W^Q, W^K, W^V$ 가 미리 준비되어 있다. 각각의 행렬과 인풋 토큰 벡터를 내적하여 인풋 토큰에 맞는 쿼리 - 키 - 밸류 벡터를 만들게 된다. 예를 들어, $x_1 \cdot W^Q = q_1, x_1 \cdot W^K = k_1, x_1 \cdot W^V = v_1$ 가 되며 $x_2 \cdot W^Q = q_2, x_1 \cdot W^K = k_2, x_1 \cdot W^V = v_2$ 가 된다. 여기서 $W$ 행렬에 해당하는 $W^Q, W^K, W^V$ 각 요소의 값은 학습을 통해 찾아야 하는 미지수에 해당한다.
+위 그림에서 $x_1, x_2$는 토큰 벡터입니다. 미리 생성된 행렬과 각 입력 벡터를 곱하면 $x_1 \cdot W^Q = q_1, x_1 \cdot W^K = k_1, x_1 \cdot W^V = v_1$ 가 되며 $x_2 \cdot W^Q = q_2, x_1 \cdot W^K = k_2, x_1 \cdot W^V = v_2$가 됩니다. $W$행렬에 해당하는 $W^Q, W^K, W^V$의 각 요소 값은 학습 과정에서 갱신되는 파라미터입니다. 일반적으로 쿼리, 키, 밸류 벡터의 차원은 인풋 토큰 벡터의 차원보다 작게 설정합니다. 논문에서는 토큰 벡터를 512차원의 벡터로 설정하고 쿼리, 키, 밸류는 64차원의 벡터로 설정하였습니다. $512/64 = 8$ 인데 이렇게 세 벡터의 차원을 토큰 벡터 차원 수의 약수로 설정하는 이유가 있습니다. Multi-Head Attention을 적용하는 데 있어서 각각의 아웃풋을 Concatenate(옆으로 붙임)해주는데 이 때 $8$이 Multi-head의 개수가 됩니다.
 
-일반적으로 쿼리 - 키 - 밸류 벡터의 차원은 인풋 토큰 벡터의 차원보다 적게 설정한다. (무조건 작게 설정해야 하는 것은 아니다) 논문에서는 인풋 토큰 벡터를 512차원의 벡터로 만들어주며 쿼리, 키, 밸류는 64차원의 벡터로 설정한다. 나중에 Multi-Head Attention을 활용할 때 각 아웃풋을 Concatenate를 해주는데 이를 위해 더 작은 차원으로 설정하게 된다. 만약 인풋이 512차원, 쿼리 - 키 - 밸류가 64차원이라면 512/64, 즉 8은 Multi-Head Attention의 숫자가 된다.
-
-세 가지 벡터(쿼리 - 키 - 밸류)를 만들어 주었다면 그 다음은 아래와 같이 쿼리와 가장 잘 맞는 키를 찾는 과정이다.
+다음으로 쿼리와 잘 맞는 키가 어떻게 구해지는 지를 알아보겠습니다. 아래 그림에서는 value#1과 연결된 key#1은 30%만큼의 관계를, value#2와 연결된 key#2는 50%만큼의 관계를 맺고 있다는 것을 보여주는 그림입니다.
 
 <p align="center"><img src="http://jalammar.github.io/images/gpt2/self-attention-example-folders-scores-3.png" alt="transformer_10" style="zoom:50%;" /></p>
 
-<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Jay alammar Github</a></p>
+<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/illustrated-transformer/">jalammar.github.io</a></p>
 
-쿼리와 키가 잘 맞는지는 각 벡터의 내적을 이용하여 그 값을 사용한다. 그 다음으로는 해당 쿼리와 각 키의 내적값을 차원의 제곱근 값으로 나누어준다. 이는 그래디언트를 안정적으로 만들어주기 위함이며 논문에서는 64차원의 벡터를 사용하고 있기 때문에 그 값을 8로 나누어주게 된다. 차원의 제곱근으로 나누어준 값에 소프트맥스를 취해주면 프로세싱 중인 토큰이 각 토큰에 얼마나 영향을 끼치는지에 대한 비율이 나오게 된다. 최종적으로 이 비율과 각 밸류 벡터를 곱해준 값을 모두 더하여 Self-Attention 층의 아웃풋을 내놓게 된다. 아래는 이 과정을 그림으로 나타낸 것이다.
+쿼리 벡터와 키 벡터가 얼마나 잘 맞는지는 내적 계산값 $q \cdot k$ 를 이용합니다. 논문에서는 학습시 그래디언트를 안정적으로 만들어주기 위해서 이렇게 구해진 값을 쿼리, 키, 밸류 벡터의 제곱근인 $\sqrt{d_k}$로 나누어줍니다. 나누어준 값에 소프트맥스를 취해주면 구하고자 하는 토큰이 다른 토큰과 얼마 만큼의 관계를 맺고 있는 지에 대한 수치가 나오게 됩니다. 최종적으로는 이 비율과 밸류 벡터를 곱해준 값을 모두 더하여 Self-Attention층의 최종 출력 벡터로 계산하게 됩니다. 아래는 일련의 과정을 그림으로 나타낸 것입니다.
 
-![transformer_11](http://jalammar.github.io/images/t/self-attention-output.png)
+<p align="center"><img src="http://jalammar.github.io/images/t/self-attention-output.png" alt="transformer_11"  /></p>
 
-<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Jay alammar Github</a></p>
+<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/illustrated-transformer/">jalammar.github.io</a></p>
 
-실제로는 벡터 하나마다 따로 계산이 진행되는 아니라 행렬을 사용하여 한꺼번에 계산하게 된다. 행렬이 계산되는 과정을 그림으로 보도록 하자. 아래는 인풋 토큰 벡터를 모두 포함하고 있는 행렬 $X$ 로부터 각각 쿼리 - 키 - 밸류에 해당하는 행렬 $Q, K, V$ 를 만들어내는 과정이다.
+
+
+위 그림에서 *"Thinking"*이라는 단어는 자기 자신과 88%만큼의 관계를, *"Machine"*이라는 단어와는 12%만큼의 관계를 맺고 있는 것을 볼 수 있습니다. 각 값을 밸류 벡터인 $v_1, v_2$와 각각 곱하여 더하면 최종 출력 벡터인 $z_1$이 나오게 됩니다.
+
+실제로는 벡터 하나하나마다 따로 계산을 진행하지 않고 행렬을 사용하여 한꺼번에 계산합니다. 아래는 토큰 벡터로 이루어진 행렬 $X$ 로부터 쿼리, 키, 밸류에 해당하는 행렬 $Q, K, V$ 를 만드는 과정입니다.
 
 <p align="center"><img src="http://jalammar.github.io/images/t/self-attention-matrix-calculation.png" alt="transformer_12" style="zoom: 67%;" /></p>
 
-<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Jay alammar Github</a></p>
+<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/illustrated-transformer/">jalammar.github.io</a></p>
 
-아래는 생성된 $Q, K, V$ 로부터 Self-Attention의 아웃풋 행렬인 $Z$ 를 만들어 내기 위한 연산 과정이다.
+아래는 생성된 $Q, K, V$ 로부터 Self-Attention의 아웃풋 행렬인 $Z$ 를 만들어 내기 위한 연산 과정입니다.
 
 <p align="center"><img src="http://jalammar.github.io/images/t/self-attention-matrix-calculation-2.png" alt="transformer_13" style="zoom: 67%;" /></p>
 
-<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Jay alammar Github</a></p>
+<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/illustrated-transformer/">jalammar.github.io</a></p>
 
-전체 과정을 다른 그림으로 나타내면 아래와 같이 나타낼 수 있다. 어떻게 Self-Attention이 진행되는지 쭉 따라가 보도록 하자.
+전체 과정을 다른 그림으로 나타내면 아래와 같이 나타낼 수 있습니다. Self-Attention층 내에서 어떤 과정이 진행되는지를 그림을 따라가면서 알아보도록 하겠습니다.
 
 <p align="center"><img src="http://jalammar.github.io/images/xlnet/self-attention-1.png" alt="transformer_15" style="zoom:50%;" /></p>
 
@@ -153,71 +176,79 @@ Self-Attention 층에서 어떤 계산이 일어나는 지를 좀 더 자세히 
 
 <p align="center"><img src="http://jalammar.github.io/images/xlnet/self-attention-summary.png" alt="transformer_15" style="zoom:50%;" /></p>
 
-<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Jay alammar Github</a></p>
+<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/illustrated-transformer/">jalammar.github.io</a></p>
 
-다음으로 이전에 차원수를 다루면서 잠깐 언급되었던 **멀티헤드 어텐션(Multi-Head Attention)** 에 대해서 알아보자. Multi-Head Attention의 목적은 각 단어가 미치는 영향을 한 번이 아니라 여러 번 계산하기 위함이다. 예를 들어, *"it"* 이 어떤 단어를 지칭하는지(어떤 단어의 영향을 가장 많이 받는지) 알아내는 것이 Self-Attention의 문제였다면 한 번의 계산만으로 이 문제의 답을 결정하는 것이 아니라 여러 번 계산한 값을 모두 사용하겠다는 것이다.
+### Multi-Head Attention
 
-논문에서 사용한 HEAD의 개수는 8(=512/64) 이었으므로 총 8번의 다른 Self-Attention을 실행하여 8개의 아웃풋 $z_0, z_1, \cdots , z_7 $ 을 만들어낸다. (여기서 숫자는 다른 토큰을 나타내는 것이 아니라 모두 한 토큰으로부터 생성된 다른 H ead의 Attention 결과이다) 아래는 이 과정을 그림으로 나타낸 것이다.
+다음으로는 **멀티헤드 어텐션(Multi-Head Attention)** 에 대해서 알아보겠습니다. Multi-Head Attention을 사용하는 목적은 단어 간의 관계를 한 번이 아니라 여러 번 계산하여 적용하기 위함입니다. 논문에서 사용한 Head의 개수는 $8(=512/64)$ 입니다. 따라서, 총 8번의 Self-Attention을 실행하여 8개의 아웃풋 $Z_0, Z_1, \cdots , Z_7 $ 을 만들어냅니다. 아래는 이 과정을 그림으로 나타낸 것입니다.
 
 <p align="center"><img src="http://jalammar.github.io/images/t/transformer_attention_heads_z.png" alt="transformer_16" style="zoom:67%;" /></p>
 
-<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Jay alammar Github</a></p>
+<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/illustrated-transformer/">jalammar.github.io</a></p>
 
-이렇게 나온 각각의 아웃풋 행렬은 옆으로 길게 이어 붙여진(Concatenate) 후에 가중치 행렬인 $W_0$ 과의 내적을 통해서 Multi-Head Attention의 최종 결과인 행렬 $Z$  를 만들어낸다. 여기서 행렬 $W_0$ 의 요소는 학습을 통해 계속 갱신되는 미지수이다. 또한 이렇게 생성된 행렬 $Z$ 은 인풋 행렬인 $X$ 와 동일한 Shape을 가진다. 아래는 Concatenate 이후의 과정을 그림으로 나타낸 것이다.
+이렇게 나온 각각의 아웃풋 행렬 $Z_n (n=1,\cdots,7)$는 Concatenate되어 또 다른 파라미터 행렬인 $W^o$ 와의 내적을 통해 Multi-Head Attention의 최종 결과인 행렬 $Z$를 만들어냅니다. 여기서 행렬 $W^o$의 요소 역시 학습을 통해 갱신됩니다. 최종적으로 생성된 행렬 $Z$는 토큰 벡터로 이루어진 행렬 $X$와 동일한 크기(Shape)인 것을 볼 수 있습니다. 이렇게 출력된 행렬 $Z$는 이제 FFNN으로 넘어가게 됩니다. 아래는 이 과정을 그림으로 나타낸 것입니다.
 
 <p align="center"><img src="http://jalammar.github.io/images/t/transformer_attention_heads_weight_matrix_o.png" alt="transformer_17" style="zoom:67%;" /></p>
 
-<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Jay alammar Github</a></p>
+<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/illustrated-transformer/">jalammar.github.io</a></p>
 
-## Residual & Normalization
+## Residual Block
 
-Self-Attention층을 지난 아웃풋은 **Residual Block** 과 **Layer Normalization** 과정을 거치게 된다. Residual Block이란 Self-Attention을 통과한 아웃풋에 자기 자신을 더해주는 역할을 한다. 이렇게 더해주면 역전파 과정에서 그래디언트(Gradient)를 1이상으로 보존하여 기울기 소실(Gradient Vanishing) 때문에 발생하는 정보 유실을 막는 역할을 한다. 이런 방법은 컴퓨터 비전 분야 모델 중 하나인 ResNet에 사용된다. Residual Block을 지나면 Layer Normalization을 거치게 된다.
+Self-Attention층에서 출력된 행렬(벡터)이 FFNN층으로 가기 전에 Residual block과 Layer normalization과정을 거치게 됩니다. Residual Block이란 Self-Attention층을 통과한 출력 벡터에 원래의 입력 벡터를 더해주는 과정입니다. 이렇게 더해주면 역전파(Backpropagation)에서 그래디언트를 항상 1이상으로 유지하기 때문에 기울기 소실(Gradient vanishing)로 인한 정보 유실을 막을 수 있습니다. Computer vision분야의 Pretrained model 중 하나인 ResNet에서 Residual block을 사용하여 성능을 끌어올린 전례가 있습니다.
+
+<img src="https://miro.medium.com/max/570/1*D0F3UitQ2l5Q0Ak-tjEdJg.png" alt="res_block" style="zoom:80%;" />
+
+<p align="center" style="font-size:80%">이미지 출처 : <a href="https://towardsdatascience.com/residual-blocks-building-blocks-of-resnet-fd90ca15d6ec">towardsdatascience.com</a></p>
+
+Residual Block을 지나면 Layer Normalization을 거쳐 드디어 FFNN에 들어갑니다. 아래 그림은 Residual block(Add)과 Layer normalization과정이 인코더 블록의 Self-Attention과 FFNN 이후에 있음을 잘 보여주고 있습니다. 
 
 <p align="center"><img src="http://jalammar.github.io/images/t/transformer_resideual_layer_norm_2.png" alt="transformer_18" style="zoom: 67%;" /></p>
 
-<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Jay alammar Github</a></p>
-
-위 과정은 Self-Attention 층이 끝나는 위치 뿐만 아니라 각 인코더 블록의 FFNN층 이후, 디코더의 모든 하위 레이어 이후에 위치함으로서 정보를 보존하는 역할을 한다.
+<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/illustrated-transformer/">jalammar.github.io</a></p>
 
 ## FFNN
 
-Encoder에서 Self-Attention과 Residual & Normalization을 거친 벡터는 이제 Fully Connected **FFNN(Feed Forward Neural Networks)** 으로 들어가게 된다. 이전 이미지에서 볼 수 있듯 FFNN은 토큰마다 따로(Separately) 진행되기 때문에 병렬화가 가능하다. 하지만 같은 인코더 블록 내에 있는 FFNN들은 서로 동일한(Identically) 가중치를 적용하게 된다. FFNN에서 일어나는 계산은 아래와 같은 수식으로 나타낼 수 있다.
+Self-Attention과 Residual block을 마친 벡터는 FFNN(Feed forward neural network)로 들어오게 됩니다. 동일한 인코더 블록 내에 있는 FFNN들은 서로 동일한 가중치를 공유합니다. FFNN에서 일어나는 계산은 아래와 같은 수식에 근거하여 계산됩니다.
+
 
 
 $$
-FFN(x) = \max(0, xW_1 + b_1) W_2 +b_2
+FFNN(x) = \max(0, xW_1 + b_1) W_2 +b_2
 $$
 
 
-FFNN에서 일어나는 과정을 이미지로 나타내면 아래와 같다. 
+
+아래 그림은 FFNN 입력층(Input layer), 은닉층(Hidden layer), 출력층(Output layer)에서의 벡터를 그림으로 나타낸 것입니다. 512차원의 입력 벡터가 활성화 함수(Activation function)인 ReLU, 즉 $\max(0,\text{input})$을 지나 2048차원의 벡터가 된 뒤에 다시 512차원의 벡터로 출력되는 것을 볼 수 있습니다.
 
 ![ffnn_1](https://user-images.githubusercontent.com/45377884/86258473-d4cfef00-bbf5-11ea-86ce-4019c22178a3.png) 
 
-<p align="center" style="font-size:80%">이미지 출처 : <a href="https://github.com/pilsung-kang/text-analytics">Text-Analytics Github</a></p>
+<p align="center" style="font-size:80%">이미지 출처 : <a href="https://github.com/pilsung-kang/text-analytics">Text analytics 강의자료</a></p>
 
-512차원의 입력 벡터가 활성화 함수(Activation function)인 ReLU를 지나면 2048차원의 벡터가 되며 다음 연산에서는 다시 512차원의 출력 벡터로 변하게 된다.
+## Masked Self Attention
 
-## Masked Multi-Head Attention
+인코더 블록의 내부 구조를 모두 알아보았으니 이제는 디코더 블록의 내부 구조를 살펴볼 차례입니다. 디코더의 첫 번째 하위 레이어(Sub layer)는 인코더와 동일한 Self-Attention입니다. 하지만 디코더의 Self-Attention에는 특별한 조건이 하나 더 붙습니다. 디코더는 시퀀스를 출력하는 역할을 하기 때문에 등장하지 않은 단어에 대한 계산을 해서는 안됩니다.
 
-**Masked Multi-Head Attention** 은 디코더 블록 중 가장 첫 번째 하위 레이어에 적용되는 노래이다. 디코더는 시퀀스 자기 자신보다 뒤에 위치한 토큰에 대해서는 정보를 미리 알고 있으면 안된다. 때문에 해당 토큰 이전에 있는 토큰들에 대한 정보만 남기고 나머지는 마스킹(Masking)을 해준다.
+예를 들어 *"나는 학생이다.(I am a student)"*라는 문장을 번역하는데 디코더가 *"I am"* 뒤에 올 단어를 예측할 차례라고 합시다. 3번째 단어를 예측하는 데 뒤에 등장하는*"student"*를 보고 결정해서는 안된다는 이야기입니다. 이 때문에 디코더에서 Self-Attention을 계산할 때에는 예측하련느 토큰 이전에 있는 토큰에 대한 정보만 남기고 마스킹(Masking)을 해줍니다. 이런 이유 때문에 디코더의 Self-Attention은 특별히 **Masked Self-Attention**이라고 부릅니다.
+
+*"나는 학생이다.(I am a student)"*라는 문장을 번역하는데 *"I am"* 뒤에 올 단어를 예측할 차례라면 *"a", "student"*에 대한 정보는 얻을 수 없도록 가려버리는 것이지요. 아래는 인코더에서 수행하는 Self-Attention과 디코더에서 수행하는 Masked Self-Attention의 차이를 그림으로 나타낸 것입니다.
 
 <p align="center"><img src="http://jalammar.github.io/images/gpt2/self-attention-and-masked-self-attention.png" alt="transformer_19" style="zoom: 50%;" /></p>
 
-<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Jay alammar Github</a></p>
+<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/illustrated-transformer/">jalammar.github.io</a></p>
 
-Masked Multi-Head Attention 과정을 그림으로 나타내면 다음과 같다.
+그렇다면 어떻게 정보를 마스킹 해줄 수 있을까요? 아래는 위 그림에 있는 두 과정의 계산 차이를 나타낸 그림입니다. 아래 그림을 보며 설명을 이어가겠습니다.
 
 <p align="center"><img src="https://user-images.githubusercontent.com/45377884/86260921-e4046c00-bbf8-11ea-8c7c-f8b58b8b46e9.png" alt="masked_attn"/></p>
 
-<p align="center" style="font-size:80%">이미지 출처 : <a href="https://github.com/pilsung-kang/text-analytics">Text-Analytics Github</a></p>
+<p align="center" style="font-size:80%">이미지 출처 : <a href="https://github.com/pilsung-kang/text-analytics">Text analytics 강의자료</a></p>
 
-프로세싱 중인 토큰 이후에 토큰에 대해서는 $q \cdot k$ 의 값을 계산한 후 $-\infty$ 로 마스킹해준다. 이렇게 되면 마스킹된 부분은 소프트맥스를 해주었을 때 Score가 0이 되고 밸류 벡터가 아무런 영향을 미치지 못하게 된다. 
+위 그림을 보면 디코더에서 *"Thinking"*이라는 단어를 예측할 때에는 그 뒤에 있는 *"Machine"*이라는 단어의 쿼리-키 내적값 $q \cdot k$의 값을 $-\infty$로 만들어주는 것을 볼 수 있습니다. 이렇게 되면 마스킹된 부분은 소프트맥스 함수에 넣어주어도 그 값이 0이 되고, 이 때문에 밸류 벡터가 아무런 영향을 미치지 못하게 됩니다. 아래는 4개 입력 벡터에 대해 Masked Self-Attention이 작동하는 과정을 도식화한 그림입니다.
 
 <p align="center"><img src="http://jalammar.github.io/images/xlnet/masked-self-attention-2.png" alt="transformer_20" style="zoom: 50%;" /></p>
 
-<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Jay alammar Github</a></p>
+<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/illustrated-transformer/">jalammar.github.io</a></p>
 
-Masked Multi-Head Attention이 진행되는 전체 과정을 나타내면 다음과 같다.
+"robot must obey orders"라는 4단어로 이루어진 문장에 대해서 Masked Self-Attention을 수행하는 되는 전체 과정은 아래와 같이 진행됩니다. 
 
 <p align="center"><img src="http://jalammar.github.io/images/gpt2/transformer-decoder-attention-mask-dataset.png" alt="transformer_21" style="zoom: 50%;" /></p>
 
@@ -227,31 +258,31 @@ Masked Multi-Head Attention이 진행되는 전체 과정을 나타내면 다음
 
 <p align="center"><img src="http://jalammar.github.io/images/gpt2/transformer-attention-masked-scores-softmax.png" alt="transformer_23" style="zoom:50%;" /></p>
 
-<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Jay alammar Github</a></p>
+<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/illustrated-transformer/">jalammar.github.io</a></p>
 
 ## Encoder-Decoder Attention
 
-Masked Multi-Head Attention에서의 출력 벡터는 그 다음으로 **인코더-디코더 어텐션(Encoder-Decoder Attention)** 과정을 거치게 된다. 인코더를 지나온 벡터가 해당 키와 밸류를 가지고 각 디코더 블록의 Masked Multi-Head Attention 아웃풋과 Attention 메커니즘을 다시 한 번 수행한다. 
+Masked Self-Attention층의 출력 벡터는 인코더 블록에서와 동일하게 Residual block과 Layer normalization을 거친 뒤에 **인코더-디코더 Attention(Encoder-Decoder Attention)**과정을 거치게 됩니다. 이 층에서는 인코더의 마지막 블록에서 출력된 키, 밸류 행렬으로 Self-Attention 메커니즘을 한 번 더 수행합니다.
 
-![transformer_24](http://jalammar.github.io/images/t/transformer_decoding_2.gif)
+<p align="center"><img src="http://jalammar.github.io/images/t/transformer_decoding_2.gif" alt="transformer_24"  /></p>
 
-<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Jay alammar Github</a></p>
+<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/illustrated-transformer/">jalammar.github.io</a></p>
 
-## Final Linear and Softmax Layer
+## Linear & Softmax Layer
 
-트랜스포머 속 마지막 메커니즘은 최상단 층에 있는 **Linear & Softmax Layer** 이다. 리니어 레이어(Linear Layer)는 단순한 완전 연결(Fully Connected) 신경망이며 가장 마지막 디코더 블록의 출력 벡터를 로짓 벡터(Logit Vector)라고 불리는 훨씬 더 큰 벡터로 바꾸어 준다.
-
-그리고 소프트맥스 레이어는 이 로짓 벡터를 각 토큰의 확률(Probability)로 바꿔준다. 이 마지막 과정을 그림으로 나타내면 다음과 같다.
+모든 인코더와 디코더 블록을 거친 벡터는 최상단 층인 Linear 층과 소프트맥스 층을 차례대로 거칩니다. Linear 층은 단순한 완전 연결(Fully connected) 신경망이며 가장 마지막 디코더 블록의 출력 벡터를 로짓 벡터(Logit vector)로 변환해 줍니다. 그리고 소프트맥스 층에서는 이 로짓 벡터를 각 토큰이 위치할 확률로 바꾸어 줍니다. 이 과정을 그림으로 나타내면 아래와 같습니다.
 
 <p align="center"><img src="http://jalammar.github.io/images/t/transformer_decoder_output_softmax.png" alt="transformer_25" style="zoom: 80%;" /></p>
 
-<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Jay alammar Github</a></p>
+<p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/illustrated-transformer/">jalammar.github.io</a></p>
 
 
 
 ## Complexity & Performance
 
-각 레이어 타입 마다의 **복잡도(Complexity)** 를 비교하면 다음과 같다.
+### Complexity
+
+트랜스포머의 구조는 위에서 모두 살펴보았습니다. 그렇다면 이러한 트랜스포머 모델의 **복잡도(Complexity)**는 어떠한지 다른 신경망 구조와 비교하여 보도록 하겠습니다.
 
 | Layer Type                  | Complexity per Layer   | Sequential Operations | Maximum Path Length |
 | --------------------------- | ---------------------- | --------------------- | ------------------- |
@@ -260,16 +291,20 @@ Masked Multi-Head Attention에서의 출력 벡터는 그 다음으로 **인코�
 | Convolutional               | $O(k \cdot n \cdot d)$ | $O(1)$                | $O(\log_k (n))$     |
 | Self-Attention (restricted) | $O(r \cdot n \cdot d)$ | $O(1)$                | $O(n / r)$          |
 
-BLEU Score[^1]를 통해서 비교한 모델의 성능은 다음과 같다. 트랜스포머의 크기를 키운 Big 모델은 당시 SOTA(State-of-the-Art)를 기록하였으며 학습에 필요한 비용도 트랜스포머를 활용했을 때 가장 적은 것을 이전 모델보다 훨씬 더 줄어드는 것을 볼 수 있다.  
+Self-Attention 메커니즘은 Sequential하게 입력을 받지 않으므로 이 부분에서 RNN보다 복잡도 측면에서 유리한 것을 볼 수 있습니다.
+
+### Performance
+
+BLEU Score[^1]를 통해서 다른 모델과 비교한 트랜스포머의 성능은 다음과 같습니다. 트랜스포머의 크기를 키운 Big 모델은 BLEU 기준으로 당시 SOTA(State-of-the-art)를 기록하였습니다. 트랜스포머 모델이 이전의 방법을 사용하였을 때보다 더 적은 학습 비용을 필요로 하는 것도 볼 수 있습니다.
 
 <p align="center"><img src="https://user-images.githubusercontent.com/45377884/86265841-4c564c00-bbff-11ea-995a-c8049836a356.png" alt="trans_perform_1" style="zoom:67%;" /></p>
 
-<p align="center" style="font-size:80%">이미지 출처 : <a href="https://github.com/pilsung-kang/text-analytics">Text-Analytics Github</a></p>
+<p align="center" style="font-size:80%">이미지 출처 : <a href="https://arxiv.org/abs/1706.03762">Attention is all you need</a></p>
 
-또한 인코더-디코더 블록의 개수나 차원 등 다양한 하이퍼파라미터를 조정함에 따라 여러가지 변화된 트랜스포머의 형태가 있다. 이는 다음 이미지를 통해 확인할 수 있다. 
+게다가 논문에서는 입력 임베딩 벡터의 차원 $d_\text{model}$이나 Self-Attention 내부 쿼리-키-밸류 벡터의 차원인  $d_k$, 인코더(디코더) 블록의 개수인 $N$ 등을 변형시켜 가면서 측정한 성능을 PPL(Perplexity)와 BLEU 기준으로 보여주고 있습니다. 아래는 위와 같은 실험 내용에 대한 이미지입니다. 
 
 <p align="center"><img src="https://user-images.githubusercontent.com/45377884/86266384-1c5b7880-bc00-11ea-8c56-48405bbb625a.png" alt="trans_variation" style="zoom:67%;" /></p>
 
-<p align="center" style="font-size:80%">이미지 출처 : <a href="https://github.com/pilsung-kang/text-analytics">Text-Analytics Github</a></p>
+<p align="center" style="font-size:80%">이미지 출처 : <a href="https://arxiv.org/abs/1706.03762">Attention is all you need</a></p>
 
 [^1]: [김동화님 블로그](https://donghwa-kim.github.io/BLEU.html) 에 잘 정리되어 있다
