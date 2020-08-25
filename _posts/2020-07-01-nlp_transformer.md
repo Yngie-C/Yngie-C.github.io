@@ -21,7 +21,7 @@ Attention은 아이템으로 이루어진 시퀀스를 입력받아 시퀀스 RN
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/illustrated-transformer/">jalammar.github.io</a></p>
 
-트랜스포머도 Seq2Seq모델과 유사한 인코더(Encoder)-디코더(Decoder) 구조를 가지고 있습니다. 아래는 트랜스포머의 전체적인 구조를 나타내는 이미지입니다. 이전까지의 Seq2Seq를 도식화한 이미지와 매우 유사하지만 "Encoder**'s'**, Decoder**'s'**가 
+트랜스포머도 Seq2Seq모델과 유사한 인코더(Encoder)-디코더(Decoder) 구조를 가지고 있습니다. 아래는 트랜스포머의 전체적인 구조를 나타내는 이미지입니다. 이전까지의 Seq2Seq를 도식화한 이미지와 매우 유사하지만 "Encoder**'s'**, Decoder**'s'**가 다른 것을 확인할 수 있습니다.
 
 <p align="center"><img src="http://jalammar.github.io/images/t/The_transformer_encoders_decoders.png" alt="transformer_2" style="zoom:67%;" /></p>
 
