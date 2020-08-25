@@ -307,4 +307,4 @@ BLEU Score[^1]를 통해서 다른 모델과 비교한 트랜스포머의 성능
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://arxiv.org/abs/1706.03762">Attention is all you need</a></p>
 
-[^1]: [김동화님 블로그](https://donghwa-kim.github.io/BLEU.html) 에 잘 정리되어 있다
+[^1]: [김동화님 블로그](https://donghwa-kim.github.io/BLEU.html) 에 잘 정리되어 있습니다.
