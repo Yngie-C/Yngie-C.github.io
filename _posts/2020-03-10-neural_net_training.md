@@ -42,15 +42,12 @@ $$
 \text{Loss}_{CEE} = -\sum_k{y_k\log{\hat{y}_k}}
 $$
 
-
 교차 엔트로피 오차는 어떻게 작용할까요? 실제 레이블이 $\left[\begin{array}{ccccc}1 & 0 & 0 & 0 & 0\end{array}\right]$ 인 5개의 인스턴스에 대하여 3개의 분류기가 각각 다음과 같이 예측값을 내놓았다고 가정하겠습니다.
+
+
 $$
-\begin{aligned}
 \text{Classifier 1} : \left[\begin{array}{ccccc}1 & 0 & 0 & 0 & 0\end{array}\right]\\
-
-\text{Classifier 2} : \left[\begin{array}{ccccc}0 & 0 & 0 & 0 & 0\end{array}\right]\\
-
-\end{aligned}
+\text{Classifier 2} : \left[\begin{array}{ccccc}0 & 0 & 0 & 0 & 0\end{array}\right]
 $$
 이 때의 교차 엔트로피 오차를 구해보겠습니다. 실제로 $\log0 = -\infty$ 이므로 $0$ 대신 매우 작은 값인 $2^{-10}$을 대입하여 $\log 2^{-10^{10}} = -10^{10}$으로 대체하겠습니다. (실제로는 이 값보다 훨씬 더 작은 값을 나타냅니다)
 $$
