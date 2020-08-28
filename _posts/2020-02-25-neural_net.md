@@ -1,6 +1,6 @@
 ---
 1layout: post
-title: 2. 신경망(Neural Network)
+title: 신경망 (Neural Network)
 category: Deep Learning
 tag: Deep-Learning
 ---

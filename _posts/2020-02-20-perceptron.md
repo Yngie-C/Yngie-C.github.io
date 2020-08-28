@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 퍼셉트론(Perceptron)
+title: 퍼셉트론 (Perceptron)
 category: Deep Learning
 tag: Deep-Learning
 ---
