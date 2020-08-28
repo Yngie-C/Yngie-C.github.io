@@ -27,7 +27,7 @@ $$
 
 위 식에서 $\hat{y}_k$는 신경망의 출력값이며 $y_k$는 실제 레이블입니다. $k$는 데이터의 개수입니다. 아래는 각 인스턴스에 대해 MSE 오차를 시각화하여 나타낸 것입니다.
 
-<img src="https://cdn-media-1.freecodecamp.org/images/MNskFmGPKuQfMLdmpkT-X7-8w2cJXulP3683" alt="mse" style="zoom: 67%;" />
+<p align="center"><img src="https://cdn-media-1.freecodecamp.org/images/MNskFmGPKuQfMLdmpkT-X7-8w2cJXulP3683" alt="mse" style="zoom: 67%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://www.freecodecamp.org/news/machine-learning-mean-squared-error-regression-line-c7dde9a26b93/">freecodecamp.org</a></p>
 
@@ -63,7 +63,7 @@ L_2 &= -(1\cdot \log 2^{-10^{10}} + 0\cdot \log 2^{-10^{10}} + 0\cdot \log 2^{-1
 $$
 정답 레이블을 모두 맞춘 첫 번째 분류기의 교차 엔트로피 오차는 0이지만, 모두 맞추지 못한 두 번째 분류기의 교차 엔트로피 오차는 매우 큰 값이 나오는 것을 볼 수 있습니다. $0$으로 갈 때 급격하게 값이 $-\infty$로 발산하는 로그 함수의 특성을 사용하여 적절한 손실값이 나오도록 할 수 있습니다. 아래는 로그 함수의 그래프입니다.
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Binary_logarithm_plot_with_ticks.svg/1280px-Binary_logarithm_plot_with_ticks.svg.png" alt="log_func" style="zoom: 33%;" />
+<p align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Binary_logarithm_plot_with_ticks.svg/1280px-Binary_logarithm_plot_with_ticks.svg.png" alt="log_func" style="zoom: 33%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://en.wikipedia.org/wiki/Logarithm">wikipedia - Logarithm</a></p>
 
@@ -105,13 +105,13 @@ $$
 
 우리가 다루는 손실 함수는 모두 아래로 볼록(Convex, 컨벡스)함수 입니다. 아래로 볼록 함수가 어떻게 생겼는지는 아래의 그림을 통해서 살펴보겠습니다.
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/ConvexFunction.svg/1920px-ConvexFunction.svg.png" alt="convex" style="zoom:30%;" />
+<p align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/ConvexFunction.svg/1920px-ConvexFunction.svg.png" alt="convex" style="zoom:30%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://en.wikipedia.org/wiki/Convex_function">wikipedia - convex function</a></p>
 
 2차원에서 컨벡스 함수란 함수 $f(x)$ 위의 두 점 $(x_1, f(x_1)), (x_2, f(x_2))$ 을 잇는 직선 $g(x)$ 에 대하여 구간 $(x_1, x_2)$ 사이의 점 $x_m$ 에서 $f(x) < g(x)$ 를 만족하는 함수입니다. 이를 3차원으로 확장하면 다음과 같은 함수가 그려집니다.
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Grafico_3d_x2%2Bxy%2By2.png" alt="convex_3d" style="zoom: 67%;" />
+<p align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Grafico_3d_x2%2Bxy%2By2.png" alt="convex_3d" style="zoom: 67%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://en.wikipedia.org/wiki/Convex_function">wikipedia - convex function</a></p>
 
