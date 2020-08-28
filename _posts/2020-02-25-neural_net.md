@@ -1,23 +1,24 @@
 ---
-layout: post
-title: 2. 신경망(NeuralNet)
+1layout: post
+title: 2. 신경망(Neural Network)
 category: Deep Learning
 tag: Deep-Learning
 ---
 
 
 
-## 1) 신경망
+# Neural Network
 
-- **신경망** (Neural Net) : 퍼셉트론에서는 각자의 가중치를 직접 입력해주어야 하는 문제가 있었다. 신경망은 학습을 통해 적절한 가중치의 값을 스스로 찾아감으로서 이런 문제를 해결해준다. 신경망은 아래와 같이 생겼다. 가장 왼쪽 줄(빨간색)을 **입력층**[^1] 이라고 하고, 가장 오른쪽 줄(초록색)을 **출력층** 이라고 한다. 입력층과 출력층 사이의 층은 사람 눈에 보이지 않기 때문에 **은닉층** 이라고 한다. 
+퍼셉트론(Perceptron)에서는 게이트를 만들어 주기 위해서 게이트 마다의 가중치를 직접 입력해주어야 하는 어려움이 있었습니다. **신경망(Neural Net)**은 수동으로 파라미터를 입력해주지 않아도 알아서 파라미터를 결정할 수 있도록 하는 장치입니다.
 
-<p align="center">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Colored_neural_network.svg/800px-Colored_neural_network.svg.png" alt="NeuralNet" style="zoom:40%;" />
-</p>
+신경망의 구조는 아래 그림과 같습니다.
 
+<p align="center"><img src="https://i.imgur.com/McMOhuQ.png" alt="NeuralNet" style="zoom:80%;" /></p>
 
+<p align="center" style="font-size:80%">이미지 출처 : <a href="https://www.kdnuggets.com/2017/10/neural-network-foundations-explained-gradient-descent.html">kdnuggets.com</a></p>
 
-- 이전 게시물에서 입력 신호가 2개인 퍼셉트론의 동작을 수식으로 표현했던 것이다.
+퍼셉트론의 수식을 다시 떠올려 보겠습니다. 아래는 2개의 입력값 $x_1, x_2$을 받는 퍼셉트론을 수식으로 나타낸 것입니다. $w_1, w_2$는 각 입력값에 곱해지는 가중치이며 $b$는 편향(Bias)입니다.
+
 
 $$
 y = \begin{cases} 0 \qquad (b + w_1x_1 + w_2x_2 \leq 0) \\
@@ -26,188 +27,143 @@ $$
 
 
 
-- 이를 함수 $h(x)$ 를 써서 나타내면 다음과 같이 나타낼 수 있다.
-
+이를 함수 $h(x)$를 사용하면 다음과 같이 나타낼 수 있습니다. 
 $$
 y = h(b + w_1x_1 + w_2x_2) \\
 h(x) = \begin{cases} 0 \qquad (x \leq 0) \\
 1 \qquad (x > 0) \end{cases}
 $$
 
-여기서 $h(x)$ 는 **활성화 함수** (Activation Function)라고 하며, 신호의 총합이 활성화를 일으키는지를 정하는 역할을 한다.  가중치 신호를 모두 더하여 $(\sum)$ 활성화 함수로 주입하면 새로운 값이 반환된다. 
+여기서 $h(x)$는 **활성화 함수(Activation function)**라고 하며, 신호의 총합이 활성화를 일으키는지를 정하는 역할을 합니다. 가중치 신호를 모두 더하여 활성화 함수로 주입하면 임계값과 비교하여 출력값이 반환됩니다. 아래는 이 과정을 나타낸 것입니다. 
 
-<p align="center"><img src="https://t1.daumcdn.net/cfile/tistory/23019334560370B611" alt="activation f" style="zoom:70%;" /></p>
+<p align="center"><img src="https://www.i2tutorials.com/wp-content/media/2019/09/Deep-learning-20-i2tutorials.png" alt="activation f" style="zoom:80%;" /></p>
 
+<p align="center" style="font-size:80%">이미지 출처 : <a href="https://www.i2tutorials.com/explain-activation-function-in-neural-network-and-its-types/">i2tutorials.com</a></p>
 
-<br/>
+## Activation Function
 
-## 2) 활성화 함수
+###  Step Function
 
-- **시그모이드(Sigmoid) 함수**
+활성화 함수는 신경망의 행동을 결정하는 중요한 역할을 합니다. 위에서 나타낸 것처럼 임계값을 기준으로 출력값이 $0-1$ 로 변하는 함수를 **계단 함수(Step function)**라고 합니다. 계단 함수의 그래프는 다음과 같이 생겼습니다.
 
-  - 먼저, 수식으로 시그모이드 함수를 만나보자.
+<p align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Dirac_distribution_CDF.svg/1280px-Dirac_distribution_CDF.svg.png" alt="step_function" style="zoom: 33%;" /></p>
 
-  $$
-  h(x) = \frac{1}{1 + \exp(-x)}
-  $$
-  
-  신경망에서는 활성화 함수로 위 식으로 구성된 시그모이드 함수를 이용하여 신호를 변환한다. 그리고 변환된 신호를 다음 뉴런에 전달하게 된다.
+<p align="center" style="font-size:80%">이미지 출처 : <a href="https://en.wikipedia.org/wiki/Heaviside_step_function">wikipedia - Heaviside step function</a></p>
 
+계단 함수는 직관적으로 이해할 수 있는 활성화 함수지만 불연속이라는 단점이 있습니다. 신경망에서는 학습을 위해 미분을 해야하는데 계단 함수는 임계값 지점에서 미분이 불가능할 뿐더러, 다른 지점에서는 미분값이 $0$이 되어 학습을 할 수 없게 됩니다. 이런 한계점을 해결하기 위해서 등장한 것이 **시그모이드 함수(Sigmoid)**입니다.
 
+### Sigmoid Function
 
-- **계단 함수 구현하기**
+시그모이드 함수는 기본적으로 $S$ 모양을 그리는 곡선 함수를 통칭하여 부르는 말이며 대표적인 함수는 로지스틱(Logistic) 함수와 하이퍼탄젠트(Hyper tangent, $\tanh$) 함수가 있습니다. 두 함수의 그래프를 보며 시그모이드 함수가 계단 함수가 다른 점이 무엇인지 알아보도록 하겠습니다.
 
-  - 퍼셉트론에서 구현했던 것과 같이 입력이 0을 넘으면 1을 출력하고, 그 외에는 0을 출력하는 함수를 파이썬 코드로 구현하면 다음과 같다.
+<p align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/1920px-Logistic-curve.svg.png" alt="logistic" style="zoom: 25%;" /></p>
 
-  ```python
-  def step_function(x):
-      if x > 0:
-          return 1
-      else:
-          return 0
-  ```
+<p align="center" style="font-size:80%">이미지 출처 : <a href="https://en.wikipedia.org/wiki/Logistic_function">wikipedia - Logistic function</a></p>
 
-  하지만 위의 코드는 $x$ 자리에 실수만 가능하고, Numpy 배열 등은 넣을 수 없다. 이런 문제를 해결하기 위해 다음과 같은 코드를 사용한다.
+<p align="center"><img src="https://mathworld.wolfram.com/images/interactive/TanhReal.gif" alt="hyper" style="zoom:110%;" /></p>
 
-  ```python
-  def step_function(x):
-      y = x > 0
-      return y.astype(np.int)
-  ```
+<p align="center" style="font-size:80%">이미지 출처 : <a href="https://mathworld.wolfram.com/HyperbolicTangent.html">mathworld.wolfram.com</a></p>
 
-  위 함수에서는 `x > 0` 조건에 따라 `y` 에 bool, 즉 `True or False ` 값이 할당된다. 그리고 이를 int로 바꾸어 반환한다. 계단 함수의 그래프는 아래와 같다.
+두 함수는 계단 함수의 단점이었던 불연속을 해결했습니다. 계단 함수와 시그모이드 함수의 공통점은 **비선형 함수(Non-linear)**라는 점입니다. 활성화 함수는 비선형 함수를 사용해야 합니다. 활성화 함수가 선형 함수이면 안되는 이유는 무엇일까요? 선형인 활성화 함수 $l(x) = ax + b$ 가 있다고 해보겠습니다. 이런 활성화 함수를 사용하여 3개의 층을 반복해서 쌓는다면 최종적인 활성화 함수는 $l(l(l(x))) = l^3(x) = a(a(ax+b)+b)+b = a^3x+a^2b+ab+b$가 됩니다. $a^3 = c, d = a^2b+ab+b$라고 하면 $l^3(x) = cx+d$로 여전히 같은 형태의 함수를 사용하는 것과 같기 때문에 층을 깊게 쌓는 의미가 없게 됩니다.
 
-  <p align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Dirac_distribution_CDF.svg/1280px-Dirac_distribution_CDF.svg.png" alt="step_function" style="zoom:30%;" /></p>
+로지스틱 함수와 하이퍼탄젠트 함수의 수식은 다음과 같습니다.
 
-- 이어서 시그모이드 함수를 파이썬 코드로 구현하면 아래와 같고, 이를 그래프로 그려보면 그 아래와 같은 결과를 얻을 수 있다. 
-  
-```python
-  def sigmoid(x):
-      return 1 / (1+np.exp(-x))
-```
-
-![sigmoid](https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/480px-Logistic-curve.svg.png)
-
-
-
-- **비선형 함수** : 계단 함수와 시그모이드 함수의 공통점은 비선형이라는 것이다. 계단 함수는 구부러진 형태로 나타나며, 시그모이드 함수는 곡선의 형태로 그려지기 때문. 신경망의 활성화 함수는 비선형의 형태여야 한다. 선형일 경우에는 신경망의 층을 깊게 하는 의미가 사라지기 때문이다. $l(x) = ax+b$ 형태의 선형 함수를 층을 쌓아 계속( $l(l(l(x)))$ 의 형태로)반복한다고 하더라도 함수의 형태는 그대로이다.
-
-
-
-- **ReLU 함수** : Sigmoid의 단점인 [Vanishing Gradient Problem](https://brunch.co.kr/@chris-song/39) 을 해결하고자 나온 활성화 함수이다. (링크의 글에서는 Leaky ReLU 까지 다루고 있다.) ReLU 함수는 입력값이 0보다 작을 경우 0을 반환하고, 0보다 클 경우에는 입력값을 그대로 반환한다. 아래는 ReLU 함수를 수식으로 나타낸 것이고, 그 아래는 ReLU 함수를 그래프로 나타낸 것이다.
-  $$
-  h(x) = \begin{cases} 0 \qquad (x \leq 0) \\
-  x \qquad (x > 0) \end{cases}
-  $$
-  
-  
-  ![ReLU](https://t1.daumcdn.net/cfile/tistory/2238DC3558D62AF732)
-  
-  다음은 ReLU 함수를 파이썬 코드로 구현한 것이다.
-  
-  ```python
-  def relu(x):
-      return np.maximum(0,x)
-  ```
-  
-  
-
-<br/>
-
-## 3) 다차원 배열의 계산
-
-- Numpy 기본에 대한 내용은 본 블로그의 [Numpy](https://yngie-c.github.io/python/2020/01/29/numpy/) 에서 확인할 수 있으며, 구글링을 통해서 더 자세하고 많은 정보를 얻을 수 있다.
-
-<br/>
-
-## 4) 3층 신경망 구현하기
-
-- 표기법 설명 : 이번 장에 등장하는 가중치 표기들 중 위첨자로 표기된 $^{(k)}$ 는 $k$ 층의 가중치를 나타낸다. 그리고 아래첨자로 표기된 두개의 숫자 $_{mn}$ 은 이전 층의 $m$ 번째 뉴런에서 다음 층의 $n$ 번째 뉴런으로 전달하는 신호의 가중치임을 나타낸다. 예를 들어 $w^{(1)}_{21}$ 라는 표기가 있을 경우 1층의 가중치이며, 1층의 2번째 뉴런에서 2층의 1번째 뉴런으로 전달하는 것임을 나타낸다.
-
-
-
-- 각 층의 신호전달 구현하기 : 가중치 신호 2개와 편향으로부터 전달받은 신호의 노드를 $a$ 라 하면
 
 $$
-a_{1}^{(1)} = w^{(1)}_{11}x_1 + w^{(1)}_{21}x_2 + b^{(1)}_{1}
+\begin{aligned}
+\text{Logistic} &: \frac{1}{1+e^{-x}} \\
+\text{Hypertangent} &: \frac{e^x-e^{-x}}{e^x+e^{-x}} = \frac{e^{2x}-1}{e^{2x}+1}
+\end{aligned}
 $$
 
-이고, 위 식을 행렬식으로 나타내면 다음과 같다.
+
+### ReLU Function
+
+시그모이드 함수 역시 한계점을 가지고 있습니다. 문제는 **기울기 소실(Gradient vanishing)**입니다. 기울기 소실은 시그모이드 함수를 활성화 함수로 사용하여 층을 깊게 쌓았을 때 학습이 잘 되지 않는 현상입니다. 이런 현상이 왜 발생하는지 알아보겠습니다.
+
+우선 로지스틱 함수 $L(x)$를 미분한 함수의 수식에 대해서 알아보겠습니다.
+
+
 $$
-\mathbf{A}^{(1)} = \mathbf{X}\mathbf{W}^{(1)} + \mathbf{B}^{(1)}
+L^\prime(x) = \bigg(\frac{1}{1+e^{-x}}\bigg)^\prime = \frac{e^x}{(1+e^{-x})^2}
 $$
 
-> $\mathbf{A}^{(1)} = (a_{1}^{(1)} \quad a_{1}^{(1)} \quad a_{1}^{(1)}), \quad \mathbf{X} = (x_1 \quad x_2), \quad \mathbf{B}^{(1)} = (b_{1}^{(1)}\quad b_{2}^{(1)} \quad b_{3}^{(1)})$ 
->
-> $\mathbf{W}^{(1)} = \begin{pmatrix} w^{(1)}_{11} w^{(1)}_{21} w^{(1)}_{31} \\ w^{(1)}_{12} w^{(1)}_{22} w^{(1)}_{32} \end{pmatrix}$
 
-위의 행렬식을 구현하는 파이썬 코드는 다음과 같다. 각 신호와 가중치의 값은 책에 있는 것을 그대로 사용하였다. 구해진 값에 활성화 함수(여기서는 시그모이드)를 취해주면 새로운 층의 신호행렬 $Z^{(1)}$ 을 얻을 수 있다.
+위 함수의 그래프는 아래와 같이 생겼습니다.
 
-```python
-X = np.array([1.0, 0.5])
-W1 = np.array([[0.1, 0.3, 0.5], [0.2, 0.4, 0.6]])
-B1 = np.array([0.1, 0.2, 0.3])
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/91560184-5d5bd900-e974-11ea-8c02-2a182c6a7c93.png" alt="logistic_deri" style="zoom:67%;" /></p>
 
-A1 = np.dot(X, W1) + B1
+위 함수는 최댓값이 0.25밖에 되지 않고 $x$가 5보다 크거나 -5보다 작을 때는 거의 0에 가깝습니다. 최댓값이 1보다 작으면 추후 오차 역전파(Backpropagation)를 통해 정보를 전달하는 과정에서 정보가 유실됩니다. 특히 층을 깊게 쌓는다면 정보가 거의 모두 유실되는 사태가 발생합니다.
 
-Z1 = sigmoid(A1)
-```
-
-은닉층에서는 위와 같은 과정을 반복하여 신호를 전달하며, 마지막 출력층에서만 분류나 회귀에 맞는 활성화 함수를 사용한다.
+하이퍼탄젠트 함수는 어떻게 될까요? 하이퍼탄젠트 함수 $\tanh$를 미분한 함수의 수식은 다음과 같습니다.
 
 
+$$
+\tanh^\prime(x) = \bigg(\frac{e^x-e^{-x}}{e^x+e^{-x}}\bigg)^\prime = \frac{4e^{2x}}{(1+e^{2x})^2}
+$$
 
-<br/>
 
-## 5) 출력층 설계하기
+위 함수의 그래프는 아래와 같이 생겼습니다.
 
-대개 출력층에서의 활성화 함수로 회귀에서는 (자기 자신을 그대로 출력하는) 항등 함수를, (다중 레이블) 분류에서는 소프트맥스 함수를 사용한다.   
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/91560164-52a14400-e974-11ea-8bf4-bbfc7fd42deb.png" alt="hypertangent_deri" style="zoom: 67%;" /></p>
 
-- **소프트맥스(softmax)** 함수 : 소프트맥스 함수를 수식으로 표현하면 아래와 같고, 그 아래는 소프트맥스 함수를 파이썬 코드로 구현한 것이다.
+함수의 최댓값이 높아져 $x=0$ 에서의 미분값이 1로 증가하였습니다. 덕분에 로지스틱 함수 보다는 정보를 잘 전달합니다 (이런 이유 때문에 RNN에서는 활성화 함수로 $\tanh$ 함수를 사용합니다). 하지만 여전히 $x$가 0에서 멀어질수록 미분값이 0에 가까워지기 때문에 정보를 제대로 전달할 수 없게 됩니다. 실제로 $0.5$만큼을 전달하는 3층으로 전달하더라도 $0.5^3 = 0.125$ 밖에 되지 않습니다. 이렇게 시그모이드 함수를 활성화 함수로 사용할 때 역전파시 학습이 제대로 진행되지 않는 현상을 **기울기 소실**이라고 합니다.
+
+기울기 소실 문제를 극복하기 위해서 등장한 함수가 바로 **ReLU(Rectified Linear Unit)함수**입니다. ReLU함수는 입력값이 0보다 작을 경우에는 0을 반환하고, 0보다 클 경우에는 입력값을 그대로 반환합니다. 아래는 ReLU함수를 수식으로 나타낸 것입니다.
+$$
+h(x) = \begin{cases} 0 \qquad (x \leq 0) \\
+x \qquad (x > 0) \end{cases}
+$$
+
+아래는 ReLU함수의 그래프를 나타낸 것입니다.
+
+<p align="center"><img src="https://miro.medium.com/max/1225/0*g9ypL5M3k-f7EW85.png" alt="ReLU" style="zoom:50%;" /></p>
+
+<p align="center" style="font-size:80%">이미지 출처 : <a href="https://medium.com/@sonish.sivarajkumar/relu-most-popular-activation-function-for-deep-neural-networks-10160af37dda">medium.com</a></p>
+
+ReLU함수는 $x$가 0보다 클 때는 항상 미분값이 1이 되므로 층이 깊어지더라도 층 사이에 정보를 그대로 넘겨줄 수 있게 됩니다. 게다가 미분값이 항상 0과 1로 나와 복잡하지 않기 때문에 연산을 빠르게 할 수 있다는 점도 ReLU함수의 장점입니다. ReLU함수는 이런 장점 덕분에 은닉층에서 가장 많이 사용되는 활성화 함수가 되었습니다. 물론 ReLU함수에게도 0이하의 값이 그대로 보존되지 않고 버려지는 문제가 있습니다. 이를 보완하기 위한 Leaky ReLU함수로 고안되어 사용되고 있습니다. Leaky ReLU함수 $h_\text{Leaky}(x)$의 수식은 다음과 같습니다.
+
+
+$$
+h_\text{Leaky}(x) = \begin{cases} ax \qquad (x \leq 0) \\
+x \qquad (x > 0) \end{cases}
+$$
+
+
+위 수식에서 일반적으로 $a=0.01$을 사용하며, 그래프는 다음과 같이 그릴 수 있습니다.
+
+<p align="center"><img src="https://miro.medium.com/max/1225/1*siH_yCvYJ9rqWSUYeDBiRA.png" alt="leaky" style="zoom:50%;" /></p>
+
+<p align="center" style="font-size:80%">이미지 출처 : <a href="https://medium.com/@himanshuxd/activation-functions-sigmoid-relu-leaky-relu-and-softmax-basics-for-neural-networks-and-deep-8d9c70eed91e">medium.com</a></p>
+
+### Softmax
+
+은닉층(Hidden Layer)의 활성화 함수로는 일반적으로 ReLU함수 혹은 Leaky ReLU와 같은 ReLU함수를 변형한 함수가 주로 사용됩니다. 하지만 출력층의 활성화 함수는 우리가 하고자 하는 작업에 맞게 조정해주어야 합니다. 일반적으로 회귀( Regression), 즉 연속형 변수에 대한 예측값을 출력하는 경우에는 활성화 함수로 항등함수 $h_\text{reg}(x) = x$ 를 사용합니다.
+
+이진 분류의 경우에는 입력값을 받아 $0$ 혹은 $1$ 의 값을 출력하는 것이므로 주로 로지스틱 함수를 많이 사용합니다. 그렇다면 인스턴스를 다중 레이블로 분류하는 경우에는 어떤 활성화 함수를 사용하는 것이 좋을까요? 이런 질문에 대한 답으로 나온 것이 바로 소프트맥스(Softmax) 함수입니다. 소프트맥스 함수는 이진 분류에서 사용하는 로지스틱 함수를 다중 분류에서 사용할 수 있도록 일반화한 함수입니다. 소프트맥스의 함수는 다음과 같습니다.
+
 
 $$
 y_k = \frac{\exp(a_k)}{\sum^n_{i=1}\exp(a_i)}
 $$
 
 
+소프트맥스도 함수도 사용할 때 주의해야 할 점이 있습니다. 소프트맥스 함수가 지수함수이기 때문에 $a$ 값이 커지게 되면 $\exp(a)$ 값이 매우 커지게 됩니다. `__int32`가 최대로 나타낼 수 있는 숫자는 $2,147,483,647$ 입니다 $a = 22$ 만 되더라도 표현할 수 있는 값 이상이 되어 오버플로(Overflow)현상이 발생합니다. 또한 부동소수점 표기 특성상, 작은 숫자를 큰 값으로 나누면 수치가 불안정해지는 문제도 발생하게 됩니다.
 
-```python
-def softmax(a):
-	exp_a = np.exp(a)
-	sum_exp_a = np.sum(exp_a)
-	y = exp_a / sum_exp_a
-    
-    return y
-```
+이런 문제를 해결하기 위해서 실제로 소프트맥스 함수를 사용하기 위해서는 상수 $C$를 곱해주어 스케일을 조정해주는 과정이 필요합니다. 실제로 구현되어 있는 소프트맥스 함수의 수식은 아래와 같습니다.
 
 
-
-- 소프트맥스 함수 구현 시 주의점 : 소프트맥스 함수가 지수함수이기 때문에 $a$ 값에 따라서 결과값이 매우 커지는 오버플로(overflow) 문제가 발생한다. 컴퓨터는 큰 값으로 나눌 때, 수치가 불안정해지므로 이런 오버플로 문제를 해결해주어야 한다. 아래는 이를 해결하기 위한 수식이다.
 
 $$
-y_k = \frac{\exp(a_k)}{\sum^n_{i=1}\exp(a_k)} = \frac{C\exp(a_k)}{C\sum^n_{i=1}\exp(a_k)} \\ = \frac{\exp(a_k +\log C)}{\sum^n_{i=1}\exp(a_k + \log C)} = \frac{\exp(a_k +C^\prime)}{\sum^n_{i=1}\exp(a_k + C^\prime)}
+\begin{aligned}
+y_k &= \frac{\exp(a_k)}{\sum^n_{i=1}\exp(a_i)} = \frac{C\exp(a_k)}{C\sum^n_{i=1}\exp(a_i)} \\
+&= \frac{\exp(a_k +\log C)}{\sum^n_{i=1}\exp(a_i + \log C)} \\
+&= \frac{\exp(a_k +C^\prime)}{\sum^n_{i=1}\exp(a_i + C^\prime)}
+\end{aligned}
 $$
 
-> 여기서 $C^\prime$ 은 어떤 값이든 상관 없지만 오버플로를 막기 위해서는 일반적으로 입력 신호 중 최댓값(절댓값이 가장 큰 것)을 입력한다.
-
-위의 수식을 파이썬 코드로 옮기면 다음과 같이 쓸 수 있다.
-
-```python
-def softmax(a):
-    c = np.max(a)
-	exp_a = np.exp(a - c)
-	sum_exp_a = np.sum(exp_a)
-	y = exp_a / sum_exp_a
-    
-    return y
-```
-
-소프트맥스 함수의 출력값을 모두 더하면 1이 되며, 이 때문에 출력값을 확률로도 해석할 수 있다.
 
 
+위 식에서 $C^\prime = \log C$로, $C^\prime$에는 0보다 작은 값이면 어떤 값을 대입하든 상관 없지만 오버플로를 막기 위해서 일반적으로 $a_i \{i=1, \cdots ,n\}$ 중 가장 큰 값에 $-1$ 을 곱해준 값을 사용합니다. 예를 들어, $a_i = [1000, 1050, 1100]$이면 $C^\prime = -1100$ 이 됩니다.
 
-- 출력층의 뉴런 수 정하기 : 출력층의 뉴런 수는 무넺에 맞게 적절히 정해야 한다.
-
-
-
-[^1]: 입력층의 경우 따로 명시하지 않는다는 의견도 있다. 
+소프트맥스 함수의 출력값은 항상 $[0,1]$ 범위 내에 있으며 모든 출력값을 더한 값이 1이 되는, 즉 $\sum^n_{i=1}y_i = 1$ 인 특징이 있습니다. 이런 성질 덕분에 소프트맥스의 출력값을 확률(Probability)로도 해석할 수 있으며 다중 레이블에 대한 확률이 필요한 경우에 소프트맥스 함수를 사용하기도 합니다.
