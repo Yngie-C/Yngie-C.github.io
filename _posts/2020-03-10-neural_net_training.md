@@ -49,7 +49,11 @@ $$
 \text{Classifier 1} : \left[\begin{array}{ccccc}1 & 0 & 0 & 0 & 0\end{array}\right]\\
 \text{Classifier 2} : \left[\begin{array}{ccccc}0 & 0 & 0 & 0 & 0\end{array}\right]
 $$
+
+
 이 때의 교차 엔트로피 오차를 구해보겠습니다. 실제로 $\log0 = -\infty$ 이므로 $0$ 대신 매우 작은 값인 $2^{-10}$을 대입하여 $\log 2^{-10^{10}} = -10^{10}$으로 대체하겠습니다. (실제로는 이 값보다 훨씬 더 작은 값을 나타냅니다)
+
+
 $$
 \begin{aligned}
 L_1 &= -(1\log1 + 0\cdot \log 2^{-10^{10}} + 0\cdot \log 2^{-10^{10}} + 0\cdot \log 2^{-10^{10}} + 0\cdot \log 2^{-10^{10}}) \\
@@ -58,6 +62,8 @@ L_2 &= -(1\cdot \log 2^{-10^{10}} + 0\cdot \log 2^{-10^{10}} + 0\cdot \log 2^{-1
 & = - (1\cdot -10^{10} + 0\cdot -10^{10} +0\cdot -10^{10}+0\cdot -10^{10}+0\cdot -10^{10})= 10^{10}
 \end{aligned}
 $$
+
+
 정답 레이블을 모두 맞춘 첫 번째 분류기의 교차 엔트로피 오차는 0이지만, 모두 맞추지 못한 두 번째 분류기의 교차 엔트로피 오차는 매우 큰 값이 나오는 것을 볼 수 있습니다. $0$으로 갈 때 급격하게 값이 $-\infty$로 발산하는 로그 함수의 특성을 사용하여 적절한 손실값이 나오도록 할 수 있습니다. 아래는 로그 함수의 그래프입니다.
 
 <p align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Binary_logarithm_plot_with_ticks.svg/1280px-Binary_logarithm_plot_with_ticks.svg.png" alt="log_func" style="zoom: 33%;" /></p>
