@@ -1,6 +1,6 @@
 ---
 1layout: post
-title: 신경망 (Neural Network)
+title: 신경망 (Neural Network)과 활성화 함수 (Activation Function)
 category: Deep Learning
 tag: Deep-Learning
 ---
@@ -27,12 +27,16 @@ $$
 
 
 
-이를 함수 $h(x)$를 사용하면 다음과 같이 나타낼 수 있습니다. 
+이를 함수 $h(x)$를 사용하면 다음과 같이 나타낼 수 있습니다.
+
+
 $$
 y = h(b + w_1x_1 + w_2x_2) \\
 h(x) = \begin{cases} 0 \qquad (x \leq 0) \\
 1 \qquad (x > 0) \end{cases}
 $$
+
+
 
 여기서 $h(x)$는 **활성화 함수(Activation function)**라고 하며, 신호의 총합이 활성화를 일으키는지를 정하는 역할을 합니다. 가중치 신호를 모두 더하여 활성화 함수로 주입하면 임계값과 비교하여 출력값이 반환됩니다. 아래는 이 과정을 나타낸 것입니다. 
 
