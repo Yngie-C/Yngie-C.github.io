@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 옵티마이저(Optimizer)와 가중치 초기화(Parameter Initialization)
+title: 옵티마이저(Optimizer)
 category: Deep Learning
 tag: Deep-Learning
 ---
@@ -19,7 +19,7 @@ tag: Deep-Learning
 
 
 
-<img src="https://user-images.githubusercontent.com/45377884/91630397-18838100-ea0c-11ea-8f90-515ef74599f1.png" alt="optimizer" style="zoom: 50%;" />
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/91630397-18838100-ea0c-11ea-8f90-515ef74599f1.png" alt="optimizer" style="zoom: 50%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://www.slideshare.net/yongho/ss-79607172?from_action=save">slideshare.net/yongho</a></p>
 
@@ -35,7 +35,7 @@ tag: Deep-Learning
 
 확률적 경사 하강법에서는 주어진 데이터셋에서 하나의 데이터를 선택하여 스텝을 나갈 때마다 이 데이터를 기준으로 경사 하강법으로 개선해나갑니다. 파라미터를 개선할 때마다 다른 데이터가 선택됩니다. 매번 하나의 인스턴스만을 선택하여 학습하기 때문에 일반적인 경사하강법 보다는 학습 속도가 훨씬 빠르다는 장점이 있습니다. 하지만 선택된 데이터가 경향성을 벗어나는 경우에는 오차가 급격히 증가하며 이 때문에 학습이 불안정하다는 단점을 가지고 있습니다. 아래는 경사 하강법과 확률적 경사 하강법을 표현한 그림입니다.
 
-![sgd](https://1.bp.blogspot.com/-KX6skkRmUvE/W9_DjB0XLSI/AAAAAAAAGoY/ccvrYtO_3HQZhU_U084XY_uAnfQ5QbumACLcBGAs/s1600/Screen%2BShot%2B2018-11-04%2Bat%2B6.16.45%2BPM.png)
+<p align="center"><img src="https://1.bp.blogspot.com/-KX6skkRmUvE/W9_DjB0XLSI/AAAAAAAAGoY/ccvrYtO_3HQZhU_U084XY_uAnfQ5QbumACLcBGAs/s1600/Screen%2BShot%2B2018-11-04%2Bat%2B6.16.45%2BPM.png" alt="sgd"  /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="http://ankit-ai.blogspot.com/2018/11/optimization-algorithms-for-machine.html">ankit-ai.blogspot.com</a></p>
 
@@ -69,7 +69,7 @@ $$
 
 아래는 비등방성 함수에서 일반적인 확률적 경사 하강법과 모멘텀을 적용한 확률적 경사 하강법으로 최저점을 탐색하는 과정을 도식화한 이미지입니다.
 
-![momentum](https://www.researchgate.net/publication/333469047/figure/fig1/AS:764105438793728@1559188341202/The-compare-of-the-SGD-algorithms-with-and-without-momentum-Take-Task-1-as-example-The.png)
+<p align="center"><img src="https://www.researchgate.net/publication/333469047/figure/fig1/AS:764105438793728@1559188341202/The-compare-of-the-SGD-algorithms-with-and-without-momentum-Take-Task-1-as-example-The.png" alt="momentum" style="zoom:80%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://www.researchgate.net/figure/The-compare-of-the-SGD-algorithms-with-and-without-momentum-Take-Task-1-as-example-The_fig1_333469047">researchgate.net</a></p>
 
@@ -158,7 +158,7 @@ $$
 $$
 E[g^2]_t = \gamma E[g^2]_{t-1} + (1-\gamma)g^2_t
 $$
- 
+
 
 Adagrad의 수식을 먼저 써보고 Adadelta가 어떤 방식으로 이를 개선하는지 알아보겠습니다. 위에서 살펴본 Adagrad의 수식은 아래와 같았습니다.
 
@@ -237,9 +237,9 @@ $$
 
 아래는 다양한 모양의 손실 함수에서 지금까지 알아본 옵티마이저가 최적화하는 방향과 속도를 나타낸 것입니다.
 
-![comparison1](https://rnrahman.com/img/visualising-optim/saddle.gif)
+<p align="center"><img src="https://rnrahman.com/img/visualising-optim/saddle.gif" alt="comparison1"  /></p>
 
-![comparison2](https://rnrahman.com/img/visualising-optim/beale.gif)
+<p align="center"><img src="https://rnrahman.com/img/visualising-optim/beale.gif" alt="comparison2"  /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://rnrahman.com/blog/visualising-stochastic-optimisers/">rnrahman.com/blog</a></p>
 
