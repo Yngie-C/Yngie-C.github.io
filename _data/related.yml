@@ -1,7 +1,7 @@
-# - post: overview
-#   related:
-#   - decision_tree
-#   - Linear_reg
-#   - Logistic_Regression
-#   - training_test_reg
-#   - val_eval
+- post: overview
+  related:
+  - decision_tree
+  - Linear_reg
+  - Logistic_Regression
+  - training_test_reg
+  - val_eval
