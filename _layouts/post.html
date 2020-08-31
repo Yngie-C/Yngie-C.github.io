@@ -32,12 +32,12 @@ layout: default
             {% for p in site.posts %}
               {% if p.slug == pslug %}
                 <li>
-                  <h3>
+                  <h4>
                     <a href="{{ site.baseurl }}{{ p.url }}">
                       {{ p.title }}
                       <small>{{ p.date | date_to_string }}</small>
                     </a>
-                  </h3>
+                  </h4>
                 </li>
               {% endif %}
             {% endfor %}
