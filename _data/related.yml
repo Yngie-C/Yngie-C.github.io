@@ -5,3 +5,18 @@
   - Logistic_Regression
   - training_test_reg
   - val_eval
+- post: rule_based
+  related:
+  - decision_tree
+  - Linear_reg
+  - Logistic_Regression
+  - training_test_reg
+  - val_eval
+- post: nlp_lexical_syntax_analysis
+  related:
+  - nlp_pos_tagging
+  - nlp_bow
+  - nlp_tf-idf
+  - nlp_elmo
+  - nlp_bert
+
