@@ -17,6 +17,33 @@
   - nlp_pos_tagging
   - nlp_bow
   - nlp_tf-idf
-  - nlp_elmo
+  - nlp_transformer
   - nlp_bert
-
+- post: nlp_bow
+  related:
+  - nlp_tf-idf
+  - nlp_ngram
+  - nlp_nplm
+  - nlp_word2vec
+  - nlp_glove
+- post: nlp_tf-idf
+  related:
+  - nlp_bow
+  - nlp_ngram
+  - nlp_nplm
+  - nlp_word2vec
+  - nlp_glove
+- post: nlp_ngram
+  related:
+  - nlp_bow
+  - nlp_tf-idf
+  - nlp_nplm
+  - nlp_word2vec
+  - nlp_glove
+- post: nlp_nplm
+  related:
+  - nlp_ngram
+  - nlp_word2vec
+  - nlp_glove
+  - nlp_bert
+  - nlp_gpt
