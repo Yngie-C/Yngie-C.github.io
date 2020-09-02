@@ -2,7 +2,7 @@
   related:
   - decision_tree
   - Linear_reg
-  - Logistic_Regression
+  - neural_net
   - training_test_reg
   - val_eval
 - post: rule_based
@@ -10,6 +10,27 @@
   - decision_tree
   - Linear_reg
   - Logistic_Regression
+  - training_test_reg
+  - val_eval
+- post: decision_tree
+  related:
+  - Linear_reg
+  - naive_bayes
+  - Logistic_Regression
+  - SVM
+  - training_test_reg
+- post: naive_bayes
+  related:
+  - sentiment_analysis
+  - Logistic_Regression
+  - SVM
+  - training_test_reg
+  - val_eval
+- post: Logistic_Regression
+  related:
+  - sentiment_analysis
+  - Linear_reg
+  - SVM
   - training_test_reg
   - val_eval
 - post: nlp_lexical_syntax_analysis
