@@ -23,11 +23,9 @@ tag: Machine-Learning
 
 복잡한 문제를 풀기 위해서 시행착오(Trial and error) 방법을 사용할 때 효과적으로 문제를 풀기 위해서 사용합니다. 메타 휴리스틱을 적용한 최적화 알고리즘 중에는 자연계의 행동을 모사한 방법이 많습니다. 대표적인 경우가 뇌의 활동을 모사한 인공신경망(Artificial neural networks, ANNs), 개미의 이동을 모사한 개미 식민지 최적화(Ant colony optimization, ACO), 조류나 어류 무리의 행동을 모사한 입자 군집 최적화(Particle swarm optimization, PSO) 등이 있습니다.
 
- ### Genetic Algorithm
+### Genetic Algorithm
 
-유전 알고리즘은 생물의 번식을 모사한 진화 알고리즘입니다. 번식 과정을 반복하면서 더 나은 솔루션을 찾아가며 기존의 솔루션을 보존합니다.
-
-유전 알고리즘을 이전의 다른 방법들과 비교하여 시간-성능 그래프에 나타내면 다음과 같습니다. Stepwise selection 보다 더 오랜 시간이 걸리게 되지만 더 좋은 성능을 보이는 것을 알 수 있습니다.
+유전 알고리즘은 생물의 번식을 모사한 진화 알고리즘입니다. 번식 과정을 반복하면서 더 나은 솔루션을 찾아가며 기존의 솔루션을 보존합니다. 유전 알고리즘을 [전진 선택(Forward selection) 및 후진 제거(Backward Elimination) 또는 Stepwise selection 방식](https://yngie-c.github.io/machine%20learning/2020/09/06/fs_be/)과 비교하여 시간-성능 그래프에 나타내면 다음과 같습니다. Stepwise selection 보다 더 오랜 시간이 걸리게 되지만 더 좋은 성능을 보이는 것을 알 수 있습니다.
 
 <p align="center"><img src="https://user-images.githubusercontent.com/45377884/92316358-b17a5380-f02d-11ea-9ea3-6fa7a0ae62a9.png" alt="ga" style="zoom:50%;" /></p>
 
