@@ -29,7 +29,7 @@ tag: Machine-Learning
 
 유전 알고리즘을 이전의 다른 방법들과 비교하여 시간-성능 그래프에 나타내면 다음과 같습니다. Stepwise selection 보다 더 오랜 시간이 걸리게 되지만 더 좋은 성능을 보이는 것을 알 수 있습니다.
 
-<img src="https://user-images.githubusercontent.com/45377884/92316358-b17a5380-f02d-11ea-9ea3-6fa7a0ae62a9.png" alt="ga" style="zoom:50%;" />
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/92316358-b17a5380-f02d-11ea-9ea3-6fa7a0ae62a9.png" alt="ga" style="zoom:50%;" /></p>
 
 유전 알고리즘은 다음과 같은 6단계로 진행됩니다. 아래에서 2-5단계에 해당하는 과정은 선택한 변수가 특정한 조건을 만족할 때까지 반복하는 과정입니다.
 
@@ -42,7 +42,7 @@ tag: Machine-Learning
 
 그림으로 나타내면 아래와 같습니다.
 
-<img src="https://static.packt-cdn.com/products/9781788472173/graphics/3fe7ae9e-a589-40a3-9904-c5cf0f650d94.png" alt="ga_img" style="zoom: 50%;" />
+<p align="center"><img src="https://static.packt-cdn.com/products/9781788472173/graphics/3fe7ae9e-a589-40a3-9904-c5cf0f650d94.png" alt="ga_img" style="zoom: 50%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://subscription.packtpub.com/book/big_data_and_business_intelligence/9781788472173/8/ch08lvl1sec60/genetic-algorithms-structure">subscription.packtpub.com</a></p>
 
@@ -56,7 +56,7 @@ Initialization 단계에서는 이후 알고리즘에서 사용할 도구를 하
 
 각 크로모좀은 이진 벡터 형태이지만 이를 만드는 과정인 Population initialization은 각 값에 랜덤 값을 부여하는 것에서 시작합니다. $[0,1]$ 범위 내의 임의의 값을 각각의 Gene에 부여한 뒤에 Cut-off 값을 기준으로 이진 벡터로 변환합니다. 이런 과정을 통해 임의성을 부여할 수 있습니다. 아래는 Population이 8이고 특성 차원이 10인 경우에 Population initialization을 수행한 예시입니다.
 
-<img src="https://user-images.githubusercontent.com/45377884/92330290-bc25fe80-f0a8-11ea-9a89-949c23f2b967.png" alt="population_init" style="zoom: 67%;" />
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/92330290-bc25fe80-f0a8-11ea-9a89-949c23f2b967.png" alt="population_init" style="zoom: 67%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://github.com/pilsung-kang/Business-Analytics-IME654-">github.com/pilsung-kang/Business-Analytics-IME654</a></p>
 
@@ -81,7 +81,7 @@ $$
 
 아래는 조정된 결정계수를 사용하여 각 크로모좀의 평가값을 매긴 뒤에 순위 방식과 가중치 방식을 사용하여 처리해준 것입니다.
 
-<img src="https://user-images.githubusercontent.com/45377884/92330562-c8ab5680-f0aa-11ea-87ad-9fe7f76d70ff.png" alt="fitness_func" style="zoom:50%;" />
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/92330562-c8ab5680-f0aa-11ea-87ad-9fe7f76d70ff.png" alt="fitness_func" style="zoom:50%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://github.com/pilsung-kang/Business-Analytics-IME654-">github.com/pilsung-kang/Business-Analytics-IME654</a></p>
 
@@ -97,7 +97,7 @@ $$
 
 가중치 방식으로 처리하면 확률론적 선택(Probabilistic selection)을 사용합니다. 이 방법은 가중치 비율만큼의 면적을 가진 원판에 다트를 던져 다트가 꽂히는 크로모좀을 선택하는 방식입니다. 아래의 그림을 보며 확률론적 선택법에 대해 알아보겠습니다.
 
-![prop_selection](https://user-images.githubusercontent.com/45377884/92330986-0eb5e980-f0ae-11ea-952f-ca180e42f6d2.png)
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/92330986-0eb5e980-f0ae-11ea-952f-ca180e42f6d2.png" alt="prop_selection" style="zoom: 67%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://github.com/pilsung-kang/Business-Analytics-IME654-">github.com/pilsung-kang/Business-Analytics-IME654</a></p>
 
@@ -111,19 +111,19 @@ $$
 
 교배 지점의 개수를 1로 설정했을 때는 다음과 같이 교배가 수행됩니다.
 
-<img src="https://user-images.githubusercontent.com/45377884/92331237-3f971e00-f0b0-11ea-886b-9938901eb422.png" alt="crossover_1" style="zoom: 50%;" />
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/92331237-3f971e00-f0b0-11ea-886b-9938901eb422.png" alt="crossover_1" style="zoom: 50%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://github.com/pilsung-kang/Business-Analytics-IME654-">github.com/pilsung-kang/Business-Analytics-IME654</a></p>
 
 교배 지점의 개수를 2로 설정했을 때는 다음과 같이 교배가 수행됩니다.
 
-<img src="https://user-images.githubusercontent.com/45377884/92331241-40c84b00-f0b0-11ea-8f00-1cc46331133a.png" alt="crossover_2" style="zoom:50%;" />
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/92331241-40c84b00-f0b0-11ea-8f00-1cc46331133a.png" alt="crossover_2" style="zoom:50%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://github.com/pilsung-kang/Business-Analytics-IME654-">github.com/pilsung-kang/Business-Analytics-IME654</a></p>
 
 교배 지점의 개수를 N으로 설정했을 때는 다음과 같이 교배가 수행됩니다. 이 때는 모든 Gene이 교배의 대상이 되므로 특성마다 난수를 생성하여 Cut-off 값 이상인 Gene만 교배를 수행합니다. 교배 지점의 개수가 많아질수록 자유도가 높아지는 것이 특징이나 더 높은 자유도가 더 높은 성능을 의미하지는 않습니다.
 
-<img src="https://user-images.githubusercontent.com/45377884/92331242-4160e180-f0b0-11ea-866d-d0d024b15a31.png" alt="crossover_n" style="zoom:50%;" />
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/92331242-4160e180-f0b0-11ea-866d-d0d024b15a31.png" alt="crossover_n" style="zoom:50%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://github.com/pilsung-kang/Business-Analytics-IME654-">github.com/pilsung-kang/Business-Analytics-IME654</a></p>
 
@@ -131,10 +131,10 @@ $$
 
 생성되는 각각의 자식 크로모좀의 Gene마다 난수를 부여한 뒤 설정한 값(대개 $0.01$) 이하의 난수가 나온 경우에만 해당 Gene의 값을 바꾸어줍니다. 이 과정을 그림으로 나타내면 다음과 같습니다.
 
-<img src="https://user-images.githubusercontent.com/45377884/92331480-dc0df000-f0b1-11ea-8aa1-eefd3585517c.png" alt="mutation" style="zoom: 50%;" />
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/92331480-dc0df000-f0b1-11ea-8aa1-eefd3585517c.png" alt="mutation" style="zoom: 50%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://github.com/pilsung-kang/Business-Analytics-IME654-">github.com/pilsung-kang/Business-Analytics-IME654</a></p>
 
-## Find the Best Solution 
+## Find the Best Solution
 
 마지막으로 최적의 특성을 선택하는 방법입니다. 종료 기준(Stop criteria)을 만족하는 경우에 가장 최적의 크로모좀을 사용하여 특성을 골라냅니다. 반복 과정에서 해 수렴의 안정성을 위해서 한 가지 트릭을 사용합니다. 바로 탑 2를 다음 세대에서 바꾸지 않는 방법입니다. 만약 Population이 100일 때, 이전 세대애서 $C_9, C_{72}$가 가장 높은 성능을 보였다면 다음 세대에서 자식 크로모좀과 바꾸지 않고 그대로 사용합니다. 만약 자식 세대에서 이 둘을 뛰어넘는 성능의 크로모좀이 나오지 않않으면 자신의 자리를 계속 유지하게 됩니다.
