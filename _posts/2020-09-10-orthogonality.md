@@ -75,7 +75,7 @@ $$
 
 아래는 위에서 구한 행렬 $A$의 각 주요 부분 공간을 나타낸 것입니다. 
 
-<img src="https://user-images.githubusercontent.com/45377884/92763326-5e5a2500-f3ce-11ea-8b75-06ee6c407bd7.png" alt="ortho_subspace" style="zoom:40%;" />
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/92763326-5e5a2500-f3ce-11ea-8b75-06ee6c407bd7.png" alt="ortho_subspace" style="zoom:40%;" /></p>
 
 위 그래프로부터 Column space 와 Left-Null space가 직교 관계에 있으며 $\mathbf{C}(A) \perp \mathbf{N}(A^T)$, Row space와 Null space가 각각 직교 관계에 있는 것 $\mathbf{C}(A^T) \perp \mathbf{N}(A)$ 을 알 수 있습니다.
 
