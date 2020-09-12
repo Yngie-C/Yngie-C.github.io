@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 사영(Linearly Independence)과 정규방정식(Normal Equation)
+title: 사영(Projection)과 정규방정식(Normal Equation)
 category: Linear Algebra
 tag: Linear-Algebra
 ---
