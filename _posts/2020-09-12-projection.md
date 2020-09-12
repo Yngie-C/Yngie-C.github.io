@@ -34,16 +34,20 @@ tag: Linear-Algebra
 이런 경우에는 정해진 하나의 해가 없습니다. 이 연립방정식을 행렬로 나타냈을 때의 $A$는 열의 개수보다 행의 개수가 많은 행렬이 됩니다. 이럴 때에는 해를 나타내는 벡터 $\vec{b}$ 가 $A$의 Column space 내부에 없기 때문에, $A$의 Column 스페이스와 거리가 최소가 되는 곳, 즉 $\vec{b}$ 를 $A$ 의 Column space로 사영한 곳을 해로 정하게 됩니다. 사영 벡터 $\vec{p} = \hat{c}\cdot A$ 라고 하면 $\vec{b} - \hat{c}\cdot A \perp \vec{a_i}$ 이므로 다음과 같은 식을 만족하게 됩니다.
 
 
+
 $$
 \begin{aligned}
 \vec{a_1}^T (\vec{b} - &\hat{c}\cdot A) = 0 \\
 \vec{a_2}^T (\vec{b} - &\hat{c}\cdot A) = 0 \\
 &\vdots \\
 \vec{a_n}^T (\vec{b} - &\hat{c}\cdot A) = 0 \\
-\therefore A^T(\vec{b} - &\hat{c}\cdot A) = 0
+\therefore A^T(\vec{b} - &\hat{c}\cdot A) = 0 \\
 \end{aligned}
 $$
+
+
 식을 전개하여 $\hat{c}$에 대하여 정리하면
+
 
 
 $$
@@ -52,8 +56,8 @@ $$
 $$
 
 
-최종적으로 이 해를 구하기 위한 변환 행렬, 즉 사영 행렬(Projection matrix, $P$ )은 다음과 같이 나타낼 수 있습니다.
 
+최종적으로 이 해를 구하기 위한 변환 행렬, 즉 사영 행렬(Projection matrix, $P$ )은 다음과 같이 나타낼 수 있습니다.
 
 $$
 P = A(A^TA)^{-1}A^T \\
