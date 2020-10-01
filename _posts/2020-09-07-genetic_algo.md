@@ -7,6 +7,8 @@ tag: Machine-Learning
 
 
 
+해당 게시물은 [고려대학교 강필성 교수님의 강의](https://github.com/pilsung-kang/Business-Analytics-IME654-)를 바탕으로 작성한 것입니다.
+
 # Genetic Algorithm
 
 **유전 알고리즘(Genetic algorithm)**은 메타 휴리스틱 방법론 중 하나의 방법입니다. 유전 알고리즘에 대해 알아보기 전에 먼저 메타 휴리스틱 방법론이 무엇인지에 대해서 알아보겠습니다.

@@ -7,6 +7,10 @@ tag: Machine-Learning
 
 
 
+
+
+해당 게시물은 [고려대학교 강필성 교수님의 강의](https://github.com/pilsung-kang/Business-Analytics-IME654-)를 바탕으로 작성한 것입니다.
+
 # Dimensionality Reduction
 
 **차원 축소(Dimensionality reduction)**란 데이터가 가지고 있는 특성의 개수를 줄여나가면서 모델의 성능을 유지하는 방법입니다. 차원 축소를 하는 이유는 무엇일까요? 데이터 과학에서는 이른바 **차원의 저주(Curse of dimensionality)**라는 용어를 사용합니다. 차원의 저주가 의미하는 바는 다음과 같습니다.
