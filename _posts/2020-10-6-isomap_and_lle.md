@@ -19,7 +19,7 @@ tag: Machine-Learning
 
  <img src="https://lovit.github.io/assets/figures/embedding_for_vis_isomap_flow.png" alt="isomap"/>
 
-
+<p align="center" style="font-size:80%">이미지 출처 : <a href="https://lovit.github.io/nlp/representation/2018/09/28/mds_isomap_lle/">lovit.github.io</a></p>
 
 일반적인 다차원 척도법을 사용한다면 그림 A의 두 개 원이 가리키고 있는 두 인스턴스의 거리는 파란색 점선의 길이를 사용할 것입니다. 하지만 위와 같이 돌돌 말린(Swiss-roll) 데이터에서 두 점 사이의 실질적인 거리는 파란색 실선의 거리가 될 것입니다. 말려있는 데이터를 펼친 후에 두 인스턴스 사이의 거리인 것이지요. 
 
@@ -47,13 +47,14 @@ tag: Machine-Learning
 이어서 지역적 선형 임베딩이 수행하는 계산을 따라가 보겠습니다. 첫 번째 단계로 각 인스턴스의 이웃을 찾습니다. 다음 단계로는 각 인스턴스의 이웃으로부터 자기 자신을 재구축(reconstruct)할 수 있는 최적의 가중치 $W_{ij}$ 를 계산합니다. 수식으로 나타내면 아래의 목적 함수를 최소화하는 과정과 동일합니다.
 
 
+
 $$
-E(\mathbf{W}) = \sum_i \big\vert \mathbf{x}_i - \sum_j\mathbf{W}_{ij}\mathbf{x}_j\big\vert^2
+E(\mathbf{W}) = \sum_i \big\vert \mathbf{x}_i - \mathbf{x}_i^\prime \big\vert^2 = \sum_i \big\vert \mathbf{x}_i - \sum_j\mathbf{W}_{ij}\mathbf{x}_j\big\vert^2
 $$
 
 
-위 수식에서 $\mathbf{x}_i$ 는 재구축의 대상이 되는 원래의 인스턴스이며 그 뒤에오는 항은 이웃들과 가중치로부터 재구축한 $\mathbf{x}_i^\prime = \sum_j\mathbf{W}_{ij}\mathbf{x}_j$ 입니다. 이 둘 사이의 차이를 줄이는 것이 목적이므로 평균 제곱 오차를 사용하여 나타낸 함수를 최소화하게 됩니다. 위 함수에서 가중치 값이 가지는 조건은 2가지 입니다. 첫 번째는 이웃이 아닌 인스턴스 $j$에 대해서는 가중치의 값이 0이라는 점이고, 두 번째는 모든 $i$마다 가중치의 합이 1이 된다는 점입니다. 수식으로는 아래와 같이 나타낼 수 있습니다.
 
+위 수식에서 $\mathbf{x}_i$ 는 재구축의 대상이 되는 원래의 인스턴스이며 그 뒤에오는 항은 이웃들과 가중치로부터 재구축한 $\mathbf{x}_i^\prime$ 입니다. 이 둘 사이의 차이를 줄이는 것이 목적이므로 평균 제곱 오차를 사용하여 나타낸 함수를 최소화하게 됩니다. 위 함수에서 가중치 값이 가지는 조건은 2가지 입니다. 첫 번째는 이웃이 아닌 인스턴스 $j$에 대해서는 가중치의 값이 0이라는 점이고, 두 번째는 모든 $i$마다 가중치의 합이 1이 된다는 점입니다. 수식으로는 아래와 같이 나타낼 수 있습니다.
 
 $$
 \sum_jW_{ij} = 1 \quad \forall_i
@@ -76,7 +77,7 @@ $$
 
 <img src="https://lovit.github.io/assets/figures/embedding_for_vis_lle_flow.png" alt="lle" style="zoom:67%;" />
 
-
+<p align="center" style="font-size:80%">이미지 출처 : <a href="https://lovit.github.io/nlp/representation/2018/09/28/mds_isomap_lle/">lovit.github.io</a></p>
 
 먼저 이웃을 찾게 되고, 찾은 이웃들로부터 자기 자신을 가장 잘 재구축 할 수 있는 가중치를 구해냅니다. 가중치를 구한 이후에는 이를 사용하여 저차원 공간상에서 다시 재구축해냅니다.
 
