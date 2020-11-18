@@ -1,11 +1,11 @@
 ---
-layout: postL
+layout: post
 title: 지금까지 공부한 자료들(Python, ML, DL, NLP)
 category: Daily
 tag: Daily
 ---
 
- 
+
 
 파이썬 책의 첫 페이지를 켜서 주피터 노트북을 설치하고 print("Hello, Python")을 입력한지 벌써 1년이 되었습니다. 이를 기념하여 1년동안 어떤 자료를 보며 공부를 했는지 정리하는 게시물을 작성해보려고 합니다.
 
