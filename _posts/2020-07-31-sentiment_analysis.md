@@ -61,7 +61,7 @@ $$
 
 일반적인 감성 분석 시스템의 순서도는 아래와 같습니다.
 
-<p align="center"><img src="http://www.ceine.cl/wp-content/uploads/2013/05/f1.jpg" alt="sentiment1" style="zoom:80%;" /></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/99493457-96737a80-29b2-11eb-9d84-a0bc252b7146.jpg" alt="f1" style="zoom:80%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="http://www.ceine.cl/techniques-and-applications-for-sentiment-analysis/">http://www.ceine.cl</a></p>
 
