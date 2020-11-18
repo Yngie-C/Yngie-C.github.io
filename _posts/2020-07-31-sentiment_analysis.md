@@ -15,11 +15,13 @@ tag: NLP
 
 **감성 분석(Sentiment Analysis)**이란 텍스트에 들어있는 의견이나 감성, 평가, 태도 등의 주관적인 정보를 컴퓨터를 통해 분석하는 과정입니다. 자연어 데이터에 들어있는 감성을 분석하는 일은 오래 전부터 연구되어왔습니다. 그럼에도 언어가 가지고 있는 모호성 때문에 쉽지 않았던 것이 사실입니다. 아래의 예시를 통해 어떤 어려움이 있는 지 보도록 하겠습니다.
 
-*"Honda Accords and Toyota Camrys are nice sedans." (혼다 어코드와 도요타 캠리는 좋은 세단이다.)*
+> *"Honda Accords and Toyota Camrys are nice sedans."*
+> *(혼다 어코드와 도요타 캠리는 좋은 세단이다.)*
 
 위 문장은 혼다와 도요타의 차종 각각에 대해서 긍정을 나타내고 있습니다. 하지만 추가적인 내용이 붙었을 때 이들에 대한 평가가 달라지는 경우도 있습니다. 아래 문장을 보도록 하겠습니다.
 
-*"Honda Accords and Toyota Camrys are nice sedans, but hardly the best car on the road. (혼다 어코드와 도요타 캠리는 좋은 세단이지만 도로에서 가장 좋은 차는 아니다.)"*
+> *"Honda Accords and Toyota Camrys are nice sedans, but hardly the best car on the road.*
+> *(혼다 어코드와 도요타 캠리는 좋은 세단이지만,도로에서 가장 좋은 차는 아니다.)"*
 
 위와 같은 추가 설명이 붙는다면 위 문장은 대상에 대해 긍정을 표하고자 하는 문장인지, 부정을 표하고자 하는 문장인지 파악하기 매우 어렵게 됩니다. 이러한 언어의 모호성은 감성 분석을 어렵게 하는 원인이 됩니다.
 
