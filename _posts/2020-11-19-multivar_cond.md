@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 이변수 조건부 확률 분포
+title: 이변수 조건부 확률 분포(Conditional Distribution on bi-r.v s)
 category: Statistics
 tag: Statistics
 ---
@@ -147,7 +147,9 @@ $$
 &\color{olive}{E\bigg[\{(X_2 - E(X_2 \vert X_1)\}\cdot\{(E(X_2 \vert X_1) - E(X_2))\}\bigg]} \\
 =& E\bigg[(X_2 - E(X_2 \vert X_1)\bigg] \cdot \{E(X_2 \vert X_1) - E(X_2))\} \\
 =& E\bigg[(X_2 - E(X_2 \vert X_1)\bigg] \cdot \{E(X_2 \vert X_1) - E(X_2))\} \\
-
+=& \bigg[E(X_2) - E[E(X_2 \vert X_1)]\bigg] \cdot \{E(X_2 \vert X_1) - E(X_2))\}  \\
+=& \bigg[E(X_2) - E(X_2)\bigg]\cdot \{E(X_2 \vert X_1) - E(X_2))\} \\
+=& 0  \quad \because \text{Double Expectation Theorem}
 \end{aligned}
 $$
 
