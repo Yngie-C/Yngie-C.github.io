@@ -159,9 +159,9 @@ $$
 \begin{aligned}
 E[\big\{X_2 - E(X_2 \vert X_1)\big\}^2 \vert X_1] &= \iint \big\{x_2 - \big[\mu_2 + \rho \cdot \frac{\sigma_2}{\sigma_1}(x_1-\mu_1)\big]\big\}^2 f_{X_1,X_2}(x_1, x_2)dx_2dx_1 \\
 &= \iint \big\{(x_2 - \mu_2) - (\rho \cdot \frac{\sigma_2}{\sigma_1}(x_1-\mu_1))\big\}^2 f_{X_1,X_2}(x_1, x_2)dx_2dx_1 \\
-& = \iint \big\{(x_2 - \mu_2)^2 + \rho^2 \cdot \frac{{\sigma_2}^2}{{\sigma_1}^2}(x_1-\mu_1)^2 - 2\rho \cdot \frac{\sigma_2}{\sigma_1}(x_2 - \mu_2)(x_1-\mu_1)\big\} f_{X_1,X_2}(x_1, x_2)dx_2dx_1 \\
-&= {\sigma_2}^2 +  \rho^2 \cdot \frac{{\sigma_2}^2}{{\sigma_1}^2} \cdot {\sigma_1}^2 - 2\rho \cdot \frac{\sigma_2}{\sigma_1} \cdot \text{Cov}(X_1, X_2) \\
-&= {\sigma_2}^2 +  \rho^2 \cdot \frac{{\sigma_2}^2}{{\sigma_1}^2} \cdot {\sigma_1}^2 - 2\rho \cdot \frac{\sigma_2}{\sigma_1} \cdot \rho\sigma_2\sigma_1 \\
+& = \iint \big\{(x_2 - \mu_2)^2 + \rho^2 \cdot (\frac{\sigma_2}{\sigma_1})^2 \cdot (x_1-\mu_1)^2 - 2\rho \cdot \frac{\sigma_2}{\sigma_1}(x_2 - \mu_2)(x_1-\mu_1)\big\} f_{X_1,X_2}(x_1, x_2)dx_2dx_1 \\
+&= {\sigma_2}^2 +  \rho^2 \cdot (\frac{\sigma_2}{\sigma_1})^2 \cdot {\sigma_1}^2 - 2\rho \cdot \frac{\sigma_2}{\sigma_1} \cdot \text{Cov}(X_1, X_2) \\
+&= {\sigma_2}^2 +  \rho^2 \cdot (\frac{\sigma_2}{\sigma_1})^2 \cdot {\sigma_1}^2 - 2\rho \cdot \frac{\sigma_2}{\sigma_1} \cdot \rho\sigma_2\sigma_1 \\
 &= {\sigma_2}^2 +  \rho^2 \cdot {\sigma_2}^2 - 2\rho^2 \cdot {\sigma_2}^2 \\
 &= {\sigma_2}^2 (1-\rho^2)
 \end{aligned}
