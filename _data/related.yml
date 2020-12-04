@@ -1,3 +1,4 @@
+# ml
 - post: overview
   related:
   - decision_tree
@@ -33,6 +34,8 @@
   - SVM
   - training_test_reg
   - val_eval
+
+# nlp
 - post: nlp_lexical_syntax_analysis
   related:
   - nlp_pos_tagging
@@ -90,3 +93,4 @@
   - nlp_bert
   - nlp_gpt
 
+# statistics
