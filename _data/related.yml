@@ -82,3 +82,11 @@
   - nlp_transformer
   - nlp_bert
   - nlp_gpt
+- post: sentiment_analysis
+  related:
+  - nlp_word2vec
+  - nlp_seq2seq
+  - nlp_transformer
+  - nlp_bert
+  - nlp_gpt
+
