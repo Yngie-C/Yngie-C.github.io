@@ -71,13 +71,13 @@ tag: Machine-Learning
 
 
 
-<p align="center"><img src="http://www.aistudy.com/learning/images/%EA%B7%9C%EC%B9%99%EA%B3%B5%EA%B0%84%EC%9D%98%20%EB%8F%84%ED%95%B4.gif" alt="find_s"  /></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/102018698-348c1200-3db2-11eb-9d2d-8b186527580e.gif" alt="version_space1"  /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="http://www.aistudy.com/learning/version_space.htm">aistudy.com</a></p>
 
 위 표에서 Positive한 레이블을 나타내는 인스턴스는 1, 2, 4번 인스턴스 입니다. 이 세 인스턴스를 사용하여 Find-S Algorithm 과정을 진행해봅시다. 맨 처음은 영가설인 $h_0 = (\phi, \phi, \phi, \phi, \phi, \phi)$ 에서 시작합니다. 새로운 인스턴스 1번에 의해 정해지는 가설 $h_1$ 은 *(맑음, 따듯함, 보통, 강함, 따듯함, 일정함)* 입니다. 이 가설에 새로운 인스턴스 2번을 적용하면 새로운 가설 $h_2$ 는 *(맑음, 따듯함, ?, 강함, 따듯함, 일정함)* 으로 변하게 됩니다. *"습도"* 특성에 해당하는 가설이 변경되며 가설의 범위가 확장되는 것을 볼 수 있습니다. 마지막으로 4번 인스턴스를 추가로 적용하여 최종적으로 도출되는 가설 $h_3$ 은 *(맑음, 따듯함, ?, 강함, ?, ?)* 이 됩니다.
 
-<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=http%3A%2F%2Fcfile2.uf.tistory.com%2Fimage%2F2646EA3F583AED81051C2F" alt="find-s_ex"  />
+<p align="center"><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=http%3A%2F%2Fcfile2.uf.tistory.com%2Fimage%2F2646EA3F583AED81051C2F" alt="find-s_ex"  /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://excelsior-cjh.tistory.com/43">excelsior-cjh.tistory.com</a></p>
 
@@ -89,7 +89,7 @@ $$
 VS_{H,D} = \{h \in H \vert \quad \exists s \in S, \exists g \in G, \quad g \geq h \geq s \}
 $$
 
-<p align="center"><img src="http://www.aistudy.com/learning/images/%EA%B7%9C%EC%B9%99%EA%B3%B5%EA%B0%84%EC%97%90%EC%84%9C%20G%EC%99%80%20S.gif" alt="version_space"  /></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/102018699-3524a880-3db2-11eb-9644-734e1b52b74e.gif" alt="version_space2"  /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="http://www.aistudy.com/learning/version_space.htm">aistudy.com</a></p>
 

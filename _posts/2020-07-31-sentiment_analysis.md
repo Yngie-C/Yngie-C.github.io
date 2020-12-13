@@ -75,7 +75,7 @@ $$
 
 <p align="center"><img src="https://user-images.githubusercontent.com/45377884/88989668-1cda5280-d317-11ea-8704-6c6555e171c1.png" alt="sentiment2" style="zoom:67%;" /></p>
 
-<p align="center" style="font-size:80%">이미지 출처 : <a href="https://github.com/pilsung-kang/text-analytics">Text-Analytics Github</a></p>
+<p align="center" style="font-size:80%">이미지 출처 : <a href="https://github.com/pilsung-kang/text-analytics">github.com/pilsung-kang</a></p>
 
 ## 어휘 기반(Lexicon-based)의 감성 분석
 
