@@ -21,11 +21,13 @@ tag: Data Structure
 
 어떤 문제들은 위 그림에서 볼 수 있는 것처럼 작게 나누더라도 동일한 구조를 가지는 경우가 있습니다. 예를 들어, 그림과 같은 조직도를 가진 회사에서 예산을 나누는 경우를 생각해보겠습니다.
 
-<p align="center"><img src="http://www.kinfra.co.kr/eng/images/company_info/ori_img.gif" alt="org_chart" style="zoom:67%;" /></p>
+<p align="center"><img src="http://swuc21.com/en/wp-content/uploads/sites/2/2020/03/%ED%99%88%ED%94%BC-%EC%A1%B0%EC%A7%81%EB%8F%84-%EC%98%81%EB%AC%B8.png" alt="org_chart" style="zoom:50%;" /></p>
 
-정해진 총 예산을 $\mathbf{N}$ 이라 합시다. 이를 Manangement, Investment, Other group에 $N_1, N_2, N_3$ 로 나눠 배정하게 됩니다. 그리고 Investment group내에 있는 Department는 $N_2$ 는 또 다시 부서 내부의 각 팀에 $n_1, n_2,n_3$ 만큼 나누어져 배정됩니다. 그리고 Division1에 배정된 $n_1$ 역시 또 3개로 나누어져 받게 될 것입니다.
+<p align="center" style="font-size:80%">이미지 출처 : <a href="http://swuc21.com/en/company/organization/">swuc21.com</a></p>
 
-이렇게 더 작은 문제로 나누어도 구조적으로는 계속 동일한 문제가 반복되는 것을 알 수 있습니다. 이렇게 문제를 나누어 생각해도 동일한 구조를 가지는(Self-similar) 문제를 Repeating Problem 이라고 합니다. 이 때 문제를 작게 나누는 행위를 **분할(Divide)** , 그리고 나눈 문제를 해결하는 것을 **정복(Conquer)** 이라고 합니다. 마치 아래의 마트료시카 인형처럼 큰 문제를 계속 작게 분할해나가고, 가장 작은 문제부터 정복해 올라오게 되지요. 
+정해진 총 예산을 $\mathbf{N}$ 이라 합시다. 이를 Sales, Manufacturing, Customer Support에 $N_1, N_2, N_3$ 로 나눠 배정하게 됩니다. 그리고 Manufacturing 내에 있는 Department는 $N_2$ 를 또 다시 부서 내부의 각 팀에 $n_1, n_2,n_3$ 만큼 배정합니다.
+
+이렇게 어떤 문제는 더 작게 나누더라도 구조적으로는 동일한 문제가 반복됩니다. 이렇게 문제를 나누어 생각해도 동일한 구조를 가지는(Self-similar) 문제를 Repeating Problem 이라고 합니다. 이 때 문제를 작게 나누는 행위를 **분할(Divide)** , 그리고 나눈 문제를 해결하는 것을 **정복(Conquer)** 이라고 합니다. 마치 아래의 마트료시카 인형처럼 큰 문제를 계속 작게 분할해나가고, 가장 작은 문제부터 정복해 올라오게 되지요. 
 
 <p align="center"><img src="https://www.dookinternational.com/blog/wp-content/uploads/2018/07/a2.jpeg" alt="Matryoshka" style="zoom: 80%;" /></p>
 
@@ -91,7 +93,9 @@ def Fibonacci(n):
 
 아래는 재귀로 구현한 피보나치 함수를 호출했을 때 스택 프레임 $fib(5)$ 는 너무 복잡하므로 한 단계 낮은 인자인 $fib(4)$를 컴퓨터가 어떻게 처리하는 지에 대한 그림입니다. 
 
-<p align="center"><img src="http://knowledge-cess.com/wp-content/uploads/2014/07/Call-stack-of-Fibonacci.jpg" alt="stackframe" style="zoom:120%;" /></p>
+<p align="center"><img src="http://knowledge-cess.com/wp-content/uploads/2014/07/Call-stack-of-Fibonacci.jpg" alt="stackframe" style="zoom:100%;" /></p>
+
+
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="http://knowledge-cess.com/recursion-vs-iteration-an-analysis-fibonacci-and-factorial/">knowledge-cess.com</a></p>
 
