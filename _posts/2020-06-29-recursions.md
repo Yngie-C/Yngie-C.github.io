@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 재귀와 병합 정렬 (Recursion & Merge Sort)
+title: 재귀와 병합 정렬(Recursion & Merge Sort)
 category: Data Structure
 tag: Data Structure
 ---
@@ -77,7 +77,7 @@ def Fibonacci(n):
 
 
 
-<p align="center"><img src="https://www.andreagrandi.it/images/2015/08/fibo.png" alt="fib"  /></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/102240833-a5ab0100-3f3b-11eb-91a8-333024505f20.png" alt="fibo"  /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://www.andreagrandi.it/2015/08/31/understanding-python-decorators-optimizing-a-recursive-fibonacci-implementation/">andreagrandi.it</a></p>
 
@@ -93,7 +93,7 @@ def Fibonacci(n):
 
 아래는 재귀로 구현한 피보나치 함수를 호출했을 때 스택 프레임 $fib(5)$ 는 너무 복잡하므로 한 단계 낮은 인자인 $fib(4)$를 컴퓨터가 어떻게 처리하는 지에 대한 그림입니다. 
 
-<p align="center"><img src="http://knowledge-cess.com/wp-content/uploads/2014/07/Call-stack-of-Fibonacci.jpg" alt="stackframe" style="zoom:100%;" /></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/102240694-7d230700-3f3b-11eb-8226-c14428d98c03.jpg" alt="Call-stack-of-Fibonacci"  /></p>
 
 
 
