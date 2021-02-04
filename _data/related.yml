@@ -1,96 +1,574 @@
-# ml
+- post: firstpost
+  related:
+  - 2020_retrospect
+  - first_half
+  - have_studied
+  - val_eval
+  - 2021_plan
+- post: numpy
+  related:
+  - pandasbasic
+  - srtList_with_tpls_objs
+  - LA1
+  - dimensionality_reduction
+  - ds
+- post: pandasbasic
+  related:
+  - numpy
+  - python_closure
+  - neural_net
+  - python_collections
+  - srtList_with_tpls_objs
+- post: LA1
+  related:
+  - determinant
+  - LA2
+  - ds
+  - eigenvectors
+  - LA3
+- post: LA2
+  related:
+  - LA3
+  - determinant
+  - LA1
+  - eigenvectors
+  - ds
+- post: LA3
+  related:
+  - LA2
+  - orthogonality
+  - projection
+  - LA1
+  - eigenvectors
 - post: overview
   related:
-  - decision_tree
-  - Linear_reg
-  - neural_net
   - training_test_reg
+  - dimensionality_reduction
+  - Linear_reg
+  - kernel
   - val_eval
+- post: perceptron
+  related:
+  - dl_lstm
+  - dl_rnn
+  - neural_net
+  - back_propagation
+  - nlp_seq2seq
+- post: neural_net
+  related:
+  - Logistic_Regression
+  - parameter_init
+  - back_propagation
+  - neural_net_training
+  - dl_lstm
+- post: neural_net_training
+  related:
+  - Linear_reg
+  - back_propagation
+  - training_techs
+  - neural_net
+  - parameter_init
+- post: back_propagation
+  related:
+  - neural_net_training
+  - neural_net
+  - dl_rnn
+  - parameter_init
+  - bst
+- post: parameter_init
+  related:
+  - neural_net
+  - back_propagation
+  - neural_net_training
+  - deeplearning_cv
+  - dl_lstm
+- post: training_techs
+  related:
+  - Linear_reg
+  - neural_net_training
+  - tsne
+  - Logistic_Regression
+  - overview
+- post: CNN
+  related:
+  - nlp_doc_classification_cnn
+  - deeplearning_cv
+  - dl_rnn
+  - nlp_transformer
+  - nlp_bert
+- post: deeplearning_cv
+  related:
+  - CNN
+  - nlp_doc_classification_cnn
+  - nlp_gpt
+  - nlp_bert
+  - kernel
+- post: mle_map
+  related:
+  - prob_and_dist
+  - Logistic_Regression
+  - multivar
+  - beta
+  - tsne
+- post: prob_and_dist
+  related:
+  - beta
+  - multivar
+  - mle_map
+  - discrete_dist
+  - tsne
 - post: rule_based
   related:
   - decision_tree
+  - somap_and_lle
   - Linear_reg
-  - Logistic_Regression
-  - training_test_reg
-  - val_eval
+  - dimensionality_reduction
+  - tsne
 - post: decision_tree
   related:
+  - dimensionality_reduction
   - Linear_reg
-  - naive_bayes
-  - Logistic_Regression
-  - SVM
+  - tree
+  - rule_based
+  - bst
+- post: Linear_reg
+  related:
+  - training_techs
+  - neural_net_training
   - training_test_reg
+  - decision_tree
+  - dimensionality_reduction
 - post: naive_bayes
   related:
-  - sentiment_analysis
+  - kernel
+  - nlp_doc_classify
   - Logistic_Regression
   - SVM
-  - training_test_reg
-  - val_eval
+  - prob_and_dist
 - post: Logistic_Regression
   related:
-  - sentiment_analysis
+  - neural_net
+  - mle_map
+  - neural_net_training
   - Linear_reg
-  - SVM
-  - training_test_reg
+  - naive_bayes
+- post: SVM
+  related:
+  - nlp_doc_classify
+  - kernel
+  - naive_bayes
+  - somap_and_lle
+  - neural_net_training
+- post: training_test_reg
+  related:
+  - kernel
+  - overview
+  - Linear_reg
+  - nlp_gpt
   - val_eval
-
-# nlp
+- post: val_eval
+  related:
+  - kernel
+  - training_test_reg
+  - Linear_reg
+  - overview
+  - nlp_doc_classify
 - post: nlp_lexical_syntax_analysis
   related:
   - nlp_pos_tagging
-  - nlp_bow
-  - nlp_tf-idf
-  - nlp_transformer
+  - nlp_ngram
   - nlp_bert
+  - sentiment_analysis
+  - nlp_elmo
+- post: nlp_pos_tagging
+  related:
+  - nlp_lexical_syntax_analysis
+  - nlp_bert
+  - nlp_ngram
+  - nlp_elmo
+  - nlp_nplm
 - post: nlp_bow
   related:
   - nlp_tf-idf
-  - nlp_ngram
   - nlp_nplm
-  - nlp_word2vec
   - nlp_glove
+  - nlp_word2vec
+  - nlp_doc_classify
 - post: nlp_tf-idf
   related:
   - nlp_bow
-  - nlp_ngram
-  - nlp_nplm
   - nlp_word2vec
   - nlp_glove
+  - nlp_doc_classify
+  - nlp_nplm
 - post: nlp_ngram
   related:
-  - nlp_bow
-  - nlp_tf-idf
   - nlp_nplm
-  - nlp_word2vec
+  - nlp_bert
   - nlp_glove
+  - nlp_elmo
+  - nlp_word2vec
 - post: nlp_nplm
   related:
-  - nlp_ngram
-  - nlp_word2vec
+  - nlp_elmo
   - nlp_glove
-  - nlp_bert
-  - nlp_gpt
+  - nlp_word2vec
+  - nlp_ngram
+  - nlp_bow
 - post: nlp_word2vec
   related:
   - nlp_glove
-  - nlp_seq2seq
-  - nlp_transformer
-  - nlp_bert
-  - nlp_gpt
+  - nlp_nplm
+  - nlp_tf-idf
+  - nlp_elmo
+  - nlp_bow
 - post: nlp_glove
   related:
+  - nlp_nplm
   - nlp_word2vec
+  - nlp_elmo
+  - nlp_ngram
+  - nlp_bow
+- post: ds_array
+  related:
+  - linked_list
+  - stack_queue
+  - python_collections
+  - srtList_with_tpls_objs
+  - algorithm_analysis
+- post: linked_list
+  related:
+  - bst
+  - stack_queue
+  - tree
+  - ds_array
+  - python_collections
+- post: stack_queue
+  related:
+  - linked_list
+  - bst
+  - ds_array
+  - tree
+  - python_collections
+- post: dl_rnn
+  related:
   - nlp_seq2seq
-  - nlp_transformer
+  - back_propagation
+  - nlp_ngram
   - nlp_bert
+  - dl_lstm
+- post: dl_lstm
+  related:
+  - perceptron
+  - neural_net
+  - dl_rnn
+  - back_propagation
+  - parameter_init
+- post: recursions
+  related:
+  - dynamic_programming
+  - neural_net
+  - python_closure
+  - srtList_with_tpls_objs
+  - Logistic_Regression
+- post: dynamic_programming
+  related:
+  - recursions
+  - somap_and_lle
+  - tsne
+  - rule_based
+  - Linear_reg
+- post: nlp_seq2seq
+  related:
+  - nlp_elmo
+  - nlp_transformer
   - nlp_gpt
+  - dl_rnn
+  - nlp_doc_classification_rnn
+- post: nlp_transformer
+  related:
+  - nlp_gpt
+  - nlp_bert
+  - nlp_elmo
+  - nlp_nplm
+  - nlp_seq2seq
+- post: tree
+  related:
+  - bst
+  - linked_list
+  - decision_tree
+  - back_propagation
+  - stack_queue
+- post: nlp_elmo
+  related:
+  - nlp_nplm
+  - nlp_bert
+  - nlp_doc_classification_rnn
+  - nlp_gpt
+  - nlp_doc_classification_cnn
+- post: nlp_bert
+  related:
+  - nlp_elmo
+  - nlp_gpt
+  - nlp_nplm
+  - nlp_transformer
+  - nlp_ngram
+- post: nlp_gpt
+  related:
+  - nlp_bert
+  - nlp_transformer
+  - nlp_elmo
+  - nlp_doc_classification_cnn
+  - nlp_nplm
+- post: bst
+  related:
+  - tree
+  - linked_list
+  - stack_queue
+  - decision_tree
+  - back_propagation
+- post: first_half
+  related:
+  - 2020_retrospect
+  - rd_quarter
+  - 2021_plan
+  - have_studied
+  - nlp_bert
+- post: algorithm_analysis
+  related:
+  - srtList_with_tpls_objs
+  - python_collections
+  - ds_array
+  - recursions
+  - linked_list
+- post: srtList_with_tpls_objs
+  related:
+  - algorithm_analysis
+  - python_collections
+  - recursions
+  - linked_list
+  - numpy
+- post: python_generator
+  related:
+  - python_collections
+  - seq_unpacking
+  - recursions
+  - linked_list
+  - srtList_with_tpls_objs
+- post: nlp_doc_classify
+  related:
+  - nlp_bow
+  - nlp_tf-idf
+  - nlp_doc_classification_rnn
+  - naive_bayes
+  - SVM
+- post: python_closure
+  related:
+  - python_collections
+  - recursions
+  - neural_net
+  - pandasbasic
+  - seq_unpacking
+- post: nlp_doc_classification_cnn
+  related:
+  - CNN
+  - deeplearning_cv
+  - nlp_elmo
+  - nlp_bert
+  - nlp_nplm
+- post: nlp_doc_classification_rnn
+  related:
+  - nlp_elmo
+  - nlp_nplm
+  - nlp_bert
+  - nlp_doc_classification_cnn
+  - nlp_transformer
+- post: python_collections
+  related:
+  - seq_unpacking
+  - srtList_with_tpls_objs
+  - python_closure
+  - linked_list
+  - ds_array
 - post: sentiment_analysis
   related:
-  - nlp_word2vec
-  - nlp_seq2seq
-  - nlp_transformer
+  - nlp_lexical_syntax_analysis
   - nlp_bert
+  - nlp_ngram
+  - nlp_bow
+  - nlp_doc_classify
+- post: dimensionality_reduction
+  related:
+  - fs_be
+  - ca
+  - overview
+  - decision_tree
+  - somap_and_lle
+- post: fs_be
+  related:
+  - dimensionality_reduction
+  - genetic_algo
+  - training_test_reg
+  - decision_tree
+  - ca
+- post: genetic_algo
+  related:
+  - fs_be
+  - dimensionality_reduction
+  - ca
+  - training_techs
+  - decision_tree
+- post: orthogonality
+  related:
+  - LA3
+  - nlp_nplm
+  - nlp_elmo
+  - eigenvectors
+  - nlp_transformer
+- post: projection
+  related:
+  - ca
+  - LA3
+  - LA2
+  - LA1
+  - ds
+- post: determinant
+  related:
+  - LA2
+  - LA1
+  - eigenvectors
+  - ds
+  - LA3
+- post: eigenvectors
+  related:
+  - ds
+  - LA1
+  - determinant
+  - LA2
+  - LA3
+- post: ca
+  related:
+  - dimensionality_reduction
+  - projection
+  - ds
+  - eigenvectors
+  - somap_and_lle
+- post: tsne
+  related:
+  - somap_and_lle
+  - multivar
+  - prob_and_dist
+  - beta
+  - ds
+- post: kernel
+  related:
+  - training_test_reg
+  - naive_bayes
+  - val_eval
+  - nlp_doc_classify
   - nlp_gpt
-
-# statistics
+- post: ds
+  related:
+  - somap_and_lle
+  - eigenvectors
+  - LA1
+  - tsne
+  - ca
+- post: expect_val
+  related:
+  - multivar_cond
+  - beta
+  - multivar
+  - mgf
+  - cov_and_cor
+- post: mgf
+  related:
+  - discrete_dist
+  - expect_val
+  - neural_net
+  - amma
+  - multivar
+- post: somap_and_lle
+  related:
+  - ds
+  - tsne
+  - dimensionality_reduction
+  - ca
+  - decision_tree
+- post: rd_quarter
+  related:
+  - 2020_retrospect
+  - first_half
+  - 2021_plan
+  - have_studied
+  - nlp_bert
+- post: have_studied
+  related:
+  - 2021_plan
+  - rd_quarter
+  - 2020_retrospect
+  - first_half
+  - python_collections
+- post: multivar
+  related:
+  - beta
+  - prob_and_dist
+  - multivar_cond
+  - tsne
+  - discrete_dist
+- post: multivar_cond
+  related:
+  - expect_val
+  - cov_and_cor
+  - multivar
+  - beta
+  - prob_and_dist
+- post: cov_and_cor
+  related:
+  - multivar_cond
+  - multivar
+  - expect_val
+  - beta
+  - tsne
+- post: discrete_dist
+  related:
+  - prob_and_dist
+  - beta
+  - multivar
+  - mgf
+  - amma
+- post: beta
+  related:
+  - multivar
+  - amma
+  - prob_and_dist
+  - discrete_dist
+  - tsne
+- post: 2020_retrospect
+  related:
+  - first_half
+  - rd_quarter
+  - have_studied
+  - 2021_plan
+  - firstpost
+- post: 2021_plan
+  related:
+  - have_studied
+  - rd_quarter
+  - first_half
+  - 2020_retrospect
+  - python_collections
+- post: amma
+  related:
+  - beta
+  - prob_and_dist
+  - multivar
+  - mgf
+  - discrete_dist
+- post: seq_unpacking
+  related:
+  - python_collections
+  - python_closure
+  - linked_list
+  - srtList_with_tpls_objs
+  - python_generator
