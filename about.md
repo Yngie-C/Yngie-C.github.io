@@ -5,6 +5,6 @@ title: About
 
 
 
-## 건강한 텍스트 콘텐츠에 관심이 많은 데이터 분석가, 기획자
+# About Yngie
 
-공부한 내용들을 정리하는 곳입니다.
+저에 대한 자세한 내용은 <a href="https://www.yngie.me">이곳</a>을 참고해주세요.
