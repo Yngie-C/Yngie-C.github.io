@@ -34,7 +34,7 @@ author:
     #twitter:  <hide>
     #weibo:    <hide>
     instagram :   https://instagram.com/yngie_daily
-    #email:    
+    # email:
 
 # Navigation (2nd level links supported)
 nav:
@@ -58,5 +58,5 @@ hero:
 # Pulgins
 mathjax: true # whether support mathjax
 google_analytics_token: 'UA-158025930-1' # leave blank if you don't want google analytics
-#disqus_short_name: 'ratsgo-github-io' # leave blank if you don't want disqus
+disqus_short_name: 'yngie-c-github-io' # leave blank if you don't want disqus
 
