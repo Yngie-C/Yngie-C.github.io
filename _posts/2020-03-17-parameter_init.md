@@ -59,13 +59,19 @@ tag: Deep-Learning
 
 <p align="center"><img src="https://user-images.githubusercontent.com/45377884/91678679-24dd1a80-eb81-11ea-9637-abcdbcd3788c.png" alt="xavier" style="zoom:110%;" /></p>
 
-활성값이 이전 두 방법보다 훨씬 더 고르게 퍼져있음을 볼 수 있습니다. 층마다 노드 개수를 다르게 설정하더라도 이에 맞게 가중치가 초기화되기 때문에 고정된 표준편차를 사용하는 것보다 훨씬 더 강건(Robust)합니다. 사비에르 초기화는 논문을 발표했던 사비에르 글로로트(Xavier Glorot)의 이름을 따서 만들어졌는데요. 성을 따서 글로로트 초기화로 불리기도 합니다. 파이토치는 `torch.nn.init.xavier_normal_()` , 케라스는 `tf.keras.initializers.GlorotNormal()` 을 사용합니다.
+활성값이 이전 두 방법보다 훨씬 더 고르게 퍼져있음을 볼 수 있습니다. 층마다 노드 개수를 다르게 설정하더라도 이에 맞게 가중치가 초기화되기 때문에 고정된 표준편차를 사용하는 것보다 훨씬 더 강건(Robust)합니다. 사비에르 초기화는 논문을 발표했던 사비에르 글로로트(Xavier Glorot)의 이름을 따서 만들어졌는데요. 성을 따서 글로로트 초기화로 불리기도 합니다. 텐서플로우와 파이토치에서는 각각 아래와 같이 사비에르 초기화를 적용할 수 있습니다.
 
+```python
+# TensorFlow
+tf.keras.initializers.GlorotNormal()
 
+# PyTorch
+torch.nn.init.xavier_normal_()
+```
 
 ## He Initialization 
 
-**He 초기화(He Initialization)**는 ReLU함수를 활성화 함수로 사용할 때 추천되는 초기화 방법입니다. 컴퓨터 비전(Computer vision) 분야의 대표적인 Pre-trained 모델인 VGG도 활성화 함수로 ReLU를 사용하고 있는데요. 그렇기 때문에 He 초기화를 적용하고 있습니다. He 초기화는 $\frac{2}{\sqrt{n}}$를 표준편차로 하는 정규분포로 초기화합니다.
+**He 초기화(He Initialization)**는 ReLU함수를 활성화 함수로 사용할 때 추천되는 초기화 방법입니다. 컴퓨터 비전(Computer vision) 분야의 대표적인 Pre-trained 모델인 VGG도 활성화 함수로 ReLU를 사용하고 있는데요. 그렇기 때문에 He 초기화를 적용하고 있습니다. He 초기화는 $\sqrt{\frac{2}{n}}$ 를 표준편차로 하는 정규분포로 초기화합니다.
 
 아래는 활성화 함수가 ReLU 함수인 5층 신경망에서 사비에르 초기화를 적용했을 때 활성값이 어떻게 변하는 지를 나타낸 그래프입니다.
 
@@ -75,7 +81,15 @@ tag: Deep-Learning
 
 <p align="center"><img src="https://user-images.githubusercontent.com/45377884/91680106-34f6f900-eb85-11ea-8abe-7bd830483f21.png" alt="he_relu" style="zoom:110%;" /></p>
 
-층이 깊어지더라도 모든 활성값이 고른 분포를 보이는 것을 알 수 있습니다. 사비에르 초기화와 마찬가지로 He 초기화 역시 카이밍 히(Kaiming He)의 성을 따서 지어졌습니다. 이름을 따서 카이밍 초기화로 부르기도 합니다. 파이토치는 `torch.nn.init.kaiming_normal_()` , 케라스는 `tf.keras.initializers.GlorotNormal()` 을 사용합니다.
+층이 깊어지더라도 모든 활성값이 고른 분포를 보이는 것을 알 수 있습니다. 사비에르 초기화와 마찬가지로 He 초기화 역시 카이밍 히(Kaiming He)의 성을 따서 지어졌습니다. 이름을 따서 카이밍 초기화로 부르기도 합니다. 텐서플로우와 파이토치에서는 각각 아래와 같이 He 초기화를 적용할 수 있습니다.
+
+```python
+# TensorFlow
+tf.keras.initializers.HeNormal()
+
+# PyTorch
+torch.nn.init.kaiming_normal_()
+```
 
 
 
