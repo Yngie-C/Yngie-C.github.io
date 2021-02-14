@@ -65,7 +65,7 @@ z = t^2, \quad t=x+y
 $$
 
 
-연쇄 법칙을 사용하면 $\frac{\partial z}{\partial x} = \frac{\partial z}{\partial t} \frac{\partial t}{\partial x}$ 로 나타낼 수 있으므로 아래와 같이 편도함수를 구할 수 있습니다. 이
+연쇄 법칙을 사용하면 $\frac{\partial z}{\partial x} = \frac{\partial z}{\partial t} \frac{\partial t}{\partial x}$ 로 나타낼 수 있으므로 아래와 같이 편도함수를 구할 수 있습니다.
 
 
 $$
@@ -78,7 +78,7 @@ $$
 
 이제 본격적으로 역전파에 대해 알아보지요. 순전파에서 신경망이 수행하는 연산을 단순화하여 가중치 $x,y$ 로부터 출력 $z$를 내어 놓는 임의의 함수 $z = f(x,y)$ 라고 해보겠습니다. 원래의 손실 함수를 $L$이라고 하면 이를 개선하기 위한 미분은 $\frac{\partial L}{\partial z}$ 가 됩니다. 
 
-이를 각 가중치 $x, y$ 에 대하여 편미분한 값으로 나누어 가지게 됩니다. 이 부분은 순전파시 덧셈 연산을 하는 부분이므로 특별한 곱셈 연산 없이 역으로 $\frac{\partial z}{\partial x}, \frac{\partial z}{\partial y}$ 로 나누어 가질 수 있습니다. 아래는 이 과정을 잘 보여주는 그림입니다.
+이를 각 가중치 $x, y$ 에 대하여 편미분한 값으로 나누어 가지게 됩니다. 아래는 이 과정을 잘 보여주는 그림입니다.
 
 
 
