@@ -98,23 +98,23 @@ $$
 
 ## Encoder Block
 
-인코더 블록의 각 하위 레이어가 어떤 역할을 하는지에 대해 자세히 알아보겠습니다. 아래는 첫 번째 인코더 블록에 들어가는 벡터 $x_1, x_2$가 어떤 과정을 거치는 지를 나타낸 이미지입니다. 
+인코더 블록의 각 하위 레이어에서 어떤 일이 일어나는 지에 대해서 알아보겠습니다. 아래는 첫 번째 인코더 블록에 들어가는 벡터 $x_1, x_2$가 어떤 과정을 거치는 지를 나타낸 이미지입니다. 
 
 <p align="center"><img src="http://jalammar.github.io/images/t/encoder_with_tensors_2.png" style="zoom:66%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/illustrated-transformer/">jalammar.github.io</a></p>
 
-위에서 말한 것처럼 인코더 블록에서 가장 먼저 만나게 되는 층은 **Self-Attention**이고 이를 거쳐 나온 출력 벡터 $z_1, z_2$는 각각 **FFNN**층을 거쳐 인코더 블록을 빠져나오게 됩니다. 위 그림에서도 볼 수 있는 것처럼 Self-Attention층에서는 각각의 입력 벡터가 서로 영향을 끼치는(Dependency) 관계에 있습니다. 하지만 FFNN에서는 각자가 따로 들어가기 때문에 서로 영향을 끼치지 않는 것을 볼 수 있지요. 그렇기 때문에 FFNN에서는 병렬화가 가능하며 더 빠르게 학습이 가능합니다. 인코더 블록가 출력하는 벡터 $r_1, r_2$는 그 다음 인코더 블록의 인풋으로 다시 사용됩니다.
+위에서 말했듯이 인코더 블록에서 **Self-Attention** 하위 레이어를 먼저 만나게 됩니다. 이를 거쳐 나온 출력 벡터 $z_1, z_2$는 각각 **FFNN**층을 거쳐 인코더 블록을 빠져나오게 됩니다. 위 그림에서도 볼 수 있는 것처럼 Self-Attention층에서는 각각의 입력 벡터가 서로 영향을 끼치는(Dependency) 관계에 있습니다. 하지만 FFNN에서는 따로 들어가기 때문에 서로 영향을 끼치지 않지요. 그렇기 때문에 FFNN에서는 병렬화가 가능하고 덕분에 더 빠르게 학습할 수 있습니다. 인코더 블록가 출력하는 벡터 $r_1, r_2$는 그 다음 인코더 블록의 인풋으로 다시 사용됩니다.
 
 ### Self-Attention
 
-다음의 예시 문장을 통해서 Self-Attention층이 하는 역할을 알아보겠습니다.
+다음의 예시 문장을 통해서 Self-Attention 레이어에서 어떤 일이 일어나는지 알아보겠습니다.
 
 $$
 \text{"The animal didn't cross the street because it was too tired"}
 $$
 
-사람은 위 문장에서의 *"it"*이 어떤 단어를 지칭하는지 쉽게 알 수 있습니다. 하지만 컴퓨터에게 학습없이 이를 맞춘다는 것은 쉽지 않은 일입니다. 이런 지시대명사 외에도 문장에 있는 단어는 시퀀스 내에 있는 다른 단어와 깊은 관계를 맺고 있습니다. 이 관계가 어떻게 맺어져 있는 지를 정량적으로 표현하겠다는 것이 바로 Self-Attention의 목적입니다. 아래는 5번째 인코더 블록에서 "it"이 어떤 단어와 가장 깊은 관계를 맺고 있는 지를 나타내는 그림입니다.
+사람은 위 문장에서의 *"it"* 이 어떤 단어를 지칭하는지 쉽게 알 수 있습니다. 하지만 컴퓨터가 이를 맞추기는 쉽지 않습니다. 이런 지시대명사 외에도 문장에 있는 단어는 시퀀스 내에 있는 다른 단어와 관계를 맺고 있습니다. 이 관계를 표현하는 것이 바로 Self-Attention 레이어의 목적입니다. 아래는 5번째 인코더 블록에서 *"it"* 이 어떤 단어와 가장 깊은 관계를 맺고 있는 지를 나타내는 그림입니다.
 
 <p align="center"><img src="http://jalammar.github.io/images/t/transformer_self-attention_visualization.png" alt="transformer_8" style="zoom:110%;" /></p>
 
@@ -122,29 +122,40 @@ $$
 
 위 그림에서 *"it"*이 *"The animal"*을 정확히 가리키고 있는 것을 볼 수 있습니다. Self-Attention층은 어떤 과정을 통해 이를 알아낼 수 있는 것일까요? Self-Attention층 내부에서 일어나는 일에 대해서 알아보겠습니다.
 
-먼저 인풋 벡터가 들어오면 Self-Attention층에서는 세 가지 벡터를 인풋 벡터 갯수만큼씩 준비합니다. 이 세 가지 벡터는 각각 **쿼리(Query, Q), 키(Key, k), 밸류(Value, V)**라고 부릅니다. 가장 먼저 쿼리는 현재 처리하고자 하는 토큰을 나타내는 벡터입니다. 키는 일종의 레이블(label)로, 시퀀스 내에 있는 모든 토큰에 대한 아이덴티티(Identity)를 나타냅니다. 마지막으로 밸류는 키와 연결된 실제 토큰을 나타내는 벡터입니다. 아래는 쿼리, 키, 밸류의 특징을 잘 살린 그림입니다.
+먼저 인풋 벡터가 들어오면 Self-Attention층에서는 세 가지 벡터를 인풋 벡터의 수만큼 준비합니다. 이 세 가지 벡터는 각각 **쿼리(Query, Q), 키(Key, k), 밸류(Value, V)**라고 부릅니다. 가장 먼저 쿼리는 현재 처리하고자 하는 토큰을 나타내는 벡터입니다. 키는 일종의 레이블(label)로, 시퀀스 내에 있는 모든 토큰에 대한 아이덴티티(Identity)를 나타냅니다. 마지막으로 밸류는 키와 연결된 실제 토큰을 나타내는 벡터입니다. 아래는 쿼리, 키, 밸류의 특징을 잘 살린 그림입니다.
 
 <p align="center"><img src="http://jalammar.github.io/images/gpt2/self-attention-example-folders-3.png" alt="transformer_9" style="zoom:50%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/illustrated-transformer/">jalammar.github.io</a></p>
 
-위 그림에서 `Query #9` 벡터는 10번째 단어인 *"it"*을 나타내는 벡터입니다. 컴퓨터는 이 쿼리(=조건)를 보고 그 조건을 가장 잘 만족하는 키를 찾습니다. 그리고 파일 안에 있는 내용을 가져가는 것처럼 키에 걸려있는 실제 밸류를 가져가게 되지요. 그렇다면 각각의 쿼리, 키, 밸류 벡터는 어떻게 만들어지는 것일까요?
+위 그림에서 `Query #9` 벡터는 10번째 단어인 *"it"*에 연관된 벡터입니다. 컴퓨터는 모든 단어의 키를 살펴보며 쿼리와 가장 잘 맞는 것을 찾습니다. 그리고 해당하는 키에 걸려있는 실제 밸류를 가져가게 되지요. 그렇다면 각각의 쿼리, 키, 밸류 벡터는 어떻게 만들어지는 것일까요?
 
-Self-Attention 층 내부에는 세 벡터를 만들기 위한 행렬 $W^Q, W^K, W^V$ 가 초기화된 값으로 미리 준비되어 있습니다. 입력되는 토큰 벡터는 각 행렬과의 곱을 통해서 그에 맞는 쿼리, 키, 밸류 벡터를 만들게 됩니다. 아래 그림은 미리 준비된 행렬로부터 각 벡터가 만들어지는 것을 보여주는 이미지입니다.
+Self-Attention 층 내부에는 세 벡터를 만들기 위한 행렬 $W^Q, W^K, W^V$ 가 초기화된 값으로 미리 준비되어 있습니다. 입력되는 토큰 벡터는 각 행렬과의 곱을 통해서 그에 맞는 쿼리, 키, 밸류 벡터를 만들게 됩니다. 아래 그림은 미리 준비된 행렬로부터 각 벡터가 만들어짐을 보여주는 이미지입니다.
 
 <p align="center"><img src="http://jalammar.github.io/images/t/transformer_self_attention_vectors.png" alt="transformer_10" style="zoom: 80%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/illustrated-transformer/">jalammar.github.io</a></p>
 
-위 그림에서 $x_1, x_2$는 토큰 벡터입니다. 미리 생성된 행렬과 각 입력 벡터를 곱하면 $x_1 \cdot W^Q = q_1, x_1 \cdot W^K = k_1, x_1 \cdot W^V = v_1$ 가 되며 $x_2 \cdot W^Q = q_2, x_1 \cdot W^K = k_2, x_1 \cdot W^V = v_2$가 됩니다. $W$행렬에 해당하는 $W^Q, W^K, W^V$의 각 요소 값은 학습 과정에서 갱신되는 파라미터입니다. 일반적으로 쿼리, 키, 밸류 벡터의 차원은 인풋 토큰 벡터의 차원보다 작게 설정합니다. 논문에서는 토큰 벡터를 512차원의 벡터로 설정하고 쿼리, 키, 밸류는 64차원의 벡터로 설정하였습니다. $512/64 = 8$ 인데 이렇게 세 벡터의 차원을 토큰 벡터 차원 수의 약수로 설정하는 이유가 있습니다. Multi-Head Attention을 적용하는 데 있어서 각각의 아웃풋을 Concatenate(옆으로 붙임)해주는데 이 때 $8$이 Multi-head의 개수가 됩니다.
+위 그림에서 $\mathbf{x}_1, \mathbf{x}_2$는 토큰 벡터입니다. 수식으로 나타내면 아래와 같이 되지요.
 
-다음으로 쿼리와 잘 맞는 키가 어떻게 구해지는 지를 알아보겠습니다. 아래 그림에서는 value#1과 연결된 key#1은 30%만큼의 관계를, value#2와 연결된 key#2는 50%만큼의 관계를 맺고 있다는 것을 보여주는 그림입니다.
 
-<p align="center"><img src="http://jalammar.github.io/images/gpt2/self-attention-example-folders-scores-3.png" alt="transformer_10" style="zoom:50%;" /></p>
+$$
+\begin{aligned}
+\mathbf{x}_1 \cdot W^Q = \mathbf{q}_1 \qquad& \mathbf{x}_1 \cdot W^K = \mathbf{k}_1 & \mathbf{x}_1 \cdot W^V = \mathbf{v}_1 \\
+\mathbf{x}_2 \cdot W^Q = \mathbf{q}_2 \qquad& \mathbf{x}_2 \cdot W^K = \mathbf{k}_2 & \mathbf{x}_2 \cdot W^V = \mathbf{v}_2
+\end{aligned}
+$$
+
+
+$W$행렬에 해당하는 $W^Q, W^K, W^V$의 각 요소 값은 학습 과정에서 갱신되는 파라미터입니다. 이후에 등장할 Multi-head Attention을 사용한다면 쿼리, 키, 밸류 벡터의 차원은 인풋 토큰 벡터보다 작아집니다. 논문에서는 8개의 Head를 사용하기 때문에 512차원의 인풋 벡터를 사용하고 쿼리, 키, 밸류 벡터는 64차원으로 설정하였습니다. 자세한 내용은 아래 Multi-head Attention에서 알아보겠습니다.
+
+쿼리와 잘 맞는 키를 찾는 과정은 말 그대로 **어텐션(Attention)**입니다. 벡터의 곱연산(Dot product)을 기반으로 Softmax해주어 연관 비중을 구하게 되지요.
+
+<p align="center"><img src="http://jalammar.github.io/images/gpt2/self-attention-example-folders-scores-3.png" alt="transformer_10" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/illustrated-transformer/">jalammar.github.io</a></p>
 
-쿼리 벡터와 키 벡터가 얼마나 잘 맞는지는 내적 계산값 $q \cdot k$ 를 이용합니다. 논문에서는 학습시 그래디언트를 안정적으로 만들어주기 위해서 이렇게 구해진 값을 쿼리, 키, 밸류 벡터의 제곱근인 $\sqrt{d_k}$로 나누어줍니다. 나누어준 값에 소프트맥스를 취해주면 구하고자 하는 토큰이 다른 토큰과 얼마 만큼의 관계를 맺고 있는 지에 대한 수치가 나오게 됩니다. 최종적으로는 이 비율과 밸류 벡터를 곱해준 값을 모두 더하여 Self-Attention층의 최종 출력 벡터로 계산하게 됩니다. 아래는 일련의 과정을 그림으로 나타낸 것입니다.
+논문에서는 학습시 그래디언트를 안정적으로 만들어주기 위해서 내적 값을 벡터 차원 수의 제곱근인 $\sqrt{d_k}$로 나누어주었습니다. 최종적으로는 소프트맥스를 통해 구해준 비중과 밸류 벡터를 곱해준 값을 모두 더하여 Self-Attention 층의 최종 출력 벡터로 계산하게 됩니다. 아래는 Self-Attention 층의 과정을 그림으로 나타낸 것입니다.
 
 <p align="center"><img src="http://jalammar.github.io/images/t/self-attention-output.png" alt="transformer_11"  /></p>
 
@@ -152,9 +163,9 @@ Self-Attention 층 내부에는 세 벡터를 만들기 위한 행렬 $W^Q, W^K,
 
 
 
-위 그림에서 *"Thinking"*이라는 단어는 자기 자신과 88%만큼의 관계를, *"Machine"*이라는 단어와는 12%만큼의 관계를 맺고 있는 것을 볼 수 있습니다. 각 값을 밸류 벡터인 $v_1, v_2$와 각각 곱하여 더하면 최종 출력 벡터인 $z_1$이 나오게 됩니다.
+위 그림에서 *"Thinking"*은 자기 자신과 88%만큼의 관계를, *"Machine"*과는 12%만큼의 관계를 맺고 있는 것을 볼 수 있습니다. 각 값을 밸류 벡터인 $\mathbf{v}_1, \mathbf{v}_2$와 각각 곱하여 더하면 최종 출력 벡터인 $\mathbf{z}_1$이 나오게 됩니다.
 
-실제로는 벡터 하나하나마다 따로 계산을 진행하지 않고 행렬을 사용하여 한꺼번에 계산합니다. 아래는 토큰 벡터로 이루어진 행렬 $X$ 로부터 쿼리, 키, 밸류에 해당하는 행렬 $Q, K, V$ 를 만드는 과정입니다.
+실제 계산은 행렬을 사용하여 한꺼번에 수행합니다. 아래는 토큰 벡터로 이루어진 행렬 $X$ 로부터 쿼리, 키, 밸류에 해당하는 행렬 $Q, K, V$ 를 만드는 과정입니다.
 
 <p align="center"><img src="http://jalammar.github.io/images/t/self-attention-matrix-calculation.png" alt="transformer_12" style="zoom: 67%;" /></p>
 
@@ -180,35 +191,35 @@ Self-Attention 층 내부에는 세 벡터를 만들기 위한 행렬 $W^Q, W^K,
 
 ### Multi-Head Attention
 
-다음으로는 **멀티헤드 어텐션(Multi-Head Attention)** 에 대해서 알아보겠습니다. Multi-Head Attention을 사용하는 목적은 단어 간의 관계를 한 번이 아니라 여러 번 계산하여 적용하기 위함입니다. 논문에서 사용한 Head의 개수는 $8(=512/64)$ 입니다. 따라서, 총 8번의 Self-Attention을 실행하여 8개의 아웃풋 $Z_0, Z_1, \cdots , Z_7 $ 을 만들어냅니다. 아래는 이 과정을 그림으로 나타낸 것입니다.
+다음으로는 **멀티헤드 어텐션(Multi-Head Attention)**를 알아보겠습니다. Multi-Head Attention은 단어 간의 관계를 여러 번 계산하기 위해서 사용합니다. 동전을 던져 앞면이 나오는 확률을 구한다면 2번 던질 때보다 20번 던질 때 평균에 가까워지겠지요. 논문에서 사용한 Head의 개수는 $8(=512/64)$ 입니다. 총 8번의 Self-Attention을 실행하여 8개의 아웃풋 $Z_0, Z_1, \cdots , Z_7 $ 을 만들어냅니다. 아래는 이 과정을 그림으로 나타낸 것입니다.
 
 <p align="center"><img src="http://jalammar.github.io/images/t/transformer_attention_heads_z.png" alt="transformer_16" style="zoom:67%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/illustrated-transformer/">jalammar.github.io</a></p>
 
-이렇게 나온 각각의 아웃풋 행렬 $Z_n (n=1,\cdots,7)$는 Concatenate되어 또 다른 파라미터 행렬인 $W^o$ 와의 내적을 통해 Multi-Head Attention의 최종 결과인 행렬 $Z$를 만들어냅니다. 여기서 행렬 $W^o$의 요소 역시 학습을 통해 갱신됩니다. 최종적으로 생성된 행렬 $Z$는 토큰 벡터로 이루어진 행렬 $X$와 동일한 크기(Shape)인 것을 볼 수 있습니다. 이렇게 출력된 행렬 $Z$는 이제 FFNN으로 넘어가게 됩니다. 아래는 이 과정을 그림으로 나타낸 것입니다.
+이렇게 나온 각각의 아웃풋 행렬 $Z_n (n=1,\cdots,7)$은 이어붙여(Concatenate)집니다. 또 다른 파라미터 행렬인 $W^o$ 와의 내적을 통해 Multi-Head Attention의 최종 결과인 행렬 $Z$를 만들어냅니다. 여기서 행렬 $W^o$의 요소 역시 학습을 통해 갱신됩니다. 최종적으로 생성된 행렬 $Z$는 토큰 벡터로 이루어진 행렬 $X$와 동일한 크기(Shape)가 됩니다. 이렇게 행렬 $Z$는 이제 FFNN으로 넘어가게 됩니다. 아래는 이 과정을 그림으로 나타낸 것입니다.
 
 <p align="center"><img src="http://jalammar.github.io/images/t/transformer_attention_heads_weight_matrix_o.png" alt="transformer_17" style="zoom:67%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/illustrated-transformer/">jalammar.github.io</a></p>
 
-## Residual Block
+## Residual Block & Layer Normalization
 
-Self-Attention층에서 출력된 행렬(벡터)이 FFNN층으로 가기 전에 Residual block과 Layer normalization과정을 거치게 됩니다. Residual Block이란 Self-Attention층을 통과한 출력 벡터에 원래의 입력 벡터를 더해주는 과정입니다. 이렇게 더해주면 역전파(Backpropagation)에서 그래디언트를 항상 1이상으로 유지하기 때문에 기울기 소실(Gradient vanishing)로 인한 정보 유실을 막을 수 있습니다. Computer vision분야의 Pretrained model 중 하나인 ResNet에서 Residual block을 사용하여 성능을 끌어올린 전례가 있습니다.
+Self-Attention층에서 출력된 행렬(벡터)은 FFNN층으로 가기 전에 Residual block과 Layer normalization 과정을 거치게 됩니다. Residual Block이란 Self-Attention층을 통과한 출력 벡터에 원래의 입력 벡터를 더해주는 과정입니다. 이렇게 더해주면 역전파(Backpropagation)에서 그래디언트를 항상 1이상으로 유지하기 때문에 정보를 더 잘 보존합니다. Computer vision분야의 ResNet에서도 Residual block을 사용하여 성능을 끌어올린 사례가 있습니다.
 
 <img src="https://miro.medium.com/max/570/1*D0F3UitQ2l5Q0Ak-tjEdJg.png" alt="res_block" style="zoom:80%;" />
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://towardsdatascience.com/residual-blocks-building-blocks-of-resnet-fd90ca15d6ec">towardsdatascience.com</a></p>
 
-Residual Block을 지나면 Layer Normalization을 거쳐 드디어 FFNN에 들어갑니다. 아래 그림은 Residual block(Add)과 Layer normalization과정이 인코더 블록의 Self-Attention과 FFNN 이후에 있음을 잘 보여주고 있습니다. 
+Residual Block을 지나면 Layer Normalization을 거쳐 드디어 FFNN에 들어갑니다. 아래 그림은 Residual block(Add)과 Layer normalization 과정이 인코더 블록의 Self-Attention과 FFNN 사이에서 수행됨을 잘 보여주고 있습니다. 
 
 <p align="center"><img src="http://jalammar.github.io/images/t/transformer_resideual_layer_norm_2.png" alt="transformer_18" style="zoom: 67%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="http://jalammar.github.io/illustrated-transformer/">jalammar.github.io</a></p>
 
-## FFNN
+## FFNN(Feed forward neural network)
 
-Self-Attention과 Residual block을 마친 벡터는 FFNN(Feed forward neural network)로 들어오게 됩니다. 동일한 인코더 블록 내에 있는 FFNN들은 서로 동일한 가중치를 공유합니다. FFNN에서 일어나는 계산은 아래와 같은 수식에 근거하여 계산됩니다.
+다음으로 벡터는 FFNN(Feed forward neural network)로 들어갑니다. 동일한 인코더 블록 내에 있는 FFNN은 서로 동일한 가중치를 공유합니다. FFNN에서 일어나는 계산은 아래와 같은 수식에 근거하여 계산됩니다.
 
 
 
@@ -218,7 +229,7 @@ $$
 
 
 
-아래 그림은 FFNN 입력층(Input layer), 은닉층(Hidden layer), 출력층(Output layer)에서의 벡터를 그림으로 나타낸 것입니다. 512차원의 입력 벡터가 활성화 함수(Activation function)인 ReLU, 즉 $\max(0,\text{input})$을 지나 2048차원의 벡터가 된 뒤에 다시 512차원의 벡터로 출력되는 것을 볼 수 있습니다.
+아래 그림은 FFNN 입력층(Input layer), 은닉층(Hidden layer), 출력층(Output layer)에서의 벡터를 그림으로 나타낸 것입니다. 512차원의 입력 벡터가 활성화 함수(Activation function)인 ReLU, 즉 $\max(0,\text{input})$을 지나 2048차원의 벡터가 된 뒤에 다시 512차원의 벡터로 출력됩니다.
 
 ![ffnn_1](https://user-images.githubusercontent.com/45377884/86258473-d4cfef00-bbf5-11ea-86ce-4019c22178a3.png) 
 
