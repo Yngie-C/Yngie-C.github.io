@@ -19,7 +19,7 @@ tag: Deep-Learning
 
 단순한 예로 성인의 손뼘 길이와 신장의 연관 관계를 알아보기 위한 데이터를 가지고 있다고 해보겠습니다. 신장를 특성으로 하는 데이터는 대략 $[145, 210]$ 범위를 가질 것입니다. 나머지 특성인 손뼘 길이는 $[15, 30]$ 정도의 범위를 가지겠지요. 위처럼 대부분의 데이터는 특성값에 따라 다른 범위를 가지는데요. 데이터의 분포를 그려보면 아래 그림의 왼쪽 그래프처럼 그려지게 됩니다.
 
-![input_normalization](https://www.jeremyjordan.me/content/images/2018/01/Screen-Shot-2018-01-23-at-2.27.20-PM.png)
+<p align="center"><img src="https://www.jeremyjordan.me/content/images/2018/01/Screen-Shot-2018-01-23-at-2.27.20-PM.png" alt="input_normalization"  /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://www.jeremyjordan.me/batch-normalization/">www.jeremyjordan.me</a></p>
 
@@ -33,13 +33,13 @@ tag: Deep-Learning
 
 위와 같이 입력값은 신경망에 들어가기 전에 적당하게 조정해 줄 수 있습니다. 하지만 신경망 내부에서 파라미터와의 연산을 통해 은닉층을 빠져나오는 값은 다른 분포를 나타냅니다. 은닉층마다 이런 현상이 생긴다면 학습이 제대로 이루어지지 않지요.
 
-<img src="https://i.imgur.com/GZEjkJ5.jpg" alt="ics" style="zoom: 25%;" />
+<p align="center"><img src="https://i.imgur.com/GZEjkJ5.jpg" alt="ics" style="zoom: 25%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://i.imgur.com/GZEjkJ5.jpg">imgur.com</a></p>
 
 이렇게 신경망 내부의 은닉층마다 입력되는 값의 분포가 달라지는 현상을 **ICS(Internal covariate shift, 내부 공변량 변화)**라고 합니다. 
 
-<img src="https://image.slidesharecdn.com/mldsfinalpresentation-170912145118/95/why-batch-normalization-works-so-well-2-1024.jpg?cb=1505228042" alt="internal_covariate_shift" style="zoom: 50%;" />
+<p align="center"><img src="https://image.slidesharecdn.com/mldsfinalpresentation-170912145118/95/why-batch-normalization-works-so-well-2-1024.jpg?cb=1505228042" alt="internal_covariate_shift" style="zoom: 50%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://www.slideshare.net/ssuser950871/why-batch-normalization-works-so-well">www.slideshare.net/ssuser950871</a></p>
 
@@ -49,7 +49,7 @@ tag: Deep-Learning
 
 배치 정규화는 완전 연결층(Fully Connected Layer)과 활성화 함수 사이에 배치 정규화 층(Batch norm layer)을 하나 더 삽입합니다. 층이 추가된 후의 순서는 아래 이미지와 같습니다.
 
-<img src="https://i.stack.imgur.com/nOJiA.jpg" alt="batch_norm_layer" style="zoom: 67%;" />
+<p align="center"><img src="https://i.stack.imgur.com/nOJiA.jpg" alt="batch_norm_layer" style="zoom: 67%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://stats.stackexchange.com/questions/302059/batch-normalisation-at-the-end-of-each-layer-and-not-the-input">stats.stackexchange.com</a></p>
 
@@ -67,11 +67,11 @@ $$
 
 위 식에서 $\epsilon$ 은 계산 안정성을 위한 매우 작은 상수입니다. 이렇게 계산된 값은 표준정규분포 $N(0,1)$ 를 나타냅니다. 하지만 여기서 끝나면 안됩니다. 표준정규분포에서는 $68.26\%$ 만큼이 $[-1,1]$ 범위에 있고, $95.44\%$ 의 값이 $[-2,2]$ 범위에 있습니다. 하지만 이 구간에서는 활성화 함수인 시그모이드 함수가 선형 함수에 근사한 형태를 가집니다.
 
-<img src="https://user-images.githubusercontent.com/45377884/107559829-eb283980-6c1f-11eb-8236-869c891dfa15.PNG" alt="sigmoid2" style="zoom:50%;" />
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/107559829-eb283980-6c1f-11eb-8236-869c891dfa15.PNG" alt="sigmoid2" style="zoom:50%;" /></p>
 
 <p align="center" style="font-size:80%"><span style="color:red">로지스틱 함수(Logistic function)</span>와 <span style="color:blue">y=0.24x + 0.5</span></p>
 
-<img src="https://user-images.githubusercontent.com/45377884/107559838-ec596680-6c1f-11eb-9c7a-618fee1e1203.PNG" alt="tanh" style="zoom:50%;" />
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/107559838-ec596680-6c1f-11eb-9c7a-618fee1e1203.PNG" alt="tanh" style="zoom:50%;" /></p>
 
 <p align="center" style="font-size:80%"><span style="color:red">하이퍼탄젠트 함수(Hypertangent function)</span>와 <span style="color:blue">y=0.9x</span></p>
 
@@ -83,15 +83,15 @@ y_i \leftarrow \gamma_j\hat{x_i} + \beta_j
 $$
 
 
-이 때 곱해지고 더해지는 파라미터 $\gamma, \beta$ 는 각 노드마다 다른 값이 적용됩니다. 특정 층의 노드가 64개라면 배치 정규화 층에도 파라미터가 각각 크만큼 있는 것이지요. $\gamma_j, \beta_j (j = 1, \cdots, 64)$ 가 됩니다. 이 때 $y$ 의 분포는 $N(\gamma_j\mu_i + \beta_j, \gamma_j^2\sigma^2_i)$ 이며 $\gamma_i, \beta_i$ 는 학습을 통해 결정됩니다. 배치 정규화의 계산 그래프는 아래와 같습니다.
+이 때 곱해지고 더해지는 파라미터 $\gamma, \beta$ 는 각 노드마다 다른 값이 적용됩니다. 특정 층의 노드가 64개라면 배치 정규화 층에도 파라미터가 각각 크만큼 있는 것이지요. $\gamma_j, \beta_j (j = 1, \cdots, 64)$ 가 됩니다. 이 때 $y$ 의 분포는 $N(\beta_j, \gamma_j^2)$ 이며 $\gamma_i, \beta_i$ 는 학습을 통해 결정됩니다. 배치 정규화의 계산 그래프는 아래와 같습니다.
 
-![batch_norm_graph](http://costapt.github.io//img/batch-norm-computational-graph.png)
+<p align="center"><img src="http://costapt.github.io//img/batch-norm-computational-graph.png" alt="batch_norm_graph"  /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://costapt.github.io/2016/06/26/batch-norm/">costapt.github.io</a></p>
 
 배치 정규화를 사용했을 때와 사용하지 않았을 때 학습 데이터셋과 검증 데이터셋에 대한 학습 결과는 아래와 같습니다.
 
-![effect](https://learnopencv.com/wp-content/uploads/2018/07/val_loss.png)
+<p align="center"><img src="https://learnopencv.com/wp-content/uploads/2018/07/val_loss.png" alt="effect"  /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://learnopencv.com/batch-normalization-in-deep-networks/">learnopencv.com</a></p>
 
@@ -103,19 +103,19 @@ $$
 
 2018년에는 배치 정규화가 어떻게 최적화에 도움을 주는지에 대해 연구한 논문이 발표되었습니다. 논문에 따르면 배치 정규화가 ICS를 해결해주지도 못한다는 것이지요. 아래는 배치 정규화를 적용했을 때(오른쪽)와 적용하지 않았을 때(왼쪽), 3번째 층과 11번째 층에 들어오는 값의 분포를 시각화한 것입니다. 학습에 사용되는 미니배치마다 그래프를 그렸습니다.
 
-<img src="https://gradientscience.org/images/batchnorm/vgg_bn_good.jpg" alt="batch_norm_layer_distribution" style="zoom: 80%;" />
+<p align="center"><img src="https://gradientscience.org/images/batchnorm/vgg_bn_good.jpg" alt="batch_norm_layer_distribution" style="zoom: 80%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://gradientscience.org/batchnorm/">gradientscience.org</a></p>
 
 그림을 보면 둘 사이에 **획기적인 변화가 없습니다.** 3번째 층이든 11번째 층이든 배치 정규화를 사용했을 때와 그렇지 않았을 때 큰 차이가 없음을 볼 수 있지요. 논문 저자들은 배치 정규화를 적용한 뒤에 노이즈를 주어 일부러 분포를 흐트린 모델을 추가하여 실험해보기도 했습니다. 아래는 세 모델을 시각화한 결과입니다.
 
-![batch_norm_with_noisy](https://gradientscience.org/images/batchnorm/noisy_bn.jpg)
+<p align="center"><img src="https://gradientscience.org/images/batchnorm/noisy_bn.jpg" alt="batch_norm_with_noisy" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://gradientscience.org/batchnorm/">gradientscience.org</a></p>
 
 노이즈가 추가된 모델은 반복 스텝마다 매우 다른 분포를 보이고 있습니다. 그렇다면 세 모델의 성능은 각각 어떻게 될까요? 세 모델의 성능을 비교한 학습 그래프입니다.
 
-<img src="https://gradientscience.org/images/batchnorm/vgg_noise_grid_perf.jpg" alt="comparison" style="zoom: 25%;" />
+<p align="center"><img src="https://gradientscience.org/images/batchnorm/vgg_noise_grid_perf.jpg" alt="comparison" style="zoom: 25%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://gradientscience.org/batchnorm/">gradientscience.org</a></p>
 
@@ -127,14 +127,14 @@ $$
 
 논문의 저자는 배치 정규화가 **스무딩(Smoothing)**을 만들어준다고 이야기하고 있습니다. 배치 정규화를 적용하지 않은 손실 함수가 왼쪽과 같이 생겼다면, 배치 정규화를 적용한 손실 함수는 오른쪽처럼 생겼다는 것이지요.
 
-<img src="https://user-images.githubusercontent.com/45377884/107651920-60991600-6cc3-11eb-9bea-697a3236b03d.PNG" alt="smoothing" style="zoom: 80%;" />
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/107651920-60991600-6cc3-11eb-9bea-697a3236b03d.PNG" alt="smoothing" style="zoom: 80%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://arxiv.org/pdf/1712.09913.pdf">Visualizing the Loss Landscape of Neural Nets
 </a></p>
 
 본 실험에서 손실 함수의 평면과 기울기를 나타낸 그래프입니다. 배치 정규화를 적용했을 때가 그렇지 않을 때보다 훨씬 더 완만한 경사를 가지는 것을 볼 수 있습니다.
 
-![landscape](https://gradientscience.org/images/batchnorm/landscapes.jpg)
+<p align="center"><img src="https://gradientscience.org/images/batchnorm/landscapes.jpg" alt="landscape"  /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://gradientscience.org/batchnorm/">gradientscience.org</a></p>
 
