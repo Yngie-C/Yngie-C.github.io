@@ -1,6 +1,6 @@
 ---
 layout: post
-title: [Book Review] 진지한 파이썬
+title: (Book Review) 진지한 파이썬
 category: Daily
 tag: Daily
 ---
