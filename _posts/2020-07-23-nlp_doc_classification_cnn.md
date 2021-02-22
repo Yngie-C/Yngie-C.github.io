@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 합성곱 신경망(CNN)을 활용한 문서 분류
+title: 합성곱 신경망(CNN)을 활용한 문장 분류
 category: NLP
 tag: NLP
 ---
