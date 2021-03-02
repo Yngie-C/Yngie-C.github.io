@@ -63,18 +63,28 @@ $$
 시그모이드 함수는 기본적으로 $S$ 모양을 그리는 곡선 함수를 통칭하여 부르는 말입니다. 이 중 대표적인 함수는 **로지스틱(Logistic) 함수**와 **하이퍼탄젠트(Hyper tangent, $\tanh$) 함수**가 있습니다. 두 함수의 수식과 그래프를 보며 시그모이드 함수와 계단 함수가 다른 점이 무엇인지 알아보도록 하겠습니다.
 
 **로지스틱 함수(Logistic Function)**
+
+
 $$
 \text{Logistic} : \frac{1}{1+e^{-x}}
 $$
+
+
 
 <p align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/1920px-Logistic-curve.svg.png" alt="logistic" style="zoom: 25%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://en.wikipedia.org/wiki/Logistic_function">wikipedia - Logistic function</a></p>
 
 **하이퍼탄젠트 함수(Hypertangent Function)**
+
+
 $$
 \text{Hypertangent} : \frac{e^x-e^{-x}}{e^x+e^{-x}} = \frac{e^{2x}-1}{e^{2x}+1}
 $$
+
+
+
+
 
 
 <p align="center"><img src="https://mathworld.wolfram.com/images/interactive/TanhReal.gif" alt="hyper" style="zoom:110%;" /></p>
