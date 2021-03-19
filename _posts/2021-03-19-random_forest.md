@@ -13,7 +13,7 @@ tag: Machine-Learning
 
 **랜덤 포레스트(Random Forest)**는 자주 사용되는 앙상블 기법 중 하나입니다. 기본 모델로 의사 결정 나무(Decision tree)를 사용하기 때문에 배깅(Bagging)의 특수한 형태입니다. 배깅은 기본 모델로 무엇을 설정하든 상관없지만 랜덤 포레스트는 의사 결정 나무를 사용해야 합니다. 다수의 의사 결정 나무(Tree)를 결합한 모델이기에 Forest라는 이름이 붙었습니다.
 
-<img src="https://images.unsplash.com/photo-1425913397330-cf8af2ff40a1?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8Zm9yZXN0fGVufDB8fDB8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=500&amp;q=60" alt="forest" style="zoom:80%;" />
+<p align="center"><img src="https://images.unsplash.com/photo-1425913397330-cf8af2ff40a1?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8Zm9yZXN0fGVufDB8fDB8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=500&amp;q=60" alt="forest" style="zoom: 80%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://unsplash.com/">unsplash.com</a></p>
 
@@ -25,7 +25,7 @@ tag: Machine-Learning
 
 아래는 25개의 변수 중에서 임의로 5개의 변수를 택할 때 변수가 어떻게 선택되는 지를 나타낸 그림입니다.
 
-![variable_selection](https://user-images.githubusercontent.com/45377884/111717707-f6fcc080-889b-11eb-98ef-8736f8b5f4c9.png)
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/111717707-f6fcc080-889b-11eb-98ef-8736f8b5f4c9.png" alt="variable_selection"  /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://github.com/pilsung-kang/Business-Analytics-IME654-">github.com/pilsung-kang/Business-Analytics-IME654</a></p>
 
@@ -37,7 +37,7 @@ tag: Machine-Learning
 
 이해를 도울 수 있는 예시를 들어보겠습니다. 아래는 A반과 B반 학생 3명의 성적을 나타낸 표입니다.
 
-![example](https://user-images.githubusercontent.com/45377884/111719948-48a74a00-88a0-11eb-8517-fa50fb42717c.png)
+<p align="center"><img src="https://user-images.githubusercontent.com/45377884/111719948-48a74a00-88a0-11eb-8517-fa50fb42717c.png" alt="example"  /></p>
 
 학생 각각의 평균은 A반이 월등히 높습니다. B반 학생들의 평균은 모두 72점인데 A반 학생들의 평균은 약 90점이나 됩니다. 하지만 3명이 머리를 맞대고 국어, 영어, 수학을 풀어야 하는 상황이라면 결과는 조금 다릅니다. 각 과목의 최고점을 모아보면 A반은 $(91, 92, 94)$ 점이고 B반은 $(96, 96, 96)$ 점입니다. 개개인의 퍼포먼스는 A반이 더 높지만 집단 지성의 관점에서 봤을 때에는 B반의 퍼포먼스가 더 높겠네요.
 
@@ -72,7 +72,7 @@ $$
 
 이렇게 구한 $v_i$ 는 변수의 상대적인 중요도를 나타낼 뿐 절대적인 의미는 없습니다. $v_i$ 값이 높은 변수가 다른 변수에 대해 상대적으로 중요할 뿐이지요. 아래는 특정 데이터의 중요도를 구한 뒤 시각화한 예시입니다.
 
-<img src="https://www.researchgate.net/profile/Myat-Aung-3/publication/328307936/figure/fig5/AS:802070386966529@1568239890316/Feature-importance-20-most-important-features-for-logistic-regression-left-and-random.jpg" alt="feature_importance" style="zoom:50%;" />
+<p align="center"><img src="https://www.researchgate.net/profile/Myat-Aung-3/publication/328307936/figure/fig5/AS:802070386966529@1568239890316/Feature-importance-20-most-important-features-for-logistic-regression-left-and-random.jpg" alt="feature_importance" style="zoom:66%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://www.researchgate.net/figure/Feature-importance-20-most-important-features-for-logistic-regression-left-and-random_fig5_328307936">www.researchgate.net</a></p>
 
