@@ -17,11 +17,11 @@ tag: Graph ML
 
 그래프는 **노드(Node)**와 **엣지(Edge)**의 형태로 구성되어 있는데요. 이와 같은 구조는 개체, 그리고 개체 사이에 상호작용을 묘사하고 분석하는 데 효과적입니다. 그래프로 나타내어지는 정보는 굉장히 많은데요. 대표적으로는 아래와 같은 것이 있습니다. 모두 해당 도메인 내에 있는 개체, 그리고 개체 사이에 일어나는 상호작용을 나타내고 있습니다.
 
-<img src="https://i.imgur.com/FfuWcqv.png" alt="graph1" style="zoom: 50%;" />
+<p align="center"><img src="https://i.imgur.com/FfuWcqv.png" alt="graph1" style="zoom: 50%;" /></p>
 
-<img src="https://i.imgur.com/q879zr9.png" alt="graph2" style="zoom:50%;" />
+<p align="center"><img src="https://i.imgur.com/q879zr9.png" alt="graph2" style="zoom:50%;" /></p>
 
-<img src="https://i.imgur.com/SFBP4iw.png" alt="graph2" style="zoom:50%;" />
+<p align="center"><img src="https://i.imgur.com/SFBP4iw.png" alt="graph2" style="zoom:50%;" /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="http://web.stanford.edu/class/cs224w/slides/01-intro.pdf">web.stanford.edu/class/cs224w/slides/01-intro.pdf</a></p>
 
@@ -43,7 +43,7 @@ tag: Graph ML
 
 노드 레벨의 예측 태스크 중 주목할 만한 사례는 단백질의 3D 접힘 구조 예측입니다. 지난 2020년, DeepMind 팀은 알파폴드2를 발표했습니다. [해당 블로그](https://deepmind.com/blog/article/alphafold-a-solution-to-a-50-year-old-grand-challenge-in-biology) 에서 알 수 있는 것처럼 연구진은 단백질 구조 예측에 Graph ML 방법론을 적용하였습니다. 단백질은 각각의 아미노산의 배열(Sequence)로 이루어지지만 어떤 배열을 가지는지에 따라 지역적으로 서로가 상호작용하는 정도가 달라집니다. 그래서 3차원 공간 상에서 각 단백질은 매우 다른 구조를 띠게 되고 이에 따라 단백질의 성질이 결정됩니다. 아래는 단백질 구조가 바뀌는 것을 잘 나타낸 그림입니다.
 
-![protein_folding](https://kstatic.googleusercontent.com/files/3db3b6d1763040d97f1e7edd78eb2de9c83d4d26060599010b22b830217cc39cdd84f1daf249baa9f8a88a5286ae2c02dcfbfcd6b3d6c230937d7a76647fbe56)
+<p align="center"><img src="https://kstatic.googleusercontent.com/files/3db3b6d1763040d97f1e7edd78eb2de9c83d4d26060599010b22b830217cc39cdd84f1daf249baa9f8a88a5286ae2c02dcfbfcd6b3d6c230937d7a76647fbe56" alt="protein_folding"  /></p>
 
 <p align="center" style="font-size:80%">이미지 출처 : <a href="https://deepmind.com/blog/article/AlphaFold-Using-AI-for-scientific-discovery">deepmind.com</a></p>
 
